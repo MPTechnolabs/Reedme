@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" android:background="#FFFFFF"
+    >
+
+    <GridView android:id="@+id/grid_category_item" android:layout_width="fill_parent" android:layout_height="fill_parent"  android:layout_above="@+id/sub_view_lyt" android:layout_marginTop="4.0dip" android:horizontalSpacing="4.0dip" android:verticalSpacing="4.0dip" android:stretchMode="columnWidth" android:numColumns="2"  />
+  <include android:id="@+id/sub_view_lyt" android:layout_width="fill_parent" android:layout_height="50.0dip" android:layout_alignParentBottom="true" layout="@layout/sub_view_cart" />
+  <RelativeLayout android:id="@+id/main_content" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_above="@+id/sub_view_lyt" />
+
+</RelativeLayout>

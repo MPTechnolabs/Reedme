@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
+    <item android:title="@string/Home"
+          android:id="@+id/home"
+          android:icon="@mipmap/home"/>
+
+    <item android:title="@string/Profile"
+          android:id="@+id/profile"
+          android:icon="@mipmap/profile"/>
+
+    <item android:title="@string/MyStore"
+          android:id="@+id/mystore"
+          android:icon="@mipmap/mystore"/>
+
+    <item android:title="@string/ReedMe"
+        android:id="@+id/reedme"
+        android:icon="@mipmap/reedme"/>
+
+    <item android:title="@string/History"
+        android:id="@+id/history"
+        android:icon="@mipmap/history"/>
+
+    <item android:title="@string/ContactUs"
+        android:id="@+id/contactus"
+        android:icon="@mipmap/contact_us"/>
+
+
+    <group android:id="@+id/group_settings_id">
+
+        <item android:title="@string/action_settings"
+              android:icon="@mipmap/services"/>
+
+        <item android:title="@string/Help"
+            android:icon="@mipmap/help"/>
+
+        <item
+            android:id="@+id/logout"
+            android:checked="false"
+            android:icon="@mipmap/ic_exit"
+            android:title="@string/Logout" />
+    </group>
+
+
+</menu>

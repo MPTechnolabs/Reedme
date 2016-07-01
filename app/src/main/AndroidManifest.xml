@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.reedme" >
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission.CAMERA"/>
+   <!-- <uses-permission-sdk-23 android:name="android.permission.CAMERA" />
+    <uses-permission-sdk-23 android:name="android.permission.WRITE_EXTERNAL_STORAGE" />-->
+
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <permission
+        android:name="com.example.reedme.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.example.reedme.permission.MAPS_RECEIVE" />
+
+
+    <application
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:name="android.support.multidex.MultiDexApplication"
+        android:hardwareAccelerated="true"
+        android:theme="@style/AppTheme"
+        android:allowBackup="true"
+        tools:ignore="AllowBackup,UnusedAttribute">
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+
+            android:value="@integer/google_play_services_version" />
+
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyA8htI7nDBFAveDcLYtwGSxatZvjY4Vswk" />
+
+
+        <activity
+            android:name=".activity.SplashActivity" android:screenOrientation="portrait"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".activity.activity_user_register" android:screenOrientation="portrait"  />
+        <activity android:name=".activity.activity_merchant_register" android:screenOrientation="portrait" android:theme="@style/AppThemeMerchant"  />
+
+        <activity android:name=".activity.Activity_login" android:screenOrientation="portrait"  />
+        <activity android:name=".activity.activity_merchant_login" android:screenOrientation="portrait" android:theme="@style/AppThemeMerchant" />
+
+        <activity android:name=".activity.Activity_selection" android:screenOrientation="portrait"  />
+
+
+        <activity  android:name=".activity.StartActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme1"/>
+
+        <activity  android:name=".activity.SearchActivity" android:screenOrientation="portrait" />
+        <activity  android:name=".activity.CategoryItemFullActivity" android:screenOrientation="portrait"  android:theme="@style/AppTheme1"/>
+
+        <activity android:name=".activity.CheckoutContinueActivity" android:screenOrientation="portrait"  android:theme="@style/AppTheme1"/>
+        <activity android:name=".activity.CheckoutProceedActivity" android:screenOrientation="portrait"  android:theme="@style/AppTheme1"/>
+        <activity  android:name=".activity.CheckoutPlaceOrderActivity" android:screenOrientation="portrait"  android:theme="@style/AppTheme1"/>
+        <activity android:name=".activity.ThankActivity" android:screenOrientation="portrait"  android:theme="@style/AppTheme1"/>
+        <activity  android:name=".activity.MyOrdersActivity" android:screenOrientation="portrait"  android:theme="@style/AppTheme1"/>
+        <activity  android:name=".activity.OrderDetailActivity" android:screenOrientation="portrait"  android:theme="@style/AppTheme1"/>
+        <activity android:name=".activity.StoreDiaplyActivity" android:screenOrientation="portrait"  android:theme="@style/AppTheme1"/>
+        <activity android:name=".fragments.CategoryItemActivity" android:screenOrientation="portrait"  android:theme="@style/AppTheme1"/>
+
+        <activity android:name=".activity.activity_mystore"  android:screenOrientation="portrait" android:theme="@style/AppTheme1"/>
+        <activity android:name=".activity.FragmentMyAccount"  android:screenOrientation="portrait" android:theme="@style/AppTheme1"/>
+        <activity android:name=".activity.ReddMeWalletActivity"  android:screenOrientation="portrait" android:theme="@style/AppTheme1"/>
+
+        <activity android:name=".activity.DrawerActivity" android:screenOrientation="portrait" android:theme="@style/AppThemeMerchant"/>
+        <activity android:name=".barcodescanner.CaptureActivity" android:theme="@style/AppThemeMerchant"/>
+        <activity android:name=".activity.FriendsActivity" android:screenOrientation="portrait"  android:label="Profile"
+            android:theme="@style/AppThemeMerchant1"
+            />
+        <activity android:name=".activity.MerchantCheckoutContinueActivity" android:screenOrientation="portrait"  android:theme="@style/AppThemeMerchant1"/>
+
+        <activity android:name=".activity.Add_product" android:screenOrientation="portrait"  android:label="Add Product"
+            android:theme="@style/AppThemeMerchant1"
+            />
+        <activity android:name=".activity.activity_merchant_continue" android:screenOrientation="portrait"  android:label="Add Product"
+            android:theme="@style/AppThemeMerchant1"
+            />
+        <activity android:name=".activity.MerchantUserQR" android:screenOrientation="portrait"  android:label="User Detail"
+            android:theme="@style/AppThemeMerchant"
+            />
+    </application>
+
+</manifest>

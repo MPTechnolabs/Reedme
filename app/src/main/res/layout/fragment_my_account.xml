@@ -1,0 +1,223 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_bg">
+    <include
+        layout="@layout/activity_progress"
+        />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rel_top">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/edt_first_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@mipmap/user_bg"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="55dp"
+                    android:layout_marginBottom="10dp"
+                    android:paddingTop="10dp"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textColorHint="@color/black"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/edt_last_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@mipmap/user_bg"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="55dp"
+                    android:layout_marginBottom="10dp"
+                    android:paddingTop="10dp"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textColorHint="@color/black"
+                    android:textSize="12sp" />
+
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="10dp"
+
+                    android:background="@mipmap/signup_mobile"
+                    android:gravity="center_vertical"
+                    android:layout_height="wrap_content">
+
+                    <View
+                        android:layout_width="2px"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="@dimen/fortyfive"
+
+                        android:layout_height="match_parent"
+                        android:background="@color/grey">
+
+                    </View>
+                    <EditText
+                        android:id="@+id/edt_mobile_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:inputType="number"
+                        android:text="1234567"
+                        android:padding="15dp"
+                        android:singleLine="true"
+                        android:textColorHint="@color/black"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+
+
+                <EditText
+                    android:id="@+id/edt_email_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="7dp"
+                    android:background="@drawable/edt_login_email_bg"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:text=""
+                    android:inputType="textEmailAddress"
+                    android:paddingLeft="55dp"
+                    android:singleLine="true"
+                    android:textColorHint="@color/black"
+                    android:textSize="12sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:weightSum="2"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+
+                    <Button
+                        android:id="@+id/btn_cancel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/edittext_height_size"
+                        android:background="@color/cancel_btn_bg"
+                        android:textColor="@color/white"
+                        android:layout_weight="1"
+                        android:textSize="16sp"
+                        android:layout_margin="5dp"
+                        android:text="CANCEL"/>
+
+
+                    <Button
+                        android:id="@+id/btn_save"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/edittext_height_size"
+                        android:background="@color/colorPrimary"
+                        android:textColor="@color/white"
+                        android:layout_weight="1"
+                        android:textSize="16sp"
+                        android:layout_margin="5dp"
+                        android:text="SAVE"/>
+
+<!--
+                    <ImageView
+                        android:id="@+id/iv_cancel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:src="@drawable/cancel" />
+
+                    <ImageView
+                        android:id="@+id/iv_save"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:src="@drawable/save" />-->
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_change_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:paddingTop="10dp"
+                android:background="@drawable/fill_bg"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txt_change_pass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="10dp"
+                    android:textColor="@color/black"
+                    android:text="Change your Password"
+                    android:textSize="12sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/lightgrey"></View>
+
+
+                <LinearLayout
+                    android:id="@+id/ll_edit_delivery_address"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_height="wrap_content">
+
+
+                    <TextView
+                        android:id="@+id/txt_edt_delivery_add"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
+                        android:text="Edit Delivery Address"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- <RelativeLayout
+
+         android:id="@+id/tab_footer"
+         android:layout_width="match_parent"
+         android:layout_height="51dp"
+         android:layout_alignParentBottom="true"
+         android:gravity="center">
+
+         <include layout="@layout/tab_footer_main" />
+     </RelativeLayout>-->
+</RelativeLayout>

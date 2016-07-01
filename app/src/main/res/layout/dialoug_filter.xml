@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    tools:context=".MainActivity">
+
+    <RelativeLayout
+        android:id="@+id/rel_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:visibility="gone">
+
+    </RelativeLayout>
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rel_top"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/tendp"
+        android:paddingRight="@dimen/tendp"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/tendp"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/txt_pricetitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/tendp"
+                android:text="Price From:"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_16" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:weightSum="2">
+
+                <EditText
+                    android:id="@+id/edt_price_low"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/edittext_height_size"
+                    android:layout_margin="3dp"
+                    android:layout_weight="1"
+                    android:background="@mipmap/price_bg"
+                    android:drawableRight="@mipmap/arrowdown"
+                    android:hint="Low"
+                    android:inputType="number"
+                    android:padding="8dp"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/edt_price_high"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/edittext_height_size"
+                    android:layout_margin="3dp"
+                    android:layout_weight="1"
+                    android:background="@mipmap/price_bg"
+                    android:drawableRight="@mipmap/arrowup"
+                    android:hint="High"
+                    android:inputType="number"
+                    android:padding="8dp"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/rel_footer"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_alignParentBottom="true">
+
+            <Button
+                android:id="@+id/btn_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginRight="@dimen/twentydp"
+                android:layout_centerInParent="true"
+                android:background="@mipmap/cancel" />
+
+            <Button
+                android:id="@+id/btn_done"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_centerInParent="true"
+                android:background="@mipmap/done_btn" />
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+<!--
+
+    &lt;!&ndash;   <ScrollView
+           android:layout_width="fill_parent"
+           android:layout_height="fill_parent"
+           android:layout_below="@+id/rel_top"
+           android:layout_marginTop="10dp"
+           android:fillViewport="true">&ndash;&gt;
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rel_top"
+        android:layout_marginTop="10dp">
+
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/rel_footer"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/tendp"
+            android:paddingRight="@dimen/tendp">
+
+
+            <TextView
+                android:id="@+id/txt_pricetitle1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/tendp"
+                android:text="Price From:"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_16" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:weightSum="2">
+
+                <EditText
+                    android:id="@+id/edt_price_low1"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/edittext_height_size"
+                    android:layout_margin="3dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/price_bg"
+                    android:drawableRight="@drawable/arrowdown"
+                    android:hint="Low"
+                    android:inputType="number"
+                    android:padding="8dp"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/edt_price_high1"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/edittext_height_size"
+                    android:layout_margin="3dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/price_bg"
+                    android:drawableRight="@drawable/arrowup"
+                    android:hint="High"
+                    android:inputType="number"
+                    android:padding="8dp"
+                    android:textSize="16sp" />
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/fifteendp"
+                    android:layout_marginRight="@dimen/fourtydp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/price_bg">
+
+                    <TextView
+                        android:id="@+id/txt_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:paddingLeft="@dimen/tendp"
+                        android:text="100 AED"
+                        android:textColor="@color/search_text_subheading"
+                        android:textSize="@dimen/text_14" />
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/tendp">
+
+                        <ImageView
+                            android:id="@+id/iv_arrowup"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/arrowup" />
+
+                        <ImageView
+                            android:id="@+id/iv_arrowdown"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/iv_arrowup"
+                            android:layout_marginTop="3dp"
+                            android:src="@drawable/arrowdown" />
+
+                    </RelativeLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/fourtydp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/price_bg">
+
+                    <TextView
+                        android:id="@+id/txt_price1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:paddingLeft="@dimen/tendp"
+                        android:text="100 AED"
+                        android:textColor="@color/search_text_subheading"
+                        android:textSize="@dimen/text_14" />
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/tendp">
+
+                        <ImageView
+                            android:id="@+id/iv_arrowup1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/arrowup" />
+
+                        <ImageView
+                            android:id="@+id/iv_arrowdown1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/iv_arrowup1"
+                            android:layout_marginTop="3dp"
+                            android:src="@drawable/arrowdown" />
+
+                    </RelativeLayout>
+                </RelativeLayout>&ndash;&gt;
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/fifteendp"
+                android:background="@color/edt_search_text_bg" />
+
+            <TextView
+                android:id="@+id/txt_options"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/tendp"
+                android:paddingLeft="@dimen/tendp"
+                android:text="General Options"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_16" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/tendp"
+                android:layout_marginRight="@dimen/tendp"
+                android:layout_marginTop="@dimen/tendp">
+
+                <ListView
+                    android:id="@+id/lv_filter_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:divider="@color/edt_search_text_bg"
+                    android:dividerHeight="0.3dp"
+                    android:scrollbars="none">
+
+                </ListView>
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+-->
+
+    <!--    </ScrollView>-->
+
+</RelativeLayout>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/custom_dialou_width"
+    android:layout_height="@dimen/custom_dialou_hight"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rel_title_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/top_bg_colour">
+
+        <TextView
+            android:id="@+id/txt_title_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:padding="15dp"
+            android:text="Select App Info Name"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rel_list_view"
+        android:layout_width="@dimen/custom_dialou_width"
+        android:layout_height="@dimen/custom_dialou_hight"
+        android:layout_below="@id/rel_title_dialog"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <ListView
+            android:id="@+id/lv_select_state"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/custom_dialou_hight"
+            android:scrollbars="none">
+
+
+        </ListView>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rel_ok_cancel_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rel_list_view"
+        android:layout_marginBottom="10dp">
+
+        <!--  <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:padding="10dp"
+              android:weightSum="100">
+
+              <Button
+                  android:id="@+id/btn_ok"
+                  android:layout_width="0dp"
+                  android:layout_height="wrap_content"
+                  android:layout_gravity="center"
+                  android:layout_marginLeft="10dp"
+                  android:layout_marginRight="10dp"
+                  android:layout_weight="50"
+
+                  android:text="OK"
+                  android:textAllCaps="false"
+
+                  android:textSize="18sp" />
+
+              <Button
+                  android:id="@+id/btn_cancel"
+                  android:layout_width="0dp"
+                  android:layout_height="wrap_content"
+                  android:layout_gravity="center"
+                  android:layout_marginLeft="10dp"
+                  android:layout_marginRight="10dp"
+                  android:layout_weight="50"
+                  android:text="Cancel"
+                  android:textAllCaps="false"
+                  android:textSize="18sp" />
+
+          </LinearLayout>-->
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
+

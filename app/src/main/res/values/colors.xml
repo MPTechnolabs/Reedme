@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="tab_bar_background_color">#3F3F47</color>
+    <color name="tab_normal_color">#D3C2D4</color>
+    <color name="tab_active_color">#5580EF</color>
+
+
+    <color name="window_background">#FFF</color>
+    <color name="pink">#e91e63</color>
+    <color name="pink_pressed">#ec407a</color>
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#727272</color>
+    <color name="secondary_text_transparent_70">#B3727272</color>
+    <color name="trans_black_25">#40000000</color>
+    <color name="chrome_grey">#F2F2F2</color>
+    <color name="gray">#ff555555</color>
+    <color name="gray_dark">#ff565656</color>
+    <color name="gray_light">#fff0f0f0</color>
+    <color name="transparent">#00000000</color>
+
+
+
+    <color name="sample_red">#E82A2A</color>
+    <color name="sample_dark_red">#c21515</color>
+    <color name="payment_header">#f5f3ed</color>
+    <color name="payment_header_one">#e6e6e6</color>
+
+    <color name="colorPrimary">#fd5c63</color>
+    <color name="colorPrimaryDark">#eb2226</color>
+    <color name="colorAccent">#e4eef2</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="drawer_menu_divider_color">#b8c3e3</color>
+    <color name="side_drawer_background_color">#E3DDDD</color>
+    <color name="black">#000000</color>
+    <color name="holo_red_light">#E84C3D</color>
+    <color name="lightgrey">#d4d2d2</color>
+    <color name="green">#29A480</color>
+    <color name="greenTheme">#72BA42</color>
+    <color name="Red">#E84C3D</color>
+    <color name="grey">#949393</color>
+    <color name="total_comment_background_color">#fafafa</color>
+    <color name="comment_text_color">#2a3f6a</color>
+    <color name="comment_hint_text_color">#686868</color>
+    <color name="light_white_color">#FAFAFA</color>
+    <color name="checkbox_text_color">#868686</color>
+    <color name="edit_text_bg_color">#E7ECEE</color>
+    <color name="blue_text_color">#0095DA</color>
+    <color name="txtColour">#010000</color>
+    <color name="gray_normal_bg">#F0F0F0</color>
+    <color name="light">#f1efef</color>
+    <color name="lightGreen">#41AA70</color>
+    <color name="order_color">#686868</color>
+    <color name="text_dark">#686868</color>
+    <color name="bg_dialog_trans">#666666</color>
+    <color name="drawer_groupbg">#FFA7A5A5</color>
+    <color name="view_color">#EBEFF1</color>
+
+    <color name="skyBlue">#32cbff</color>
+    <color name="offskyBlue">#7fffd3</color>
+    <color name="red">#ff0000</color>
+    <color name="yellow">#ffb054</color>
+    <color name="red_text">#ED1C24</color>
+    <color name="sort_bg">#EBECF0</color>
+    <color name="cancel_btn_bg">#3e3e3e</color>
+    <color name="save_btn_bg">#ffb054</color>
+
+    <color name="category_list_bg">#a8a8a8</color>
+
+    <!--search-->
+    <color name="edt_search_bg">#E7ECEE</color>
+    <color name="edt_search_text_bg">#9CA6AA</color>
+    <color name="search_text_bg_blue">#0095DA</color>
+    <color name="search_text_subheading">#4C4C4C</color>
+    <color name="search_titlebar_bg">#F9F9F9</color>
+    <color name="footer_bg">#272727</color>
+    <color name="screenbg_light">#F9F9F9</color>
+    <color name="darktext">#153B4C</color>
+    <color name="splash_bottom_tab_bg">#656565</color>
+    <!--Shipping-->
+    <color name="shipping_date_bg">#F1F4F5</color>
+    <color name="shipping_date_bg_blue">#D8EAF2</color>
+    <color name="shipping_date_border">#2BA6DF</color>
+    <color name="shipping_btn_bg">#41AA70</color>
+    <color name="remove_btn_bg"> #e36e6d</color>
+    <color name="top_bg_colour">#2d3e52</color>
+    <color name="success_btn_bg">#7ed821</color>
+
+    <color name="time_background_border">#94b57f</color>
+    <color name="time_background">#ccedb4</color>
+    <color name="text_time_bg">#207012</color>
+    <color name="red_background">#c22d1f</color>
+    <color name="red_background_bg">#d95b25</color>
+
+    <color name="search_edt_background">#EAEFF0</color>
+    <color name="cancel_txt_background">#EAEFF0</color>
+
+    <color name="colorPrimaryMerchant">#00aff0</color>
+    <color name="colorPrimaryDarkMerchant">#03a4e1</color>
+    <color name="colorAccentMerchant">#f1f1f1</color>
+    <color name="colorTextPrimary">#212121</color>
+    <color name="colorTextSecondary">#727272</color>
+    <color name="btn_color">#2582C5</color>
+    <color name="grey_white">#f3f3f3</color>
+
+    <color name="saffron">#F4B63E</color>
+    <color name="sienna">#EB6460</color>
+    <color name="purple">#7c57e4</color>
+    <color name="orange">#ff8c6a</color>
+
+</resources>

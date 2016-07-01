@@ -1,0 +1,32 @@
+<RadioGroup android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:background="@mipmap/login_bg"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RadioButton
+        android:id="@+id/radio_button_one"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/radio_button_background_left"
+        android:button="@android:color/transparent"
+        android:gravity="center"
+        android:text="@string/user"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_18"
+        android:textStyle="bold"/>
+
+    <RadioButton
+        android:id="@+id/radio_button_two"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/radio_button_background_right"
+        android:button="@android:color/transparent"
+        android:text="@string/merchant"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:textSize="@dimen/text_18"
+        android:textStyle="bold"/>
+    />
+</RadioGroup>

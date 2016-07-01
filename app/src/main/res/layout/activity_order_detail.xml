@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:background="@color/white" android:padding="@dimen/activity_horizontal_margin" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <include
+        layout="@layout/activity_progress"
+        />
+
+    <RelativeLayout android:background="@android:color/white" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:orientation="horizontal" android:id="@+id/sub_lyt_order_detail_item" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <LinearLayout android:gravity="center" android:orientation="vertical" android:background="@android:color/white" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1.5">
+                <TextView android:gravity="center" android:id="@+id/txt_order_id" android:padding="@dimen/my_order_text_view_padding" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/order_id" />
+                <View android:background="@color/gray_light" android:layout_width="fill_parent" android:layout_height="1.0dip" />
+                <TextView android:textColor="@color/gray" android:gravity="center" android:id="@+id/txt_order_id_value" android:padding="@dimen/my_order_text_view_padding" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="470066" />
+                <View android:background="@color/gray_light" android:layout_width="fill_parent" android:layout_height="1.0dip" />
+            </LinearLayout>
+            <LinearLayout android:gravity="center" android:orientation="vertical" android:background="@android:color/white" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="4.0">
+                <TextView android:gravity="center" android:id="@+id/txt_order_date" android:padding="@dimen/my_order_text_view_padding" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/order_date" />
+                <View android:background="@color/gray_light" android:layout_width="fill_parent" android:layout_height="1.0dip" />
+                <TextView android:gravity="center" android:id="@+id/txt_order_date_value" android:padding="@dimen/my_order_text_view_padding" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="9 Sep. 2015" />
+                <View android:background="@color/gray_light" android:layout_width="fill_parent" android:layout_height="1.0dip" />
+            </LinearLayout>
+            <LinearLayout android:gravity="center" android:orientation="vertical" android:background="@android:color/white" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1.5">
+                <TextView android:gravity="center" android:id="@+id/txt_order_amount" android:padding="@dimen/my_order_text_view_padding" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/amount" />
+                <View android:background="@color/gray_light" android:layout_width="fill_parent" android:layout_height="1.0dip" />
+                <TextView android:gravity="center" android:id="@+id/txt_order_amount_value" android:padding="@dimen/my_order_text_view_padding" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="140.00" />
+                <View android:background="@color/gray_light" android:layout_width="fill_parent" android:layout_height="1.0dip" />
+            </LinearLayout>
+        </LinearLayout>
+        <RelativeLayout android:id="@+id/lyt_order_detail_payable" android:padding="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_below="@+id/sub_lyt_order_detail_item">
+            <RelativeLayout android:gravity="center_vertical" android:id="@+id/lyt_checkout_payable_address" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip">
+                <ImageView android:id="@+id/img_checkout_place_payment_icon" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@mipmap/payable_icon"  />
+                <TextView android:textSize="16.0sp" android:id="@+id/txt_checkout_delivery_address" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:text="Payable Amount" android:layout_toRightOf="@+id/img_checkout_place_payment_icon" />
+            </RelativeLayout>
+            <RelativeLayout android:id="@+id/lyt_checkout_place_payable_detail" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="15.0dip" android:layout_below="@+id/lyt_checkout_payable_address">
+                <TextView android:id="@+id/txt_place_payable_total" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Total" android:layout_alignParentLeft="true" />
+                <TextView android:id="@+id/txt_place_payable_total_value" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="52.0" android:drawableLeft="@mipmap/rupee" android:layout_alignParentRight="true" />
+                <TextView android:id="@+id/txt_place_payable_shipping" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:text="Shipping" android:layout_below="@+id/txt_place_payable_total" android:layout_alignParentLeft="true" />
+                <TextView android:id="@+id/txt_place_payable_shipping_value" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:layout_marginTop="5.0dip" android:text="0.00" android:drawableLeft="@mipmap/rupee" android:layout_below="@+id/txt_place_payable_total" android:layout_alignParentRight="true" />
+            </RelativeLayout>
+            <View android:id="@+id/view_place_divider_first" android:background="@color/colorPrimary" android:layout_width="fill_parent" android:layout_height="1.0dip" android:layout_marginTop="10.0dip" android:layout_marginBottom="10.0dip" android:layout_below="@+id/lyt_checkout_place_payable_detail" />
+            <RelativeLayout android:id="@+id/lyt_checkout_place_payable_total" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_below="@+id/view_place_divider_first">
+                <TextView android:textSize="18.0sp" android:id="@+id/txt_place_payable_total_amout" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/payable" android:layout_alignParentLeft="true" />
+                <TextView android:textSize="18.0sp" android:id="@+id/txt_place_payable_total_amout_value" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="102.0" android:drawableLeft="@mipmap/rupee" android:layout_alignParentRight="true" />
+            </RelativeLayout>
+        </RelativeLayout>
+        <LinearLayout android:visibility="gone" android:orientation="horizontal" android:id="@+id/lyt_order_detail_pack_delivery" android:background="@color/gray" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_below="@+id/lyt_order_detail_payable">
+            <TextView android:gravity="center" android:id="@+id/txt_order_detail_packed" android:background="@color/gray_light" android:padding="@dimen/my_order_text_view_padding" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Packed" android:layout_weight="1.0" />
+            <TextView android:gravity="center" android:id="@+id/txt_order_detail_delivering" android:background="@color/gray_light" android:padding="@dimen/my_order_text_view_padding" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Delivering" android:layout_weight="1.0" />
+            <TextView android:gravity="center" android:id="@+id/txt_order_detail_delivered" android:background="@color/gray_light" android:padding="@dimen/my_order_text_view_padding" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Delivered" android:layout_weight="1.0" />
+        </LinearLayout>
+
+
+        <TextView android:textColor="@color/window_background" android:gravity="center" android:id="@+id/txt_order_detail_canceled" android:background="@color/colorPrimary" android:padding="@dimen/my_order_text_view_padding" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Canceled" android:layout_below="@+id/lyt_order_detail_pack_delivery" />
+        <RelativeLayout android:id="@+id/lyt_order_detail_item_detail" android:padding="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_below="@+id/txt_order_detail_canceled">
+            <RelativeLayout android:gravity="center_vertical" android:id="@+id/lyt_order_detail_item" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip">
+                <ImageView android:id="@+id/img_order_detail_item_icon" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@mipmap/item_detail_icon"  />
+                <TextView android:textSize="16.0sp" android:id="@+id/txt_order_detail_item_detail" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:text="Item Details" android:layout_toRightOf="@+id/img_order_detail_item_icon" />
+                <TextView android:textSize="16.0sp" android:id="@+id/txt_order_detail_item_delivery_date" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:text="Delivery Date" android:layout_alignParentRight="true" />
+            </RelativeLayout>
+            <TextView android:visibility="gone" android:id="@+id/txt_order_detail_item_delivery_date_value" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="9 Sep. 2015" android:layout_below="@+id/lyt_order_detail_item" android:layout_alignParentRight="true" />
+            <TextView android:id="@+id/txt_order_detail_item_delivery_time" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:text="" android:layout_below="@+id/txt_order_detail_item_delivery_date_value" android:layout_alignParentRight="true" />
+        </RelativeLayout>
+        <View android:id="@+id/view_order_detail_divider_second" android:background="@color/colorPrimary" android:layout_width="fill_parent" android:layout_height="1.0dip"  android:layout_marginBottom="5.0dip" android:layout_below="@+id/lyt_order_detail_item_detail" />
+        <ListView android:id="@+id/lst_order_variantes" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_above="@+id/lyt_cancel_order" android:layout_below="@+id/view_order_detail_divider_second" />
+        <RelativeLayout android:gravity="center" android:id="@+id/lyt_cancel_order" android:background="@color/colorPrimary" android:padding="10.0dip" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="20.0dip" android:layout_marginRight="20.0dip" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true" android:onClick="CancelOrder">
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@mipmap/cancel_o_icon" />
+            <TextView android:textColor="@android:color/white" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="25.0dip" android:text="CANCEL MY ORDER" />
+        </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,0 +1,278 @@
+package com.example.reedme.activity;
+
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.reedme.R;
+import com.example.reedme.adapter.CheckoutItemAdapter;
+import com.example.reedme.adapter.CheckoutMerchantItemAdapter;
+import com.example.reedme.barcodescanner.BarcodeCallback;
+import com.example.reedme.barcodescanner.BarcodeResult;
+import com.example.reedme.barcodescanner.CompoundBarcodeView;
+import com.example.reedme.dataprovider.ParseDataProvider;
+import com.example.reedme.helper.AppPrefs;
+import com.example.reedme.helper.Constants;
+import com.example.reedme.helper.CustomSimpleMessageDialog;
+import com.example.reedme.helper.MyJSONParser;
+import com.example.reedme.helper.Util;
+import com.example.reedme.helper.Utills;
+import com.example.reedme.model.CategoryData;
+import com.example.reedme.model.CheckOutData;
+import com.example.reedme.model.Product;
+import com.example.reedme.model.Vantage;
+import com.example.reedme.model.login_code;
+import com.example.reedme.views.CustomDelegate;
+import com.example.reedme.views.SweetSheet;
+import com.google.zxing.ResultPoint;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Created by Android on 6/24/2016.
+ */
+public class activity_merchant_continue  extends AppCompatActivity {
+    public static ListView checkoutList;
+    static Context context;
+    static float totalAmount;
+    private SweetSheet mSweetSheet;
+    private RelativeLayout rl;
+    RelativeLayout add;
+    private CompoundBarcodeView barcodeScannerView;
+    static TextView txtPaybleValue;
+    CategoryData categoryData;
+    String product_result;
+    ProgressBar progressBar;
+    public static MyJSONParser mJsonParser = null;
+    JSONObject jsonObject_parent = null;
+
+    CheckoutMerchantItemAdapter adapter;
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.activity_merchant_continue);
+
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setTitle("CHECKOUT");
+        try {
+            context = this;
+            mJsonParser = new MyJSONParser();
+
+            overridePendingTransition(R.anim.right_to_left, R.anim.left_to_inner);
+            LoadContext();
+            LoatData();
+        } catch (Exception ex) {
+
+            Log.e("Exception",ex.toString());
+        }
+
+    }
+
+    public void LoadContext() {
+        txtPaybleValue = (TextView) findViewById(R.id.txt_payable_value);
+        rl = (RelativeLayout) findViewById(R.id.rl);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        add= (RelativeLayout) findViewById(R.id.lyt_checkout_empty_cart_button);
+
+        setupCustomView();
+
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mSweetSheet.toggle();
+                barcodeScannerView.pause();
+                barcodeScannerView.resume();
+            }
+        });
+
+    }
+    private void setupCustomView() {
+        mSweetSheet = new SweetSheet(rl);
+        CustomDelegate customDelegate = new CustomDelegate(true,
+                CustomDelegate.AnimationType.DuangLayoutAnimation);
+        View view = LayoutInflater.from(activity_merchant_continue.this).inflate(R.layout.fragment_scan, null, false);
+        customDelegate.setCustomView(view);
+        mSweetSheet.setDelegate(customDelegate);
+
+
+        barcodeScannerView = (CompoundBarcodeView)view.findViewById(R.id.zxing_barcode_scanner);
+        // barcodeScannerView.resume();
+
+        barcodeScannerView.decodeContinuous(callback);
+
+    }
+
+    private BarcodeCallback callback = new BarcodeCallback() {
+        @Override
+        public void barcodeResult(BarcodeResult result) {
+            if (result.getText() != null) {
+                //txt_result.setText(result.getText());
+                product_result = result.getText();
+                barcodeScannerView.pause();
+
+                new JSONParse().execute();
+
+
+
+                //barcodeScannerView.setStatusText(result.getText());
+                mSweetSheet.dismiss();
+            }
+        }
+        @Override
+        public void possibleResultPoints(List<ResultPoint> resultPoints) {
+        }
+    };
+
+
+    public void LoatData() {
+        CheckOutData checkOutData = AppPrefs.getAppPrefs(context).getCheckOutVantage();
+        setCheckOutPayableValue(checkOutData);
+        checkoutList = (ListView) findViewById(R.id.lst_checkout_continue_item);
+        if(checkOutData.CheckOutVantageList.size() != 0 ) {
+            adapter = new CheckoutMerchantItemAdapter(checkOutData.CheckOutVantageList);
+            checkoutList.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+        }
+
+    }
+
+    private static void setCheckOutPayableValue(CheckOutData checkOutData) {
+        float totalAmount = Util.getInstance(context).getCheckOutTotalAmount(checkOutData);
+        //float shippingValue = Util.getInstance(context).getShippingAmount(totalAmount);
+        txtPaybleValue.setText(String.valueOf(totalAmount));
+        //txtShipping.setText(String.valueOf(shippingValue));
+    }
+
+
+    public void ContinueCheckOut(View view) {
+        /*Intent intent = new Intent(activity_merchant_continue.this, CheckoutProceedActivity.class);
+        overridePendingTransition(R.anim.right_to_left, R.anim.left_to_inner);
+
+        startActivity(intent);*/
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+
+
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.inner_to_left, R.anim.left_to_out);
+    }
+
+    private class JSONParse extends AsyncTask<String,String,String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            progressBar.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected String  doInBackground(String... args) {
+
+            try {
+                JSONObject params = new JSONObject();
+
+                params.put("barcode_num", product_result);
+                jsonObject_parent = mJsonParser.postData("http://mptechnolabs.com/1reward/getProducts.php", params);
+                Log.e("JsonObject", jsonObject_parent + "");
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            progressBar.setVisibility(View.GONE);
+            LoginCallAction(ParseDataProvider.getInstance(context).IsSuccessRegister(jsonObject_parent));
+
+        }
+    }
+
+
+    protected void LoginCallAction(Integer isSuccess) {
+        if (isSuccess == 1) {
+
+            try {
+
+                JSONArray jsonStore = jsonObject_parent.optJSONArray("Product_list");
+                JSONObject pObject = jsonStore.getJSONObject(0);
+
+                Product product = new Product();
+                product.setProductId(Integer.parseInt(pObject.getString("pro_id")));
+                product.setProductName(pObject.getString("product_name"));
+                product.setStorename(pObject.getString("store_name"));
+                List<Vantage> vantageList = new ArrayList();
+                Vantage vantage = new Vantage();
+                vantage.setVantageId(Integer.parseInt(pObject.getString("pro_id")));
+                vantage.setVantagePrice(pObject.getString("price"));
+                vantage.setVantageSize(pObject.getString("size"));
+                vantage.setVantageImage(pObject.getString("product_img"));
+                vantageList.add(vantage);
+                product.setVantages(vantageList);
+
+                Util.getInstance(context).AddCheckOutVantage(vantage, product.getProductName());
+
+                Toast.makeText(getApplicationContext(),product.getProductName(),Toast.LENGTH_LONG).show();
+                adapter.notifyDataSetChanged();
+            }catch (Exception e)
+            {}
+            adapter.notifyDataSetChanged();
+
+        }
+        else
+        {
+            Utills.showCustomSimpleDialog(context, new CustomSimpleMessageDialog.SimpleDialogOnClickListener() {
+                @Override
+                public void onOkayButtonClick() {
+                    if (Utills.customSimpleMessageDialog != null) {
+                        Utills.customSimpleMessageDialog.dismiss();
+                    }
+                }
+            }, Constants.DIALOG_INFO_TITLE, "No product found", false);
+
+
+        }
+    }
+}

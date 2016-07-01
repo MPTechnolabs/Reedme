@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+    <include
+        layout="@layout/activity_progress"
+        />
+
+
+
+
+    <GridView
+        android:id="@+id/list_grid"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:horizontalSpacing="3.0dip"
+        android:verticalSpacing="3.0dip"
+
+        android:numColumns="2"
+        android:layout_above="@+id/sub_view_lyt"
+        android:listSelector="@android:color/transparent"/>
+
+    <include android:id="@+id/sub_view_lyt" android:layout_width="fill_parent"
+        android:layout_height="50.0dip" android:layout_alignParentBottom="true"
+        layout="@layout/sub_view_cart" />
+
+</RelativeLayout>

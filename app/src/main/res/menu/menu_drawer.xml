@@ -1,0 +1,46 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="nkdroid.tutorial.navigationview.MainActivity">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/navigation_item_1"
+            android:icon="@mipmap/home"
+            android:title="Home"/>
+        <item
+            android:id="@+id/navigation_item_2"
+            android:icon="@mipmap/profile"
+            android:title="User Profile"/>
+
+        <item
+            android:id="@+id/navigation_item_3"
+            android:icon="@drawable/ic_addproduct"
+            android:title="Add Product"/>
+
+        <item
+            android:id="@+id/navigation_item_4"
+            android:icon="@mipmap/cart"
+            android:title="Generate Bill"/>
+
+        <item
+            android:id="@+id/logout"
+            android:checked="false"
+            android:icon="@mipmap/ic_exit"
+            android:title="@string/Logout" />
+
+
+        <item
+            android:id="@+id/navigation_subheader"
+            android:title="Settings">
+            <menu>
+                <item
+                    android:id="@+id/navigation_sub_item_1"
+                    android:icon="@drawable/ic_image_looks_one"
+                    android:title="User Setting"/>
+                <item
+                    android:id="@+id/navigation_sub_item_2"
+                    android:icon="@drawable/ic_image_looks_two"
+                    android:title="Personal"/>
+            </menu>
+        </item>
+    </group>
+</menu>

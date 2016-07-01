@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:background="#FFFFFF"
+    >
+
+    <include
+        layout="@layout/activity_progress"
+        />
+
+    <LinearLayout
+        android:id="@+id/ll_filter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/search_titlebar_bg"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        android:weightSum="2">
+
+        <RelativeLayout
+            android:id="@+id/rel_filter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+
+            <ImageView
+                android:id="@+id/iv_filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@drawable/filter" />
+
+            <TextView
+                android:id="@+id/txt_filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/iv_filter"
+                android:padding="@dimen/fivedp"
+                android:text="FILTER"
+                android:textColor="@color/black" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rel_sort"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iv_sort"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@drawable/sort_icon" />
+
+            <TextView
+                android:id="@+id/txt_sort"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/iv_sort"
+                android:padding="@dimen/fivedp"
+                android:text="SORT"
+                android:textColor="@color/black" />
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+    <ListView android:id="@+id/list_category_item" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_below="@+id/ll_filter" android:layout_above="@+id/sub_view_lyt" android:layout_marginTop="3.0dip" android:horizontalSpacing="4.0dip"
+        android:verticalSpacing="3.0dip" android:stretchMode="columnWidth" android:numColumns="2"  />
+    <include android:id="@+id/sub_view_lyt" android:layout_width="fill_parent" android:layout_height="50.0dip" android:layout_alignParentBottom="true" layout="@layout/sub_view_cart" />
+    <RelativeLayout android:id="@+id/main_content" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_above="@+id/sub_view_lyt" />
+
+
+    <TextView
+        android:id="@+id/txt_message"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/reedme_message"
+        android:textSize="@dimen/text_20"
+        android:visibility="gone"
+        android:gravity="center"/>
+</RelativeLayout>

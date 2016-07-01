@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:background="@color/window_background" android:padding="@dimen/activity_horizontal_margin" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:id="@+id/lyt_thank_order_detail" android:background="@android:color/white" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <RelativeLayout android:id="@+id/lyt_r_thank_order_detail" android:padding="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <RelativeLayout android:id="@+id/frm_lyt_thank" android:background="@mipmap/stars" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <ImageView android:id="@+id/img_thank_right" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@mipmap/thank_icon" android:layout_centerInParent="true"  />
+                <TextView android:textSize="18.0sp" android:id="@+id/txt_thank_you" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="50.0dip" android:text="@string/thank_you" android:layout_below="@+id/img_thank_right" android:layout_centerHorizontal="true" />
+            </RelativeLayout>
+            <TextView android:textSize="14.0sp" android:textColor="@color/gray" android:gravity="center" android:id="@+id/txt_thank_order_confirm" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="20.0dip" android:text="@string/order_confirm" android:layout_below="@+id/frm_lyt_thank" android:layout_centerHorizontal="true" />
+            <RelativeLayout android:gravity="center_vertical" android:id="@+id/lyt_thank_track_shipping_btn" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="40.0dip" android:layout_below="@+id/txt_thank_order_confirm">
+                <Button android:textSize="12.0sp" android:textColor="@color/window_background" android:id="@+id/btn_thank_track" android:background="@mipmap/btn_yello_bg" android:padding="10.0dip" android:layout_width="wrap_content" android:layout_height="38.0dip" android:text=" Track Order" android:drawableLeft="@mipmap/track_icon" android:layout_alignParentLeft="true" android:onClick="TrackOrder" />
+                <Button android:textSize="12.0sp" android:textColor="@color/window_background" android:id="@+id/btn_thank_shipping" android:background="@mipmap/btn_yello_bg" android:padding="10.0dip" android:layout_width="wrap_content" android:layout_height="38.0dip" android:text=" Shopping" android:drawableLeft="@mipmap/shipping_icon" android:layout_alignParentRight="true" android:onClick="Shopping" />
+            </RelativeLayout>
+            <RelativeLayout android:gravity="center_vertical" android:id="@+id/lyt_thank_order_summary" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="30.0dip" android:layout_below="@+id/lyt_thank_track_shipping_btn">
+                <ImageView android:id="@+id/img_thank_list_icon" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@mipmap/list_icon" android:layout_centerVertical="true" />
+                <TextView android:textSize="16.0sp" android:textColor="@color/gray" android:id="@+id/txt_thank_your_order_summary" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:text="@string/your_order_summary" android:layout_toRightOf="@+id/img_thank_list_icon" />
+            </RelativeLayout>
+        </RelativeLayout>
+        <RelativeLayout android:id="@+id/lyt_thank_order_no" android:background="@color/colorPrimary" android:padding="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_below="@+id/lyt_r_thank_order_detail">
+            <TextView android:textSize="18.0sp" android:textColor="@android:color/white" android:id="@+id/txt_thank_order_no" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:text="@string/order_no" android:layout_alignParentLeft="true" />
+            <TextView android:textSize="18.0sp" android:textColor="@android:color/white" android:id="@+id/txt_place_payable_total_amout_value" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="5.0dip" android:text="470066" android:layout_alignParentRight="true" />
+        </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>

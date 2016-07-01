@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:padding="5.0sp"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="0.3dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/grey" />
+
+    <RelativeLayout android:background="@color/white" android:padding="@dimen/five"
+        android:paddingTop="15.0dip" android:paddingBottom="15.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_category_item"
+            android:layout_width="90.0dip"
+            android:layout_height="90.0dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/logo"
+            app:border_color="@color/grey"
+            app:border_width="2dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"  />
+
+        <RelativeLayout
+
+            android:id="@+id/lyt_category_item_detail" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:layout_marginLeft="20.0dip"
+            android:paddingTop="@dimen/twentydp"
+            android:layout_toRightOf="@+id/img_category_item">
+            <TextView android:textColor="@color/black"
+                android:textSize="@dimen/text_20"
+                android:id="@+id/storeName" android:layout_width="wrap_content"
+                android:text="aaa"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true" />
+            <TextView android:textSize="13.0sp"  android:textColor="@color/gray_dark"
+                android:text="discount"
+                android:id="@+id/storeDiscount" android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:layout_marginTop="3.0dip"
+                android:layout_below="@+id/storeName" />
+            </RelativeLayout>
+    </RelativeLayout>
+    <RelativeLayout android:visibility="visible" android:layout_width="wrap_content"
+        android:layout_marginRight="@dimen/fivedp"
+        android:paddingTop="@dimen/twentydp"
+        android:layout_height="wrap_content" android:layout_alignParentRight="true" android:layout_alignParentTop="true">
+        <TextView  android:textColor="@android:color/black"
+            android:gravity="center" android:id="@+id/walletPoint" android:clickable="false" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:layout_centerHorizontal="true" />
+
+       <!-- <RelativeLayout android:visibility="visible" android:id="@+id/lyt_category_sub_item_minus" android:paddingLeft="5.0dip" android:paddingTop="10.0dip" android:paddingBottom="12.0dip" android:clickable="false" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_below="@+id/txt_category_sub_item_add_count">
+            <ImageButton android:id="@+id/btn_category_sub_item_minus" android:background="@mipmap/minus" android:clickable="false" android:layout_width="wrap_content" android:layout_height="wrap_content"  />
+        </RelativeLayout>
+        <RelativeLayout android:visibility="visible" android:id="@+id/lyt_category_sub_item_plus" android:paddingTop="10.0dip" android:paddingRight="5.0dip" android:paddingBottom="12.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="2.0dip" android:layout_toRightOf="@+id/lyt_category_sub_item_minus" android:layout_below="@+id/txt_category_sub_item_add_count">
+            <ImageButton android:id="@+id/btn_category_sub_item_plus" android:background="@mipmap/plus" android:clickable="false" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        </RelativeLayout>-->
+    </RelativeLayout>
+</RelativeLayout>
+
+
+

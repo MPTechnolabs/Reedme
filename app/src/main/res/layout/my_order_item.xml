@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="@color/gray_light"
+    android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout android:gravity="center" android:orientation="vertical"
+            android:background="@android:color/white" android:layout_width="0dp"
+            android:layout_height="wrap_content" android:layout_weight="1.5">
+            <View android:background="@color/gray_light" android:layout_width="fill_parent" android:layout_height="1.0dip" />
+            <TextView android:gravity="center" android:id="@+id/txt_order_id" android:padding="@dimen/my_order_text_view_padding" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/order_id" />
+            <View android:background="@color/gray_light" android:layout_width="fill_parent" android:layout_height="1.0dip" />
+            <TextView android:textColor="@color/gray" android:gravity="center" android:id="@+id/txt_order_id_value" android:padding="@dimen/my_order_text_view_padding" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="470066" />
+            <TextView android:visibility="gone" android:gravity="center" android:id="@+id/txt_order_packed" android:background="@color/gray_light" android:padding="@dimen/my_order_text_view_padding" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Packed" />
+        </LinearLayout>
+        <View android:background="@color/gray_light" android:layout_width="1.0dip" android:layout_height="wrap_content" />
+        <LinearLayout android:gravity="center" android:orientation="vertical" android:background="@android:color/white" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="4.0">
+            <View android:background="@color/gray_light" android:layout_width="fill_parent" android:layout_height="1.0dip" />
+            <TextView android:gravity="center" android:id="@+id/txt_order_date" android:padding="@dimen/my_order_text_view_padding" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/order_date" />
+            <View android:background="@color/gray_light" android:layout_width="fill_parent" android:layout_height="1.0dip" />
+            <TextView android:gravity="center" android:id="@+id/txt_order_date_value" android:padding="@dimen/my_order_text_view_padding" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="9 Sep. 2015" />
+            <TextView android:visibility="gone" android:gravity="center" android:id="@+id/txt_order_delivery" android:background="@color/gray_light" android:padding="@dimen/my_order_text_view_padding" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Delivering" />
+        </LinearLayout>
+        <View android:background="@color/gray_light" android:layout_width="1.0dip" android:layout_height="wrap_content" />
+        <LinearLayout android:gravity="center" android:orientation="vertical" android:background="@android:color/white" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1.5">
+            <View android:background="@color/gray_light" android:layout_width="fill_parent" android:layout_height="1.0dip" />
+            <TextView android:gravity="center" android:id="@+id/txt_order_amount" android:padding="@dimen/my_order_text_view_padding" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/amount" />
+            <View android:background="@color/gray_light" android:layout_width="fill_parent" android:layout_height="1.0dip" />
+            <TextView android:gravity="center" android:id="@+id/txt_order_amount_value" android:padding="@dimen/my_order_text_view_padding" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="140.00" />
+            <TextView android:visibility="gone" android:gravity="center" android:id="@+id/txt_order_delivered" android:background="@color/gray_light" android:padding="@dimen/my_order_text_view_padding" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Delivered" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <TextView android:textColor="@color/white" android:gravity="center" android:id="@+id/txt_order_canceled" android:background="@color/colorPrimary" android:padding="@dimen/my_order_text_view_padding" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Canceled" />
+    <View android:background="@color/gray_light" android:layout_width="fill_parent" android:layout_height="1.0dip" />
+
+</LinearLayout>

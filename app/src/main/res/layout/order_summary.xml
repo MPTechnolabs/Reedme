@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:layout_margin="@dimen/fivedp"
+    android:fitsSystemWindows="true">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/gray_normal_bg" />
+
+        <RelativeLayout
+            android:id="@+id/rel_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0.5dp"
+            android:background="@color/white">
+
+            <RelativeLayout
+                android:id="@+id/rl_ordersummary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/txt_order_summery"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/five"
+                    android:layout_marginLeft="@dimen/tendp"
+                    android:layout_marginTop="@dimen/fiften"
+
+                    android:text="Order Summary"
+                    android:textColor="@color/secondary_text_transparent_70"
+                    android:textSize="@dimen/text_14" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/txt_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rl_ordersummary"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/white"
+                android:gravity="left"
+                android:text=""
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_12" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#F0F0F0"></View>
+
+        <RelativeLayout
+            android:id="@+id/rel_item_detail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+
+
+            android:visibility="gone">
+
+            <ListView
+                android:id="@+id/ll_items"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+
+                >
+
+
+            </ListView>
+
+
+        </RelativeLayout>
+        <!--     <View
+                 android:layout_width="match_parent"
+                 android:layout_height="0.5dp"
+                 android:background="@color/gray_normal_bg" />
+     -->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:id="@+id/txt_ordertotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/five"
+                android:layout_marginTop="@dimen/five"
+                android:padding="@dimen/five"
+                android:text="Sub Total"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_12" />
+
+
+            <TextView
+                android:id="@+id/txt_place_payable_total_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/five"
+                android:layout_marginTop="@dimen/five"
+                android:padding="@dimen/five"
+                android:text=""
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_12" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/gray_normal_bg" />
+
+        <!--      <RelativeLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginLeft="@dimen/five"
+                  android:layout_marginRight="@dimen/five">
+
+                  <TextView
+
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:padding="@dimen/five"
+                      android:text="Tax"
+                      android:textColor="@color/txtColour"
+                      android:textSize="@dimen/text_12" />
+
+                  <TextView
+                      android:id="@+id/txt_tax"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_alignParentRight="true"
+                      android:padding="@dimen/five"
+                      android:text="AED 0.00"
+                      android:textColor="@color/txtColour"
+                      android:textSize="@dimen/text_12" />
+
+              </RelativeLayout>-->
+
+        <!--        <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/gray_normal_bg" />-->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_normal_bg" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/five"
+            android:layout_marginRight="@dimen/five"
+            android:layout_marginTop="@dimen/five">
+
+            <TextView
+                android:id="@+id/txt_delivery"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/txt_place_payable_shipping_value"
+                android:padding="@dimen/five"
+                android:text="Shipping Charges"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_12" />
+
+            <TextView
+                android:id="@+id/txt_place_payable_shipping_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:padding="@dimen/five"
+                android:text=""
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_12" />
+
+        </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_normal_bg" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/five"
+            android:layout_marginRight="@dimen/five"
+            android:layout_marginTop="@dimen/five">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/five"
+                android:text="Discount"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_12" />
+
+            <TextView
+                android:id="@+id/txt_discount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:padding="@dimen/five"
+                android:text="0.00"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_12" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_normal_bg" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/five"
+            android:layout_marginRight="@dimen/five"
+            android:layout_marginTop="@dimen/five">
+
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/txt_place_payable_total_amout_value"
+                android:padding="@dimen/five"
+                android:text="Net Total "
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/text_14" />
+
+            <TextView
+                android:id="@+id/txt_place_payable_total_amout_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:padding="@dimen/five"
+                android:text=""
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/text_14" />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>
+
