@@ -337,8 +337,8 @@ public class StoreDiaplyActivity extends AppCompatActivity implements AdapterVie
         }
 
         Intent i= new Intent(getApplicationContext(),CategoryItemActivity.class);
-        i.putExtra("id", (StoreDiaplyActivity.categoryData.getCategoryItems().get(position)).getId());
-        i.putExtra("name", (StoreDiaplyActivity.categoryData.getCategoryItems().get(position)).getName());
+        i.putExtra("id", (StoreDiaplyActivity.categoryDate.getCategoryItems().get(position)).getId());
+        i.putExtra("name", (StoreDiaplyActivity.categoryDate.getCategoryItems().get(position)).getName());
         startActivity(i);
 
 

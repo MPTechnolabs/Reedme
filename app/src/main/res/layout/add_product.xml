@@ -1,17 +1,23 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#ff8b90af"
+    android:layout_height="fill_parent"
     android:id="@+id/rl"
+
     >
-
 <ScrollView
-
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/scrollView1"
     android:layout_width="fill_parent"
     android:background="#e8e8e7"
-    android:layout_height="match_parent" >
+    android:scrollbars="none"
+    android:layout_height="match_parent"
+    tools:ignore="UselessParent">
+
+
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -19,22 +25,12 @@
         android:background="#e8e8e7"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="100dp"
 
         android:layout_gravity="center"
         android:orientation="vertical" >
 
 
-    <!--    <LinearLayout android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-
-            android:orientation="vertical"
-            android:gravity="center_horizontal"
-            android:background="@drawable/greybackground"
-            >
-
--->
             <EditText
                 android:id="@+id/edt_productName"
                 android:layout_width="fill_parent"
@@ -44,7 +40,7 @@
                 android:paddingLeft="@dimen/dp_5"
                 android:paddingRight="@dimen/dp_5"
                 android:singleLine="true"
-                android:layout_marginTop="110dp"/>
+                android:layout_marginTop="@dimen/thirtydp"/>
 
             <EditText
                 android:id="@+id/edt_quantity"
@@ -55,7 +51,8 @@
                 android:paddingRight="@dimen/dp_5"
                 android:singleLine="true"
                 android:background="@color/grey_white"
-                android:layout_marginTop="@dimen/dp_10"/>
+                android:layout_marginTop="@dimen/dp_10"
+                android:inputType="number"/>
 
             <EditText
                 android:id="@+id/edt_price"
@@ -65,7 +62,7 @@
                 android:paddingLeft="@dimen/dp_5"
                 android:paddingRight="@dimen/dp_5"
                 android:singleLine="true"
-                android:inputType="number"
+                android:inputType="numberDecimal"
                 android:background="@color/grey_white"
                 android:layout_marginTop="@dimen/dp_10"/>
 
@@ -77,7 +74,6 @@
                 android:paddingLeft="@dimen/dp_5"
                 android:paddingRight="@dimen/dp_5"
                 android:singleLine="true"
-                android:inputType="number"
                 android:background="@color/grey_white"
                 android:layout_marginTop="@dimen/dp_10"/>
             <EditText
@@ -87,55 +83,115 @@
                 android:hint="@string/weight"
                 android:paddingLeft="@dimen/dp_5"
                 android:paddingRight="@dimen/dp_5"
-                android:inputType="number"
                 android:singleLine="true"
                 android:background="@color/grey_white"
                 android:layout_marginTop="@dimen/dp_10"/>
             <EditText
                 android:id="@+id/edt_description"
                 android:layout_width="fill_parent"
-                android:layout_height="@dimen/dp_40"
+                android:layout_height="wrap_content"
                 android:hint="@string/description"
                 android:paddingLeft="@dimen/dp_5"
                 android:paddingRight="@dimen/dp_5"
-                android:lines="3"
+                android:lines="4"
                 android:background="@color/grey_white"
                 android:layout_marginTop="@dimen/dp_10"/>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/grey_white"
+            android:layout_marginTop="@dimen/dp_10"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#e8e8e7"
+
+            android:orientation="horizontal">
+            <View
+                android:layout_width="@dimen/dp_2"
+                android:layout_height="match_parent"
+                android:background="@color/grey_white"/>
+
+            <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Product Image :"
+            android:textSize="@dimen/dp_18"
+            android:paddingLeft="@dimen/dp_5"
+            android:paddingRight="@dimen/dp_5"
+           />
+</LinearLayout>
+
             <LinearLayout
+
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+
+
+                >
+                <View
+                    android:layout_width="@dimen/dp_2"
+                    android:layout_height="match_parent"
+                    android:background="@color/grey_white"/>
 
                 <ImageView
                     android:id="@+id/img_product"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/dp_190"
+                    android:layout_height="70dp"
                     android:layout_weight="3"
+                    android:src="@drawable/logo"
+                    android:background="#e8e8e7"
                     android:layout_marginTop="@dimen/dp_10"/>
+
+
 
                 <ImageView
                     android:id="@+id/img_camera"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_height="70dp"
+                    android:layout_weight="2"
+                    android:layout_gravity="center"
+                    android:paddingLeft="@dimen/dp_5"
+                    android:paddingRight="@dimen/dp_5"
+                    android:layout_marginRight="@dimen/dp_5"
+                    android:background="@color/grey_white"
                     android:src="@mipmap/ic_camera"/>
 
-
+                <View
+                    android:layout_width="@dimen/dp_2"
+                    android:layout_height="match_parent"
+                    android:background="@color/grey_white"/>
 
 
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/grey_white"
+                android:layout_marginTop="@dimen/dp_10"
+                />
+        </LinearLayout>
+
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
-                <TextView
+                <EditText
                     android:id="@+id/txt_result"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Enter Barcode"
+                    android:layout_height="@dimen/dp_40"
+                    android:hint="Enter Barcode"
                     android:layout_weight="3"
-                    android:gravity="center"
+
                     android:padding="@dimen/tendp"
                     android:background="@color/grey_white"
 
@@ -143,7 +199,7 @@
             <TextView
                 android:id="@+id/txt_barcode"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/dp_40"
                 android:text="Scan Barcode"
                 android:layout_weight="1"
                 android:gravity="center"
@@ -178,11 +234,12 @@
                 android:layout_width="@dimen/dp_190"
                 android:layout_height="@dimen/dp_40"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/dp_16"
+                android:layout_marginBottom="@dimen/dp_10"
                 android:text="@string/add_product"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_16"
-                android:background="@color/colorPrimary"/>
+                android:background="@color/colorPrimaryMerchant"/>
 
 
         </LinearLayout>
@@ -193,7 +250,6 @@
     </LinearLayout>
 -->
 
-
-
 </ScrollView>
-    </RelativeLayout>
+
+</RelativeLayout>

@@ -17,6 +17,7 @@ import com.example.reedme.R;
 import com.example.reedme.activity.CategoryItemFullActivity;
 import com.example.reedme.activity.StartActivity;
 import com.example.reedme.activity.StoreDiaplyActivity;
+import com.example.reedme.fragments.CategoryItemActivity;
 import com.example.reedme.helper.AppPrefs;
 import com.example.reedme.helper.Constants;
 import com.example.reedme.helper.CustomSimpleMessageDialog;
@@ -55,7 +56,7 @@ public class CategoryItemAdapter extends BaseAdapter {
                 viewHolder.ItemCount--;
                 this.val$holder.CountText.setText(String.valueOf(this.val$holder.ItemCount));
                 Util.getInstance(StartActivity.context).RemoveCheckOutVantage(this.val$holder.vantage.getVantageId());
-                StoreDiaplyActivity.getInstance().SetCheckOutValue();
+                CategoryItemActivity.getInstance().SetCheckOutValue();
             }
 
         }
@@ -72,7 +73,7 @@ public class CategoryItemAdapter extends BaseAdapter {
             viewHolder.ItemCount++;
             this.val$holder.CountText.setText(String.valueOf(this.val$holder.ItemCount));
             Util.getInstance(StartActivity.context).AddCheckOutVantage(this.val$holder.vantage, this.val$holder.product.getProductName());
-            StoreDiaplyActivity.getInstance().SetCheckOutValue();
+            CategoryItemActivity.getInstance().SetCheckOutValue();
 
             //AppPrefs.getAppPrefs(StartActivity.context).setString("storename", this.val$holder.product.getStorename());
 

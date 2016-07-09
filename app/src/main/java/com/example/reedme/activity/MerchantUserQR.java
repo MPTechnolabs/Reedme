@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.reedme.R;
+import com.example.reedme.helper.AppPrefs;
 import com.example.reedme.model.UserDetail;
 import com.example.reedme.model.UserDetailList;
 
@@ -69,11 +70,19 @@ public class MerchantUserQR extends AppCompatActivity {
         txt_wallet.setText(String.format("Wallet : %s", user.getWallet_point()));
         txt_mobile.setText(user.getPhone());
 
+        AppPrefs.getAppPrefs(MerchantUserQR.this).setString(MerchantUserQR.this.getResources().getString(R.string.user_id), user.getUser_id());
+        AppPrefs.getAppPrefs(MerchantUserQR.this).setString("qr_number",user.getQr_number());
+        AppPrefs.getAppPrefs(MerchantUserQR.this).setString("email", user.getEmail());
+        AppPrefs.getAppPrefs(MerchantUserQR.this).setString("firstname",user.getFirstname());
+        AppPrefs.getAppPrefs(MerchantUserQR.this).setString("lastname",user.getLastname());
+        AppPrefs.getAppPrefs(MerchantUserQR.this).setString("address",user.getAddress());
+        AppPrefs.getAppPrefs(MerchantUserQR.this).setString("phone",user.getPhone());
+        AppPrefs.getAppPrefs(MerchantUserQR.this).setString("state",user.getState());
+        AppPrefs.getAppPrefs(MerchantUserQR.this).setString("city",user.getCity());
+        AppPrefs.getAppPrefs(MerchantUserQR.this).setString("pincode",user.getPincode());
+        AppPrefs.getAppPrefs(MerchantUserQR.this).setString("Wallet",user.getWallet_point());
 
     }
-
-
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

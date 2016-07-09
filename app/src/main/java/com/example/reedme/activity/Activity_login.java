@@ -59,6 +59,7 @@ public class Activity_login extends AppCompatActivity {
     Activity_login obj_Login;
 
     Boolean bl_InputPasswordType = true;
+    TextView txt_merchant;
     Button btn_Login;
     private static final int PERMISSION_REQUEST_CODE = 1;
 
@@ -75,8 +76,7 @@ public class Activity_login extends AppCompatActivity {
 
         mJsonParser = new MyJSONParser();
 
-        SharedPreferences appSharedPrefs = PreferenceManager
-                .getDefaultSharedPreferences(this.getApplicationContext());
+        SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
         Gson gson = new Gson();
 
         String json = appSharedPrefs.getString("MyObject", "");
@@ -100,9 +100,9 @@ public class Activity_login extends AppCompatActivity {
 
         edt_EmailId = (EditText) findViewById(R.id.edt_email_mobile);
         edt_Password = (EditText) findViewById(R.id.edt_password);
-
         txt_register_now = (TextView) findViewById(R.id.txt_register_now);
         txt_ShowPassword = (TextView) findViewById(R.id.txt_show);
+        txt_merchant = (TextView) findViewById(R.id.txt_merchant);
         progress = (AVLoadingIndicatorView) findViewById(R.id.progress);
 
         btn_Login = (Button) findViewById(R.id.btn_login);
@@ -116,6 +116,27 @@ public class Activity_login extends AppCompatActivity {
             public void onClick(View view) {
 
                 startActivity(new Intent(Activity_login.this, activity_user_register.class));
+            }
+        });
+
+        txt_merchant.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if ((AppPrefs.getAppPrefs(Activity_login.this).getIsMerchantLogin())) {
+                    Intent i = new Intent(Activity_login.this, DrawerActivity.class);
+                    startActivity(i);
+                    overridePendingTransition(R.anim.right_to_left, R.anim.left_to_out);
+                    finish();
+
+                }
+                else
+                {
+                    Intent intent = new Intent(Activity_login.this, activity_merchant_login.class);
+                    overridePendingTransition(R.anim.right_to_left, R.anim.left_to_out);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
         btn_Login.setOnClickListener(new View.OnClickListener() {
@@ -321,10 +342,9 @@ public class Activity_login extends AppCompatActivity {
                         Utills.customSimpleMessageDialog.dismiss();
                     }
                 }
-            }, Constants.DIALOG_INFO_TITLE, "Something,Went Wrong", false);
+            }, Constants.DIALOG_INFO_TITLE, "Email and password does not match ", false);
 
-            this.edt_EmailId.setText("");
-            this.edt_Password.setText("");
+
         }
     }
 }

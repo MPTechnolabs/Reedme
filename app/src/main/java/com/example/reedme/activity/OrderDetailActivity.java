@@ -134,13 +134,15 @@ public class OrderDetailActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setHomeButtonEnabled(true);
             getSupportActionBar().setTitle("My Order");
-            new JSONParse().execute();
 
             LoadContext();
             loatData();
 
+            new JSONParse().execute();
+
+
         } catch (Exception ex) {
-            Log.e(TAG, ex.getMessage());
+           // Log.e(TAG, ex.getMessage());
 
         }
     }

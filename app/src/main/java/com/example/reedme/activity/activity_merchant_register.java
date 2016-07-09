@@ -31,6 +31,7 @@ import com.example.reedme.adapter.CityAdapter;
 import com.example.reedme.adapter.CountryAdapter;
 import com.example.reedme.adapter.StoreAdapter;
 import com.example.reedme.dataprovider.ParseDataProvider;
+import com.example.reedme.helper.AppPrefs;
 import com.example.reedme.helper.Constants;
 import com.example.reedme.helper.CustomSimpleMessageDialog;
 import com.example.reedme.helper.MyJSONParser;
@@ -62,16 +63,15 @@ public class activity_merchant_register extends AppCompatActivity {
 
     private ImageView iv_shipping_back, iv_signup_back;
 
-    EditText edt_FirstName, edt_LastName, edt_EmailId, edt_Password,edt_username, edt_ConfirmPassword, edt_MobileNumber;
+    EditText edt_FirstName, edt_LastName, edt_EmailId, edt_Password, edt_ConfirmPassword, edt_MobileNumber;
 
-    EditText edt_City, edt_State, edt_Country, edt_Pincode, edt_Address, edt_SpecialInstruction,edt_discount,edt_category;
+    EditText edt_City, edt_State, edt_Country, edt_Pincode, edt_Address, edt_SpecialInstruction,edt_category;
     activity_merchant_register obj_Registaration;
 
     Dialog dialog_CityList,dialog_CountryList, dialog_StateList;
 
     Boolean  bl_SelectCity = false, bl_SelectCode = false;
-    int str_discout = 0;
-    String str_FirstName, str_category,str_LastName,str_user, str_EmailId, str_Password, str_ConfirmPassword, str_MobileNumber, str_AppInfo, str_city, str_state, str_country, str_pincode, str_Address, str_SpecialIntruction;
+    String str_FirstName, str_category,str_LastName, str_EmailId, str_Password, str_ConfirmPassword, str_MobileNumber, str_AppInfo, str_city, str_state, str_country, str_pincode, str_Address, str_SpecialIntruction;
     CheckBox cb_TermCondition;
     TextView txt_ShowPassword, txt_ConfirmPassword;
     Boolean bl_InputPasswordType = true;
@@ -111,7 +111,6 @@ public class activity_merchant_register extends AppCompatActivity {
         edt_Password = (EditText) findViewById(R.id.edt_password);
         edt_ConfirmPassword = (EditText) findViewById(R.id.edt_conpassword);
         edt_MobileNumber = (EditText) findViewById(R.id.edt_mobile_number);
-        edt_username = (EditText) findViewById(R.id.edt_user);
 
         // Second  Page
         edt_City = (EditText) findViewById(R.id.edt_city);
@@ -119,7 +118,6 @@ public class activity_merchant_register extends AppCompatActivity {
         edt_Country = (EditText) findViewById(R.id.edt_country);
         edt_Pincode = (EditText) findViewById(R.id.edt_pincode);
         edt_Address = (EditText) findViewById(R.id.edt_address);
-        edt_discount = (EditText) findViewById(R.id.edt_discount);
         edt_SpecialInstruction = (EditText) findViewById(R.id.edt_spe_instruction);
         edt_category = (EditText) findViewById(R.id.edt_category);
         cb_TermCondition = (CheckBox) findViewById(R.id.checkbox_terms);
@@ -156,7 +154,6 @@ public class activity_merchant_register extends AppCompatActivity {
                 str_EmailId = edt_EmailId.getText().toString().trim();
                 str_Password = edt_Password.getText().toString().trim();
                 str_ConfirmPassword = edt_ConfirmPassword.getText().toString().trim();
-                str_user = edt_username.getText().toString().trim();
                 str_MobileNumber = edt_MobileNumber.getText().toString().trim();
 
                 if (str_FirstName == null || str_FirstName.equals("")) {
@@ -183,19 +180,8 @@ public class activity_merchant_register extends AppCompatActivity {
                         }
 
                     }, Constants.DIALOG_INFO_TITLE, "Please Enter LastName", false);
-                }
 
-                else if (str_user == null || str_user.equals("")) {
 
-                    Utills.showCustomSimpleDialog(obj_Registaration, new CustomSimpleMessageDialog.SimpleDialogOnClickListener() {
-                        @Override
-                        public void onOkayButtonClick() {
-                            if (Utills.customSimpleMessageDialog != null) {
-                                Utills.customSimpleMessageDialog.dismiss();
-                            }
-                        }
-
-                    }, Constants.DIALOG_INFO_TITLE, "Please Enter UserName", false);
 
                 } else if (str_EmailId == null || str_EmailId.equals("")) {
 
@@ -306,7 +292,6 @@ public class activity_merchant_register extends AppCompatActivity {
                 str_pincode = edt_Pincode.getText().toString().trim();
                 str_Address = edt_Address.getText().toString().trim();
                 str_category = edt_category.getText().toString().trim();
-                str_discout = Integer.parseInt(edt_discount.getText().toString().trim());
                 str_SpecialIntruction = edt_SpecialInstruction.getText().toString().trim();
 
 
@@ -470,7 +455,6 @@ public class activity_merchant_register extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
                 openDialougSelectCountryList();
 
             }
@@ -530,10 +514,7 @@ public class activity_merchant_register extends AppCompatActivity {
                 }
             }
         });
-
-
     }
-
     private void callRegisterApi() {
 
         if (Utills.isConnectingToInternet(obj_Registaration)) {
@@ -580,9 +561,9 @@ public class activity_merchant_register extends AppCompatActivity {
                 UUID uniqueKey = UUID.randomUUID();
 
 
-                params.put("m_name",str_user);
+                params.put("m_name","");
                 params.put("registration_id","1234");
-                params.put("discount_rate",str_discout+"");
+                params.put("discount_rate","");
                 params.put("firstname",str_FirstName);
                 params.put("lastname",str_LastName);
                 params.put("email", str_EmailId);
@@ -622,11 +603,20 @@ public class activity_merchant_register extends AppCompatActivity {
     protected void LoginCallAction(Integer isSuccess) {
 
         if(isSuccess == 1) {
-            Intent i_Login = new Intent(obj_Registaration, activity_merchant_login.class);
-            i_Login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            i_Login.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-            startActivity(i_Login);
-            finish();
+            try {
+
+                String user = jsonObject_parent.getString("user_data");
+                AppPrefs.getAppPrefs(activity_merchant_register.this).setString("m_user", user);
+
+                Intent i_Login = new Intent(obj_Registaration, Activity_add_store.class);
+                i_Login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                i_Login.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                startActivity(i_Login);
+                AppPrefs.getAppPrefs(activity_merchant_register.this).setString("store_id", isSuccess.toString());
+
+                finish();
+            }catch (Exception e)
+            {}
         }
         else
         {

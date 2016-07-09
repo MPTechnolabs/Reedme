@@ -60,6 +60,7 @@
 
         <activity android:name=".activity.activity_user_register" android:screenOrientation="portrait"  />
         <activity android:name=".activity.activity_merchant_register" android:screenOrientation="portrait" android:theme="@style/AppThemeMerchant"  />
+        <activity android:name=".activity.Activity_add_store" android:screenOrientation="portrait" android:theme="@style/AppThemeMerchant"  />
 
         <activity android:name=".activity.Activity_login" android:screenOrientation="portrait"  />
         <activity android:name=".activity.activity_merchant_login" android:screenOrientation="portrait" android:theme="@style/AppThemeMerchant" />
@@ -90,7 +91,6 @@
         <activity android:name=".activity.FriendsActivity" android:screenOrientation="portrait"  android:label="Profile"
             android:theme="@style/AppThemeMerchant1"
             />
-        <activity android:name=".activity.MerchantCheckoutContinueActivity" android:screenOrientation="portrait"  android:theme="@style/AppThemeMerchant1"/>
 
         <activity android:name=".activity.Add_product" android:screenOrientation="portrait"  android:label="Add Product"
             android:theme="@style/AppThemeMerchant1"
@@ -99,6 +99,10 @@
             android:theme="@style/AppThemeMerchant1"
             />
         <activity android:name=".activity.MerchantUserQR" android:screenOrientation="portrait"  android:label="User Detail"
+            android:theme="@style/AppThemeMerchant"
+            />
+
+        <activity android:name=".activity.CheckoutMerchantPlaceOrder" android:screenOrientation="portrait"  android:label="Place Order"
             android:theme="@style/AppThemeMerchant"
             />
     </application>

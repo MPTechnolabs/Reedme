@@ -221,7 +221,7 @@ public class CheckoutPlaceOrderActivity extends AppCompatActivity {
           Toast.makeText(CheckoutPlaceOrderActivity.this,"Order Place successfully",Toast.LENGTH_LONG).show();
             AppPrefs.getAppPrefs(this.context).setCheckOutVantage(null);
             StartActivity.getInstance().SetCheckOutValue();
-            Intent intent = new Intent(this, StartActivity.class);
+            Intent intent = new Intent(CheckoutPlaceOrderActivity.this, StartActivity.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable("CategoryData", categoryData);
             intent.putExtras(bundle);

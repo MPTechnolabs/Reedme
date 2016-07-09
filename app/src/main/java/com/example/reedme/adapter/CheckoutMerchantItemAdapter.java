@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.reedme.R;
 import com.example.reedme.activity.CheckoutContinueActivity;
+import com.example.reedme.activity.activity_merchant_continue;
 import com.example.reedme.helper.Util;
 import com.example.reedme.model.CheckOutVantage;
 import com.squareup.picasso.Picasso;
@@ -37,7 +38,7 @@ public class CheckoutMerchantItemAdapter extends BaseAdapter {
                 ViewHolder viewHolder = this.val$holder;
                 viewHolder.ItemCount--;
                 this.val$holder.CountText.setText(String.valueOf(this.val$holder.ItemCount));
-                Util.getInstance(context).RemoveCheckOutVantage(this.val$holder.variant.getVantageId());
+                Util.getInstance(context).RemoveCheckOutVantageMerchant(this.val$holder.variant.getVantageId());
                 this.val$holder.Count.setText(" x " + String.valueOf(this.val$holder.ItemCount) + " = ");
                 this.val$holder.CountText.setText(String.valueOf(this.val$holder.ItemCount));
                 String value = val$holder.variant.getVantagePrice();
@@ -45,12 +46,15 @@ public class CheckoutMerchantItemAdapter extends BaseAdapter {
                 String result = value.replaceAll("[.,]","");
 */
                 this.val$holder.TotalAmount.setText(String.valueOf(Float.parseFloat(value) * ((float) this.val$holder.ItemCount)));
-                CheckoutContinueActivity.setCheckOutPayableData();
+                activity_merchant_continue.setCheckOutPayableData();
                 if (this.val$holder.ItemCount == 0) {
                     CheckoutMerchantItemAdapter.this.vantageList.remove(this.val$holder.Position);
-                    CheckoutItemAdapter adapter = (CheckoutItemAdapter) CheckoutContinueActivity.checkoutList.getAdapter();
+
+                    CheckoutMerchantItemAdapter adapter = (CheckoutMerchantItemAdapter) activity_merchant_continue.checkoutList.getAdapter();
                     adapter.notifyDataSetInvalidated();
                     adapter.notifyDataSetChanged();
+                    activity_merchant_continue.setCheckOutPayableData();
+
                 }
             }
         }
@@ -67,7 +71,7 @@ public class CheckoutMerchantItemAdapter extends BaseAdapter {
             ViewHolder viewHolder = this.val$holder;
             viewHolder.ItemCount++;
             this.val$holder.CountText.setText(String.valueOf(this.val$holder.ItemCount));
-            Util.getInstance(context).AddCheckOutItem(this.val$holder.variant);
+            Util.getInstance(context).AddCheckOutItemMerchant(this.val$holder.variant);
             this.val$holder.Count.setText(" x " + String.valueOf(this.val$holder.ItemCount) + " = ");
             this.val$holder.CountText.setText(String.valueOf(this.val$holder.ItemCount));
 
@@ -76,7 +80,10 @@ public class CheckoutMerchantItemAdapter extends BaseAdapter {
             String result = value.replaceAll("[.,]","");*/
 
             this.val$holder.TotalAmount.setText(String.valueOf(Float.parseFloat(value) * ((float) this.val$holder.ItemCount)));
-            CheckoutContinueActivity.setCheckOutPayableData();
+            activity_merchant_continue.setCheckOutPayableData();
+            CheckoutMerchantItemAdapter adapter = (CheckoutMerchantItemAdapter) activity_merchant_continue.checkoutList.getAdapter();
+            adapter.notifyDataSetInvalidated();
+            adapter.notifyDataSetChanged();
         }
     }
 
@@ -100,6 +107,7 @@ public class CheckoutMerchantItemAdapter extends BaseAdapter {
 
     public CheckoutMerchantItemAdapter(HashMap<Integer, CheckOutVantage> checkOutVantageList) {
         this.vantageList = new ArrayList(checkOutVantageList.values());
+        notifyDataSetChanged();
     }
 
     public int getCount() {
@@ -150,6 +158,7 @@ public class CheckoutMerchantItemAdapter extends BaseAdapter {
         Picasso.with(context).load(holder.variant.getVantageImage()).placeholder((int) R.mipmap.mystore).into(holder.Image);
         holder.lytItemMinus.setOnClickListener(new C05071(holder));
         holder.lytItemPlus.setOnClickListener(new C05082(holder));
+        notifyDataSetChanged();
         return view;
     }
 }

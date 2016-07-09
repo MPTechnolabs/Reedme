@@ -60,10 +60,12 @@ public class Fragement_Scanner extends Fragment {
         displayToast();
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_scan, container, false);
+
 
         mJsonParser = new MyJSONParser();
 
@@ -179,7 +181,10 @@ public class Fragement_Scanner extends Fragment {
                     .setAction("Action", null).show();
             barcodeScannerView.resume();
         }
+
+
     }
+
 
 
 }

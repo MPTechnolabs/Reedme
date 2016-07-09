@@ -38,7 +38,7 @@
                 <ImageView
                     android:id="@+id/iv_logo"
                     android:layout_width="200dp"
-                    android:layout_height="200dp"
+                    android:layout_height="180dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="@dimen/twenty"
                     android:src="@drawable/logo" />
@@ -78,7 +78,7 @@
                     android:paddingLeft="@dimen/fourtydp"
                     android:layout_marginLeft="@dimen/tendp"
                     android:layout_marginRight="@dimen/tendp"
-                    android:layout_marginTop="@dimen/twentydp"
+                    android:layout_marginTop="@dimen/tendp"
                     android:paddingTop="@dimen/tendp"
                     android:singleLine="true"
                     android:imeOptions="actionNext"
@@ -156,6 +156,7 @@
 
 
                 <LinearLayout
+                    android:id="@+id/lyt_register"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/fifteendp"
@@ -188,8 +189,21 @@
                         android:textSize="@dimen/text_14" />
 
                 </LinearLayout>
+                <TextView
+                    android:id="@+id/txt_merchant"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginRight="@dimen/tendp"
+                    android:layout_marginTop="@dimen/tendp"
+                    android:padding="2dp"
+                    android:text="Login  To Merchant"
+                    android:textColor="@color/colorPrimaryMerchant"
+                    android:textSize="@dimen/text_20"
+                    android:textStyle="bold"/>
 
             </LinearLayout>
+
         </RelativeLayout>
     </ScrollView>
 

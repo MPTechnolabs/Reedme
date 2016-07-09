@@ -1,10 +1,13 @@
 package com.example.reedme.activity;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -59,18 +62,16 @@ public class activity_merchant_continue  extends AppCompatActivity {
     RelativeLayout add;
     private CompoundBarcodeView barcodeScannerView;
     static TextView txtPaybleValue;
-    CategoryData categoryData;
     String product_result;
     ProgressBar progressBar;
     public static MyJSONParser mJsonParser = null;
     JSONObject jsonObject_parent = null;
-
+    CheckOutData checkOutData;
     CheckoutMerchantItemAdapter adapter;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_merchant_continue);
-
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -79,7 +80,6 @@ public class activity_merchant_continue  extends AppCompatActivity {
             context = this;
             mJsonParser = new MyJSONParser();
 
-            overridePendingTransition(R.anim.right_to_left, R.anim.left_to_inner);
             LoadContext();
             LoatData();
         } catch (Exception ex) {
@@ -105,7 +105,6 @@ public class activity_merchant_continue  extends AppCompatActivity {
                 barcodeScannerView.resume();
             }
         });
-
     }
     private void setupCustomView() {
         mSweetSheet = new SweetSheet(rl);
@@ -146,15 +145,18 @@ public class activity_merchant_continue  extends AppCompatActivity {
 
 
     public void LoatData() {
-        CheckOutData checkOutData = AppPrefs.getAppPrefs(context).getCheckOutVantage();
+        checkOutData = AppPrefs.getAppPrefs(context).getCheckOutVantage();
         setCheckOutPayableValue(checkOutData);
         checkoutList = (ListView) findViewById(R.id.lst_checkout_continue_item);
-        if(checkOutData.CheckOutVantageList.size() != 0 ) {
+
             adapter = new CheckoutMerchantItemAdapter(checkOutData.CheckOutVantageList);
             checkoutList.setAdapter(adapter);
             adapter.notifyDataSetChanged();
-        }
 
+    }
+
+    public static void setCheckOutPayableData() {
+        setCheckOutPayableValue(AppPrefs.getAppPrefs(context).getCheckOutVantage());
     }
 
     private static void setCheckOutPayableValue(CheckOutData checkOutData) {
@@ -166,10 +168,12 @@ public class activity_merchant_continue  extends AppCompatActivity {
 
 
     public void ContinueCheckOut(View view) {
-        /*Intent intent = new Intent(activity_merchant_continue.this, CheckoutProceedActivity.class);
-        overridePendingTransition(R.anim.right_to_left, R.anim.left_to_inner);
 
-        startActivity(intent);*/
+        Intent intent = new Intent(this, CheckoutMerchantPlaceOrder.class);
+        overridePendingTransition(R.anim.right_to_left, R.anim.left_to_out);
+        startActivity(intent);
+        finish();
+
     }
 
 
@@ -252,13 +256,21 @@ public class activity_merchant_continue  extends AppCompatActivity {
                 vantageList.add(vantage);
                 product.setVantages(vantageList);
 
-                Util.getInstance(context).AddCheckOutVantage(vantage, product.getProductName());
+                Util.getInstance(context).AddCheckOutVantageMerchant(vantage, product.getProductName());
 
-                Toast.makeText(getApplicationContext(),product.getProductName(),Toast.LENGTH_LONG).show();
-                adapter.notifyDataSetChanged();
+                finish();
+                Intent intent = getIntent();
+
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                activity_merchant_continue.this.overridePendingTransition(0, 0);
+
+
+                startActivity(intent);
+
             }catch (Exception e)
             {}
-            adapter.notifyDataSetChanged();
+
+
 
         }
         else
@@ -274,5 +286,7 @@ public class activity_merchant_continue  extends AppCompatActivity {
 
 
         }
+
     }
+
 }

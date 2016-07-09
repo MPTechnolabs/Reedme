@@ -74,7 +74,9 @@
       android:layout_width="fill_parent" android:layout_height="wrap_content"
       android:layout_marginTop="@dimen/five"
       android:divider="@color/grey"
+      android:layout_above="@+id/sub_view_lyt"
       android:layout_below="@+id/ll_filter" android:dividerHeight="1.0dip" />
+  <include android:id="@+id/sub_view_lyt" android:layout_width="fill_parent" android:layout_height="50.0dip" android:layout_alignParentBottom="true" layout="@layout/sub_view_cart" />
 
     <TextView
         android:id="@+id/txt_message"

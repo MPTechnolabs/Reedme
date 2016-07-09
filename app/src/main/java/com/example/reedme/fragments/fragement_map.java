@@ -52,7 +52,7 @@ public class fragement_map extends Fragment {
         mMapView.onResume();// needed to get the map to display immediately
 
         try {
-            MapsInitializer.initialize(getActivity().getApplicationContext());
+            MapsInitializer.initialize(getActivity());
         } catch (Exception e) {
             e.printStackTrace();
         }

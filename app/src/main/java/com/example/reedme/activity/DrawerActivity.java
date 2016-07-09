@@ -11,12 +11,16 @@ import android.os.PersistableBundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.IntentCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.reedme.R;
 import com.example.reedme.fragments.Fragement_Scanner;
@@ -37,6 +41,7 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
     private ActionBarDrawerToggle drawerToggle;
     private int mSelectedId;
     private static final int PERMISSION_REQUEST_CODE = 0;
+    TextView username,email;
 
 
     @Override
@@ -60,6 +65,8 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
         drawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
         mDrawerLayout.setDrawerListener(drawerToggle);
         drawerToggle.syncState();
+
+
         //default it set first item as selected
         mSelectedId = savedInstanceState == null ? R.id.navigation_item_1 : savedInstanceState.getInt("SELECTED_ID");
         itemSelection(mSelectedId);
@@ -78,6 +85,17 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
         mDrawer = (NavigationView) findViewById(R.id.main_drawer);
         mDrawer.setNavigationItemSelectedListener(this);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        View header = mDrawer.getHeaderView(0);
+        username= (TextView) header.findViewById(R.id.username1);
+        email = (TextView)header.findViewById(R.id.email1);
+
+        if(AppPrefs.getAppPrefs(DrawerActivity.this).getString("firstname") != null) {
+            username.setText(AppPrefs.getAppPrefs(DrawerActivity.this).getString("firstname") + " " + AppPrefs.getAppPrefs(DrawerActivity.this).getString("lastname"));
+        }
+        if(AppPrefs.getAppPrefs(DrawerActivity.this).getString("email") != null) {
+            email.setText(AppPrefs.getAppPrefs(DrawerActivity.this).getString("email"));
+        }
     }
 
     private void itemSelection(int mSelectedId) {
@@ -87,11 +105,8 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 
             case R.id.navigation_item_1:
 
-
                     getSupportFragmentManager().beginTransaction()
                             .add(R.id.container, new Fragement_Scanner()).commit();
-
-
 
                 mDrawerLayout.closeDrawer(GravityCompat.START);
 

@@ -1,25 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:background="@color/window_background" android:padding="@dimen/activity_horizontal_margin" android:layout_width="fill_parent" android:layout_height="wrap_content"
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <RelativeLayout android:background="@android:color/white" android:paddingTop="5.0dip" android:paddingBottom="5.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent">
-        <ImageView android:id="@+id/img_checkout_continue_item" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:src="@mipmap/check_out_track_continue" android:layout_alignParentTop="true" android:layout_centerHorizontal="true" />
-        <ListView android:id="@+id/lst_checkout_continue_item" android:scrollbars="none" android:fadingEdge="none" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:divider="@color/colorPrimary" android:dividerHeight="1.0dip" android:layout_above="@+id/lyt_checkout_total" android:layout_below="@+id/img_checkout_continue_item" />
-        <RelativeLayout android:gravity="center_vertical" android:id="@+id/lyt_checkout_total" android:padding="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_above="@+id/view_divider_second">
-            <TextView android:id="@+id/txt_checkout_shipping" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Shipping" />
-            <TextView android:id="@+id/txt_checkout_shipping_value" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="5.0dip" android:text="0.0" android:layout_alignParentRight="true" />
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/window_background"
+    android:padding="@dimen/activity_horizontal_margin">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@android:color/white"
+        android:paddingBottom="5.0dip"
+        android:paddingTop="5.0dip">
+
+        <ImageView
+            android:id="@+id/img_checkout_continue_item"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5.0dip"
+            android:src="@mipmap/check_out_track_continue" />
+
+        <ListView
+            android:id="@+id/lst_checkout_continue_item"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/lyt_checkout_total"
+            android:layout_below="@+id/img_checkout_continue_item"
+            android:layout_marginTop="5.0dip"
+            android:divider="@color/colorPrimary"
+            android:dividerHeight="1.0dip"
+            android:fadingEdge="none"
+            android:scrollbars="none" />
+
+        <RelativeLayout
+            android:id="@+id/lyt_checkout_total"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/view_divider_second"
+            android:gravity="center_vertical"
+            android:padding="10.0dip">
+
+            <TextView
+                android:id="@+id/txt_checkout_shipping"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Shipping" />
+
+            <TextView
+                android:id="@+id/txt_checkout_shipping_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="5.0dip"
+                android:text="0.0" />
         </RelativeLayout>
-        <View android:id="@+id/view_divider_second" android:background="@color/colorPrimary" android:layout_width="fill_parent" android:layout_height="1.0dip" android:layout_margin="2.0dip" android:layout_above="@+id/btn_checkout_continue" />
-        <RelativeLayout android:id="@+id/btn_checkout_continue" android:padding="10.0dip" android:layout_width="wrap_content" android:layout_height="100.0dip" android:layout_alignParentBottom="true">
-            <TextView android:textSize="18.0sp" android:id="@+id/txt_payable" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/payable" android:layout_alignParentLeft="true" />
-            <TextView android:textSize="18.0sp" android:id="@+id/txt_payable_value" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0.0" android:layout_alignParentRight="true" />
+
+        <View
+            android:id="@+id/view_divider_second"
+            android:layout_width="fill_parent"
+            android:layout_height="1.0dip"
+            android:layout_above="@+id/btn_checkout_continue"
+            android:layout_margin="2.0dip"
+            android:background="@color/colorPrimary" />
+
+        <RelativeLayout
+            android:id="@+id/btn_checkout_continue"
+            android:layout_width="wrap_content"
+            android:layout_height="100.0dip"
+            android:layout_alignParentBottom="true"
+            android:padding="10.0dip">
+
+            <TextView
+                android:id="@+id/txt_payable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="@string/payable"
+                android:textSize="18.0sp" />
+
+            <TextView
+                android:id="@+id/txt_payable_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="0.0"
+                android:textSize="18.0sp" />
         </RelativeLayout>
-        <RelativeLayout android:gravity="center" android:id="@+id/lyt_checkout_empty_cart_button" android:background="@xml/round" android:padding="10.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentLeft="true" android:layout_alignParentBottom="true" android:onClick="ClearCart">
-            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@mipmap/empty_cart" />
-            <TextView android:textColor="@android:color/white" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="28.0dip" android:text="EMPTY CART" />
+
+        <RelativeLayout
+            android:id="@+id/lyt_checkout_empty_cart_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:background="@xml/round"
+            android:gravity="center"
+            android:onClick="ClearCart"
+            android:padding="10.0dip">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/empty_cart" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="28.0dip"
+                android:text="EMPTY CART"
+                android:textColor="@android:color/white" />
         </RelativeLayout>
-        <RelativeLayout android:gravity="center" android:id="@+id/lyt_checkout_button" android:background="@xml/round" android:padding="10.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentRight="true" android:layout_alignParentBottom="true" android:onClick="ContinueCheckOut">
-            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@mipmap/icon_continue" />
-            <TextView android:textColor="@android:color/white" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="28.0dip" android:text="CONTINUE" />
+
+        <RelativeLayout
+            android:id="@+id/lyt_checkout_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:background="@xml/round"
+            android:gravity="center"
+            android:onClick="ContinueCheckOut"
+            android:padding="10.0dip">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/icon_continue" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="28.0dip"
+                android:text="CONTINUE"
+                android:textColor="@android:color/white" />
         </RelativeLayout>
     </RelativeLayout>
 </RelativeLayout>

@@ -6,6 +6,7 @@
         layout="@layout/activity_progress"
         />
 
+
     <RelativeLayout android:id="@+id/lyt_my_order_detail" android:background="@android:color/white" android:layout_width="fill_parent" android:layout_height="fill_parent">
         <ListView android:id="@+id/lst_my_order" android:scrollbars="none" android:fadingEdge="none" android:layout_width="fill_parent" android:layout_height="fill_parent" android:divider="@color/transparent" android:dividerHeight="15.0dip" />
     </RelativeLayout>

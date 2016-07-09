@@ -1,6 +1,7 @@
 package com.example.reedme.fragments;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
@@ -41,9 +42,11 @@ import com.example.reedme.helper.AppPrefs;
 import com.example.reedme.helper.Constants;
 import com.example.reedme.helper.CustomSimpleMessageDialog;
 import com.example.reedme.helper.MyJSONParser;
+import com.example.reedme.helper.Util;
 import com.example.reedme.helper.Utills;
 import com.example.reedme.model.Category;
 import com.example.reedme.model.CategoryData;
+import com.example.reedme.model.CheckOutData;
 import com.example.reedme.model.SubCategory;
 import com.example.reedme.views.AVLoadingIndicatorView;
 import com.google.gson.Gson;
@@ -60,6 +63,7 @@ public class CategoryItemActivity extends AppCompatActivity {
     static String itemName;
     public static ListView subCategoryList;
     private ViewPager mViewPager;
+    public static CategoryItemActivity startActivity;
 
     CategoryData categoryDate;
     public static MyJSONParser mJsonParser = null;
@@ -76,7 +80,8 @@ public class CategoryItemActivity extends AppCompatActivity {
     RelativeLayout rel_filter, rel_sort;
     Dialog dialog_Filter;
     AVLoadingIndicatorView progress;
-
+    public static TextView txtCheckOutRupee;
+    public static TextView txtItemCount;
 
     static {
         TAG = CategoryItemActivity.class.getSimpleName();
@@ -88,6 +93,12 @@ public class CategoryItemActivity extends AppCompatActivity {
         return new CategoryItemActivity();
     }
 */
+  public static CategoryItemActivity getInstance() {
+      if (startActivity == null) {
+          startActivity = new CategoryItemActivity();
+      }
+      return startActivity;
+  }
   @Override
   protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
@@ -111,7 +122,8 @@ public class CategoryItemActivity extends AppCompatActivity {
       mJsonParser = new MyJSONParser();
 
       txt_message = (TextView) findViewById(R.id.txt_message);
-
+      txtCheckOutRupee = (TextView) findViewById(R.id.txt_total_rupee);
+      txtItemCount = (TextView) findViewById(R.id.widget_title_icon2);
       ll_filter = (LinearLayout) findViewById(R.id.ll_filter);
       subCategoryList = (ListView) findViewById(R.id.lst_category_items);
 
@@ -134,7 +146,7 @@ public class CategoryItemActivity extends AppCompatActivity {
           }
       });
 
-      StoreDiaplyActivity.getInstance().SetCheckOutValue();
+      SetCheckOutValue();
 
       LoadData();
   }
@@ -413,7 +425,35 @@ public class CategoryItemActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+    public void SetCheckOutValue() {
+        CheckOutData checkOutData = AppPrefs.getAppPrefs(CategoryItemActivity.this).getCheckOutVantage();
+        if (checkOutData != null) {
+            txtCheckOutRupee.setText(String.valueOf(Util.getInstance(CategoryItemActivity.this).getCheckOutTotalAmount(checkOutData)));
+            txtItemCount.setText(String.valueOf(Util.getInstance(CategoryItemActivity.this).getCheckOutVantageCount(checkOutData)));
 
+            return;
+        }
+        txtCheckOutRupee.setText("0");
+        txtItemCount.setText("0");
+    }
+    public void CheckOut(View view) {
+        if (AppPrefs.getAppPrefs(CategoryItemActivity.this).getCheckOutVantage() == null) {
+            Toast.makeText(CategoryItemActivity.this, "Your cart is empty", Toast.LENGTH_LONG).show();
+        } else if (AppPrefs.getAppPrefs(CategoryItemActivity.this).getCheckOutVantage().CheckOutVantageList.size() == 0) {
+            Toast.makeText(CategoryItemActivity.this, "Your cart is empty", Toast.LENGTH_LONG).show();
+        } else {
+            Intent intent = new Intent(this, CheckoutContinueActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("CategoryData", categoryDate);
+            intent.putExtras(bundle);
+            startActivity(intent);
+            finish();
+        }
+    }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }

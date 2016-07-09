@@ -29,6 +29,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -82,9 +83,10 @@ public class Add_product extends AppCompatActivity {
     File fileBanner;
     String base64Image;
     TextView txt_barcode;
-    TextView txt_result;
+    EditText txt_result;
     private SweetSheet mSweetSheet;
     private RelativeLayout rl;
+    ScrollView scrollView;
     private CompoundBarcodeView barcodeScannerView;
 
 
@@ -115,8 +117,9 @@ public class Add_product extends AppCompatActivity {
         edt_size= (EditText) findViewById(R.id.edt_size);
         edt_quantity = (EditText) findViewById(R.id.edt_quantity);
         edt_weight = (EditText) findViewById(R.id.edt_weight);
-        txt_result = (TextView) findViewById(R.id.txt_result);
+        txt_result = (EditText) findViewById(R.id.txt_result);
         btn_add = (Button) findViewById(R.id.btn_add);
+        scrollView = (ScrollView) findViewById(R.id.scrollView1);
         img_camera = (ImageView) findViewById(R.id.img_camera);
         img_product = (ImageView) findViewById(R.id.img_product);
         txt_barcode = (TextView) findViewById(R.id.txt_barcode);
@@ -193,6 +196,10 @@ public class Add_product extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                if (!validate()) {
+
+                    return;
+                }
                 str_description = edt_description.getText().toString();
                 str_price = edt_price.getText().toString();
                 str_productname = edt_productName.getText().toString();
@@ -212,6 +219,55 @@ public class Add_product extends AppCompatActivity {
                 selectImage();
             }
         });
+    }
+
+    public boolean validate() {
+        boolean valid = true;
+
+        String productName = edt_productName.getText().toString();
+        String size = edt_size.getText().toString();
+        String weight= edt_weight.getText().toString();
+        String quantity= edt_quantity.getText().toString();
+        String barcode= txt_result.getText().toString();
+        String price= edt_price.getText().toString();
+
+
+        if (productName.isEmpty()) {
+            this.edt_productName.setError("enter a product name");
+            valid = false;
+        } else {
+            edt_productName.setError(null);
+        }
+        if (size.isEmpty()) {
+            this.edt_size.setError("enter a size");
+            valid = false;
+        } else {
+            edt_size.setError(null);
+        } if (weight.isEmpty()) {
+            this.edt_weight.setError("enter a weight");
+            valid = false;
+        } else {
+            edt_weight.setError(null);
+        } if (quantity.isEmpty()) {
+            this.edt_quantity.setError("enter a quantity");
+            valid = false;
+        } else {
+            edt_quantity.setError(null);
+        } if (barcode.isEmpty()) {
+            this.txt_result.setError("enter a barcode");
+            valid = false;
+        } else {
+            txt_result.setError(null);
+        } if (price.isEmpty()) {
+            this.edt_price.setError("enter a price");
+            valid = false;
+        } else {
+            edt_price.setError(null);
+        }
+
+
+
+        return valid;
     }
 
     private void selectImage() {
@@ -391,8 +447,6 @@ public class Add_product extends AppCompatActivity {
         String sResponse = null;
 
         private String mfilePath;
-
-
         @Override
         protected void onPreExecute() {
             // TODO Auto-generated method stub
@@ -412,7 +466,7 @@ public class Add_product extends AppCompatActivity {
                 post.addHeader("Accept", "application/json");
 
                 Part[] parts = {
-                        new StringPart("m_id", "1"),
+                        new StringPart("m_id", AppPrefs.getAppPrefs(Add_product.this).getString("m_user")),
                         new StringPart("product_name",str_productname),
                         new StringPart("barcode_num",barcode),
                         new StringPart("price",str_price),
@@ -462,7 +516,15 @@ public class Add_product extends AppCompatActivity {
                 if (sResponse != null) {
 
                     Log.i("Res", sResponse);
-                    Toast.makeText(Add_product.this,""+sResponse,Toast.LENGTH_LONG).show();
+                    Toast.makeText(Add_product.this,"successfully added",Toast.LENGTH_LONG).show();
+                    edt_productName.setText("");
+                    edt_description.setText("");
+                    edt_price.setText("");
+                    edt_quantity.setText("");
+                    edt_size.setText("");
+                    edt_weight.setText("");
+                    txt_result.setText("");
+
 
                 }
 
@@ -473,58 +535,6 @@ public class Add_product extends AppCompatActivity {
 
         }
     }
-    private class JSONParse extends AsyncTask<String,String,String> {
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-            Utills.showDialog(context);
-
-
-        }
-
-        @Override
-        protected String doInBackground(String... args) {
-
-
-            JSONObject params = new JSONObject();
-
-            try {
-                params.put("m_id", "1");
-                params.put("product_name",str_productname);
-                params.put("barcode_num","2232332");
-                params.put("price",str_price);
-                params.put("size",str_size);
-                params.put("weight",str_weight);
-                params.put("description",str_description);
-                params.put("quntity",str_quantity);
-                params.put("s_id","4");
-                params.put("cat_id","2");
-                params.put("product_img", fileBanner);
-
-                //params.put("user_id", AppPrefs.getAppPrefs(StartActivity.context).getString(MyOrdersActivity.this.getResources().getString(R.string.user_id)));
-
-                jsonObject_parent = mJsonParser.postData("http://www.mptechnolabs.com/1reward/addProduct.php", params);
-
-                Log.d("Json",jsonObject_parent.toString());
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            return null;
-        }
-
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-
-            Utills.dismissDialog();
-
-            //Log.e("result ",result);
-
-        }
-    }
-
 
 
     @Override
@@ -538,4 +548,9 @@ public class Add_product extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }

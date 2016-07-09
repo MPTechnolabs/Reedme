@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
 
     <string name="server_api">AIzaSyCFyleO43oeqW4YK-hFT3iB-VbTUwwoB_w</string>
@@ -392,5 +392,16 @@
     <string name="msg_sit_back">Sit back &amp; Relax! while we verify your code number</string>
 
     <string name="msg_manual_code">(Enter the CODE below)</string>
+    <string name="mdtp_day_of_week_label_typeface" translatable="false">sans-serif</string>
+    <string name="mdtp_sans_serif" translatable="false">sans-serif</string>
+    <string name="mdtp_item_is_selected"><xliff:g id="item" example="2013">%1$s</xliff:g> selected</string>
+
+    <string name="mdtp_ok">@android:string/ok</string>
+    <string name="mdtp_cancel">@android:string/cancel</string>
+    <string name="mdtp_day_picker_description">Month grid of days</string>
+    <string name="mdtp_year_picker_description">Year list</string>
+    <string name="mdtp_select_day">Select month and day</string>
+    <string name="mdtp_select_year">Select year</string>
+    <string name="mdtp_date_v1_monthyear">MMMM yyyy</string>
 
 </resources>

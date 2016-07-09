@@ -1,17 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
+    android:layout_height="210dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@mipmap/header"
     android:padding="16dp"
     android:orientation="vertical"
     android:gravity="bottom">
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/circle_image1"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginBottom="16dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/ic_profile"
+        app:border_color="@android:color/white"
+        app:border_width="1dp" />
+
+    <!-- Nombre de Usuario -->
     <TextView
-        android:textColor="#ffffff"
-        android:textSize="18sp"
+        android:id="@+id/username1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Jolly Raiyani\nMerchant"
-        />
+        android:text="Juana Maria Perez"
+        android:textColor="@color/white"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textStyle="bold" />
+
+    <!-- Correo de la cuenta -->
+    <TextView
+        android:id="@+id/email1"
+        style="@style/Widget.AppCompat.Spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="juanaperez01@gmail.com"
+        android:textColor="@color/white"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 </LinearLayout>
