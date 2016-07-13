@@ -1,11 +1,13 @@
 package com.example.reedme.activity;
 
 import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -67,30 +69,43 @@ public class activity_merchant_continue  extends AppCompatActivity {
     public static MyJSONParser mJsonParser = null;
     JSONObject jsonObject_parent = null;
     CheckOutData checkOutData;
+    RelativeLayout.LayoutParams layoutparams;
     CheckoutMerchantItemAdapter adapter;
+    TextView txt_name;
+    String str_FirstName, str_LastName;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_merchant_continue);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setTitle("CHECKOUT");
+
+
         try {
             context = this;
             mJsonParser = new MyJSONParser();
-
             LoadContext();
+
             LoatData();
+
         } catch (Exception ex) {
 
             Log.e("Exception",ex.toString());
         }
+        if(AppPrefs.getAppPrefs(activity_merchant_continue.this).getIsQR())
+        {
+            str_FirstName = AppPrefs.getAppPrefs(context).getString("firstname");
+            str_LastName = AppPrefs.getAppPrefs(context).getString("lastname");
 
+            txt_name.setText("Hello, "+str_FirstName+" "+str_LastName);
+        }
     }
 
     public void LoadContext() {
         txtPaybleValue = (TextView) findViewById(R.id.txt_payable_value);
+        txt_name = (TextView) findViewById(R.id.txt_name);
+
         rl = (RelativeLayout) findViewById(R.id.rl);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         add= (RelativeLayout) findViewById(R.id.lyt_checkout_empty_cart_button);
@@ -149,9 +164,9 @@ public class activity_merchant_continue  extends AppCompatActivity {
         setCheckOutPayableValue(checkOutData);
         checkoutList = (ListView) findViewById(R.id.lst_checkout_continue_item);
 
-            adapter = new CheckoutMerchantItemAdapter(checkOutData.CheckOutVantageList);
-            checkoutList.setAdapter(adapter);
-            adapter.notifyDataSetChanged();
+        adapter = new CheckoutMerchantItemAdapter(checkOutData.CheckOutVantageList);
+        checkoutList.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
 
     }
 
@@ -169,10 +184,19 @@ public class activity_merchant_continue  extends AppCompatActivity {
 
     public void ContinueCheckOut(View view) {
 
-        Intent intent = new Intent(this, CheckoutMerchantPlaceOrder.class);
-        overridePendingTransition(R.anim.right_to_left, R.anim.left_to_out);
-        startActivity(intent);
-        finish();
+        if((AppPrefs.getAppPrefs(activity_merchant_continue.this).getIsQR()) == true) {
+            Intent intent = new Intent(this, CheckoutMerchantPlaceOrder.class);
+            overridePendingTransition(R.anim.right_to_left, R.anim.left_to_out);
+            startActivity(intent);
+        }
+        else
+        {
+            Intent intent = new Intent(this, DrawerActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.right_to_left, R.anim.left_to_out);
+            finish();
+        }
+
 
     }
 

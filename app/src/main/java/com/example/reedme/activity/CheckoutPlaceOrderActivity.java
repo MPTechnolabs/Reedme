@@ -239,7 +239,7 @@ public class CheckoutPlaceOrderActivity extends AppCompatActivity {
                         Utills.customSimpleMessageDialog.dismiss();
                     }
                 }
-            }, Constants.DIALOG_INFO_TITLE, "Something,Went Wrong", false);
+            }, Constants.DIALOG_INFO_TITLE, "Can't Place Order...", false);
 
         }
     }

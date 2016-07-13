@@ -103,7 +103,7 @@
             />
 
         <activity android:name=".activity.CheckoutMerchantPlaceOrder" android:screenOrientation="portrait"  android:label="Place Order"
-            android:theme="@style/AppThemeMerchant"
+            android:theme="@style/AppThemeMerchant1"
             />
     </application>
 

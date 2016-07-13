@@ -56,6 +56,13 @@ public class AppPrefs {
         return this.appSharedPrefs.getBoolean("IsMLogin", false);
     }
 
+    public void setIsQR(boolean isLogin) {
+        this.prefsEditor.putBoolean("QR", isLogin).commit();
+    }
+    public boolean getIsQR() {
+        return this.appSharedPrefs.getBoolean("QR", false);
+    }
+
     public boolean getIsLogin() {
         return this.appSharedPrefs.getBoolean("IsLogin", false);
     }
