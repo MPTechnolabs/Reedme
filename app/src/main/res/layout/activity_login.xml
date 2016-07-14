@@ -135,7 +135,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/twentydp"
-                    android:layout_marginLeft="@dimen/tendp" android:layout_marginRight="@dimen/tendp"
+                    android:layout_marginLeft="@dimen/tendp"
+                    android:layout_marginRight="@dimen/tendp"
                 android:gravity="center_horizontal"
                 android:orientation="horizontal">
                     <Button

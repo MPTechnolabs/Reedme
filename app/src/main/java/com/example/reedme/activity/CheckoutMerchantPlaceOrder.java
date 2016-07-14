@@ -1,15 +1,20 @@
 package com.example.reedme.activity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -20,6 +25,7 @@ import com.example.reedme.R;
 import com.example.reedme.dataprovider.ParseDataProvider;
 import com.example.reedme.helper.AppPrefs;
 import com.example.reedme.helper.Constants;
+import com.example.reedme.helper.CustomSimpleAlertDialog;
 import com.example.reedme.helper.CustomSimpleMessageDialog;
 import com.example.reedme.helper.MyJSONParser;
 import com.example.reedme.helper.Util;
@@ -86,7 +92,7 @@ public class CheckoutMerchantPlaceOrder extends AppCompatActivity
             str_pincode = AppPrefs.getAppPrefs(context).getString("pincode");
             str_email = AppPrefs.getAppPrefs(context).getString("email");
 
-            this.checkOutData = AppPrefs.getAppPrefs(this.context).getCheckOutVantage();
+            checkOutData = AppPrefs.getAppPrefs(this.context).getCheckOutVantage();
             tAmount = Util.getInstance(this.context).getCheckOutTotalAmount(this.checkOutData);
             mJsonParser = new MyJSONParser();
 
@@ -104,7 +110,7 @@ public class CheckoutMerchantPlaceOrder extends AppCompatActivity
             this.chk_select = (CheckBox) findViewById(R.id.chkSelectWallet);
             this.edt_wallet = (EditText) findViewById(R.id.enterWallet);
             this.txt_name = (TextView) findViewById(R.id.txt_name);
-            txt_wallet.setText("Your Wallet : "+ AppPrefs.getAppPrefs(StartActivity.context).getString("Wallet"));
+            txt_wallet.setText("Your Wallet : "+ AppPrefs.getAppPrefs(CheckoutMerchantPlaceOrder.this).getString("Wallet"));
             edt_wallet.setText("0");
 
 
@@ -114,8 +120,12 @@ public class CheckoutMerchantPlaceOrder extends AppCompatActivity
         {
             checkOutData = AppPrefs.getAppPrefs(this.context).getCheckOutVantage();
             totalAmount = Util.getInstance(this.context).getCheckOutTotalAmount(this.checkOutData);
+            if(AppPrefs.getAppPrefs(CheckoutMerchantPlaceOrder.this).getString("Wallet").equals(""))
+            {}
+            else {
 
-            yourwallet  = Float.parseFloat(AppPrefs.getAppPrefs(StartActivity.context).getString("Wallet"));
+                yourwallet = Float.parseFloat(AppPrefs.getAppPrefs(CheckoutMerchantPlaceOrder.this).getString("Wallet"));
+            }
             enterwallet = Float.parseFloat((edt_wallet.getText().toString()));
             netTotal = totalAmount - enterwallet;
 
@@ -218,7 +228,7 @@ public class OrderCall extends AsyncTask<String, String, String> {
             params.put("color",Util.getInstance(context).getColor());
 
             params.put("tot_Amount",netAmount);
-            params.put("address_json","");
+            params.put("address_json",address);
 
 
             jsonObject_parent = mJsonParser.postData("http://www.mptechnolabs.com/1reward/placeOrder.php", params);
@@ -261,6 +271,10 @@ public class OrderCall extends AsyncTask<String, String, String> {
         if (success == 1) {
             Toast.makeText(CheckoutMerchantPlaceOrder.this,"Order Place successfully",Toast.LENGTH_LONG).show();
             AppPrefs.getAppPrefs(this.context).setCheckOutVantage(null);
+
+
+            AppPrefs.getAppPrefs(CheckoutMerchantPlaceOrder.this).setIsQR(false);
+
             Intent intent = new Intent(CheckoutMerchantPlaceOrder.this, DrawerActivity.class);
             Bundle bundle = new Bundle();
             intent.putExtras(bundle);
@@ -270,6 +284,9 @@ public class OrderCall extends AsyncTask<String, String, String> {
         }
         else
         {
+
+
+
             Utills.showCustomSimpleDialog(CheckoutMerchantPlaceOrder.this, new CustomSimpleMessageDialog.SimpleDialogOnClickListener() {
                 @Override
                 public void onOkayButtonClick() {
@@ -277,7 +294,7 @@ public class OrderCall extends AsyncTask<String, String, String> {
                         Utills.customSimpleMessageDialog.dismiss();
                     }
                 }
-            }, Constants.DIALOG_INFO_TITLE, "Something,Went Wrong", false);
+            }, Constants.DIALOG_INFO_TITLE, "Can't Place Order...", false);
 
         }
     }

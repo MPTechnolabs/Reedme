@@ -561,7 +561,7 @@ public class activity_merchant_register extends AppCompatActivity {
                 UUID uniqueKey = UUID.randomUUID();
 
 
-                params.put("m_name","");
+                params.put("m_name",str_FirstName);
                 params.put("registration_id","1234");
                 params.put("discount_rate","");
                 params.put("firstname",str_FirstName);

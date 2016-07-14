@@ -462,19 +462,15 @@ public class Utills {
 
     /**
      * Show Simple Dialog with message and listener
-     *
-     * @param context
+     *  @param context
      * @param simpleDialogOnClickListener
-     * @param dialog_title
-     * @param dialog_message
-     * @param flag_for_purpose
      */
-    public static void showCustomSimpleDialog1(Context context, CustomSimpleAlertDialog.SimpleDialogOnClickListener1 simpleDialogOnClickListener, String dialog_title, String dialog_message, boolean flag_for_purpose) {
+   /* public static void showCustomSimpleDialog1(Context context, CustomSimpleAlertDialog.SimpleDialogOnClickListener1 simpleDialogOnClickListener,String dialog_title,String dialog_message) {
 
         customSimpleAlertDialog = new CustomSimpleAlertDialog(context, simpleDialogOnClickListener, dialog_title, dialog_message, flag_for_purpose);
         customSimpleAlertDialog.show();
     }
-
+*/
    /*   For set Custom List View */
 
     public static void setListViewHeightBasedOnChildren(ListView listView) {

@@ -1,13 +1,17 @@
 package com.example.reedme.activity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.reedme.R;
@@ -29,6 +33,7 @@ public class MerchantUserQR extends AppCompatActivity {
 
     UserDetailList userdetail;
     TextView txt_name,txt_email,txt_wallet,txt_mobile,txt_address;
+    Button iv_generateBill;
 
 
     @Override
@@ -47,13 +52,24 @@ public class MerchantUserQR extends AppCompatActivity {
         txt_name = (TextView) findViewById(R.id.txt_name);
         txt_address = (TextView) findViewById(R.id.txt_address);
         txt_wallet = (TextView) findViewById(R.id.txt_wallet);
-
+        iv_generateBill = (Button) findViewById(R.id.iv_generateBill);
 
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         collapsingToolbarLayout.setTitle("Profile");
         collapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(android.R.color.transparent));
 
         setData();
+
+        iv_generateBill.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(MerchantUserQR.this,activity_merchant_continue.class));
+                overridePendingTransition(R.anim.right_to_left, R.anim.left_to_out);
+                finish();
+
+            }
+        });
 
 
 
@@ -70,7 +86,10 @@ public class MerchantUserQR extends AppCompatActivity {
         txt_wallet.setText(String.format("Wallet : %s", user.getWallet_point()));
         txt_mobile.setText(user.getPhone());
 
+        AppPrefs.getAppPrefs(MerchantUserQR.this).setIsQR(true);
+
         AppPrefs.getAppPrefs(MerchantUserQR.this).setString(MerchantUserQR.this.getResources().getString(R.string.user_id), user.getUser_id());
+
         AppPrefs.getAppPrefs(MerchantUserQR.this).setString("qr_number",user.getQr_number());
         AppPrefs.getAppPrefs(MerchantUserQR.this).setString("email", user.getEmail());
         AppPrefs.getAppPrefs(MerchantUserQR.this).setString("firstname",user.getFirstname());
