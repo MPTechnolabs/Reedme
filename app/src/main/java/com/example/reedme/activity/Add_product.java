@@ -474,7 +474,7 @@ public class Add_product extends AppCompatActivity {
                         new StringPart("weight",str_weight),
                         new StringPart("description",str_description),
                         new StringPart("quntity",str_quantity),
-                        new StringPart("s_id","4"),
+                        new StringPart("s_id","33"),
                         new FilePart("product_img", fileBanner)
                 };
 

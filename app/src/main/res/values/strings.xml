@@ -414,5 +414,6 @@
     <string name="mdtp_select_day">Select month and day</string>
     <string name="mdtp_select_year">Select year</string>
     <string name="mdtp_date_v1_monthyear">MMMM yyyy</string>
+    <string name="signup">SignUp</string>
 
 </resources>

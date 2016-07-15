@@ -25,6 +25,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.reedme.R;
 import com.example.reedme.adapter.CityAdapter;
@@ -71,7 +72,8 @@ public class activity_merchant_register extends AppCompatActivity {
     Dialog dialog_CityList,dialog_CountryList, dialog_StateList;
 
     Boolean  bl_SelectCity = false, bl_SelectCode = false;
-    String str_FirstName, str_category,str_LastName, str_EmailId, str_Password, str_ConfirmPassword, str_MobileNumber, str_AppInfo, str_city, str_state, str_country, str_pincode, str_Address, str_SpecialIntruction;
+    String str_FirstName="", str_category="",str_LastName="", str_EmailId="", str_Password="", str_ConfirmPassword="", str_MobileNumber="",
+            str_city="", str_state="", str_country="", str_pincode="", str_Address="", str_SpecialIntruction="";
     CheckBox cb_TermCondition;
     TextView txt_ShowPassword, txt_ConfirmPassword;
     Boolean bl_InputPasswordType = true;
@@ -155,6 +157,8 @@ public class activity_merchant_register extends AppCompatActivity {
                 str_Password = edt_Password.getText().toString().trim();
                 str_ConfirmPassword = edt_ConfirmPassword.getText().toString().trim();
                 str_MobileNumber = edt_MobileNumber.getText().toString().trim();
+                str_category = edt_category.getText().toString().trim();
+
 
                 if (str_FirstName == null || str_FirstName.equals("")) {
 
@@ -209,7 +213,19 @@ public class activity_merchant_register extends AppCompatActivity {
                     }, Constants.DIALOG_INFO_TITLE, "Please Enter Valid Email Id", false);
 
 
-                } else if (str_Password == null || str_Password.equals("")) {
+                }else if (str_category == null || str_category.equals("")) {
+
+                    Utills.showCustomSimpleDialog(obj_Registaration, new CustomSimpleMessageDialog.SimpleDialogOnClickListener() {
+                        @Override
+                        public void onOkayButtonClick() {
+                            if (Utills.customSimpleMessageDialog != null) {
+                                Utills.customSimpleMessageDialog.dismiss();
+                            }
+                        }
+
+                    }, Constants.DIALOG_INFO_TITLE, "Please Enter Business Name", false);
+                }
+                else if (str_Password == null || str_Password.equals("")) {
 
                     Utills.showCustomSimpleDialog(obj_Registaration, new CustomSimpleMessageDialog.SimpleDialogOnClickListener() {
                         @Override
@@ -261,7 +277,7 @@ public class activity_merchant_register extends AppCompatActivity {
                     }, Constants.DIALOG_INFO_TITLE, "Please Enter  Mobile Number", false);
 
 
-                } else if (str_MobileNumber.length() < 9) {
+                }else if (str_MobileNumber.length() < 9) {
 
                     Utills.showCustomSimpleDialog(obj_Registaration, new CustomSimpleMessageDialog.SimpleDialogOnClickListener() {
                         @Override
@@ -275,8 +291,8 @@ public class activity_merchant_register extends AppCompatActivity {
 
                 }  else {
 
-                    rel_two.setVisibility(View.VISIBLE);
-                    rel_one.setVisibility(View.GONE);
+                    callRegisterApi();
+
                 }
             }
         });
@@ -607,6 +623,7 @@ public class activity_merchant_register extends AppCompatActivity {
 
                 String user = jsonObject_parent.getString("user_data");
                 AppPrefs.getAppPrefs(activity_merchant_register.this).setString("m_user", user);
+                Toast.makeText(activity_merchant_register.this,"Successfully Created your account",Toast.LENGTH_LONG).show();
 
                 Intent i_Login = new Intent(obj_Registaration, Activity_add_store.class);
                 i_Login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

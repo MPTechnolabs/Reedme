@@ -36,6 +36,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.example.reedme.R;
+import com.example.reedme.adapter.AreaAdapter;
 import com.example.reedme.adapter.CityAdapter;
 import com.example.reedme.adapter.CountryAdapter;
 import com.example.reedme.adapter.StoreAdapter;
@@ -77,6 +78,7 @@ public class activity_user_register extends AppCompatActivity {
     JSONObject jsonObject_parent = null;
     Context context;
     ArrayList myList = new ArrayList();
+    ArrayList areaList = new ArrayList();
     String int_SelectCountryId,int_SelectStateId;
     private RelativeLayout rel_two, rel_one;
     private Button iv_next, iv_signup;
@@ -84,16 +86,17 @@ public class activity_user_register extends AppCompatActivity {
 
     private ImageView iv_shipping_back, iv_signup_back;
 
-    EditText edt_FirstName, edt_LastName, edt_EmailId, edt_Password,edt_username, edt_ConfirmPassword, edt_MobileNumber;
+    EditText edt_FirstName, edt_LastName, edt_EmailId, edt_Password, edt_ConfirmPassword, edt_MobileNumber,edt_age;
 
     EditText edt_City, edt_State, edt_Country, edt_Pincode, edt_Address, edt_SpecialInstruction;
     activity_user_register obj_Registaration;
 
-    Dialog  dialog_CityList,dialog_CountryList, dialog_StateList;
+    Dialog  dialog_CityList,dialog_CountryList, dialog_StateList,dialog_age;
 
-    Boolean bl_SelectAppInfo = false, bl_SelectCity = false, bl_SelectCode = false, bl_SelectArea = false;
+    Boolean  bl_SelectCity = false, bl_SelectCode = false, bl_SelectArea = false;
 
-    String str_FirstName, str_LastName,str_user, str_EmailId, str_Password, str_ConfirmPassword, str_MobileNumber, str_AppInfo, str_city, str_state, str_country, str_pincode, str_Address, str_SpecialIntruction;
+    String str_FirstName="", str_LastName="",str_user="", str_EmailId="", str_Password="", str_ConfirmPassword="", str_MobileNumber="",  str_city="", str_state="",
+            str_country="", str_pincode="", str_Address="", str_SpecialIntruction="",str_age="";
     CheckBox cb_TermCondition;
     String str_DeviceId;
     TextView txt_ShowPassword, txt_ConfirmPassword;
@@ -105,6 +108,12 @@ public class activity_user_register extends AppCompatActivity {
     String[] country_name = new String[]{
            "India"
     };
+
+    String[] age_group = new String[]{
+            "18-21","21-25","25-29","30-34","35-39","35-40","40-50","Over-50"
+    };
+
+
     AVLoadingIndicatorView progress;
 
     @Override
@@ -135,7 +144,7 @@ public class activity_user_register extends AppCompatActivity {
         edt_Password = (EditText) findViewById(R.id.edt_password);
         edt_ConfirmPassword = (EditText) findViewById(R.id.edt_conpassword);
         edt_MobileNumber = (EditText) findViewById(R.id.edt_mobile_number);
-        edt_username = (EditText) findViewById(R.id.edt_user);
+        edt_age = (EditText) findViewById(R.id.edt_age);
 
         // Second  Page
         edt_City = (EditText) findViewById(R.id.edt_city);
@@ -179,7 +188,11 @@ public class activity_user_register extends AppCompatActivity {
                 str_EmailId = edt_EmailId.getText().toString().trim();
                 str_Password = edt_Password.getText().toString().trim();
                 str_ConfirmPassword = edt_ConfirmPassword.getText().toString().trim();
-                str_user = edt_username.getText().toString().trim();
+                str_city =  edt_City.getText().toString().trim();
+                str_state =  edt_State.getText().toString().trim();
+                str_country = edt_Country.getText().toString().trim();
+                str_pincode = edt_Pincode.getText().toString().trim();
+                str_age = edt_age.getText().toString();
                 str_MobileNumber = edt_MobileNumber.getText().toString().trim();
 
                 if (str_FirstName == null || str_FirstName.equals("")) {
@@ -310,10 +323,75 @@ public class activity_user_register extends AppCompatActivity {
 
                     }, Constants.DIALOG_INFO_TITLE, "Please Enter  Valid Mobile Number", false);
 
+                }if (str_city == null || str_city.equals("")) {
+
+                    Utills.showCustomSimpleDialog(obj_Registaration, new CustomSimpleMessageDialog.SimpleDialogOnClickListener() {
+                        @Override
+                        public void onOkayButtonClick() {
+                            if (Utills.customSimpleMessageDialog != null) {
+                                Utills.customSimpleMessageDialog.dismiss();
+                            }
+                        }
+
+                    }, Constants.DIALOG_INFO_TITLE, "Please Select  City", false);
+
+
+                } else if (str_state == null || str_state.equals("")) {
+
+                    Utills.showCustomSimpleDialog(obj_Registaration, new CustomSimpleMessageDialog.SimpleDialogOnClickListener() {
+                        @Override
+                        public void onOkayButtonClick() {
+                            if (Utills.customSimpleMessageDialog != null) {
+                                Utills.customSimpleMessageDialog.dismiss();
+                            }
+                        }
+
+                    }, Constants.DIALOG_INFO_TITLE, "Please Select  State", false);
+
+
+                } else if (str_country == null || str_country.equals("")) {
+
+                    Utills.showCustomSimpleDialog(obj_Registaration, new CustomSimpleMessageDialog.SimpleDialogOnClickListener() {
+                        @Override
+                        public void onOkayButtonClick() {
+                            if (Utills.customSimpleMessageDialog != null) {
+                                Utills.customSimpleMessageDialog.dismiss();
+                            }
+                        }
+
+                    }, Constants.DIALOG_INFO_TITLE, "Please Enter  Country", false);
+
+
+                } else if (str_pincode == null || str_pincode.equals("")) {
+
+                    Utills.showCustomSimpleDialog(obj_Registaration, new CustomSimpleMessageDialog.SimpleDialogOnClickListener() {
+                        @Override
+                        public void onOkayButtonClick() {
+                            if (Utills.customSimpleMessageDialog != null) {
+                                Utills.customSimpleMessageDialog.dismiss();
+                            }
+                        }
+
+                    }, Constants.DIALOG_INFO_TITLE, "Please Enter  Pincode", false);
+
+
+                }  else if (str_age == null || str_age.equals("")) {
+
+                    Utills.showCustomSimpleDialog(obj_Registaration, new CustomSimpleMessageDialog.SimpleDialogOnClickListener() {
+                        @Override
+                        public void onOkayButtonClick() {
+                            if (Utills.customSimpleMessageDialog != null) {
+                                Utills.customSimpleMessageDialog.dismiss();
+                            }
+                        }
+
+                    }, Constants.DIALOG_INFO_TITLE, "Please Select Age Group", false);
+
+
                 }  else {
 
-                    rel_two.setVisibility(View.VISIBLE);
-                    rel_one.setVisibility(View.GONE);
+                    callRegisterApi();
+
                 }
             }
         });
@@ -483,6 +561,15 @@ public class activity_user_register extends AppCompatActivity {
 
                 }
         });
+        edt_age.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                openDialougSelectAgeList();
+
+            }
+        });
 
         txt_ShowPassword.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -599,6 +686,7 @@ public class activity_user_register extends AppCompatActivity {
                 params.put("state", str_state);
                 params.put("country", str_country);
                 params.put("pincode", str_pincode);
+                params.put("age_group",str_age);
                 params.put("qr_number",uniqueKey.toString());
 
                 jsonObject_parent = mJsonParser.postData("http://www.mptechnolabs.com/1reward/14-04-2016userSignup.php", params);
@@ -623,6 +711,8 @@ public class activity_user_register extends AppCompatActivity {
     protected void LoginCallAction(Integer isSuccess) {
 
         if(isSuccess == 1) {
+
+            Toast.makeText(activity_user_register.this,"Successfully Created your account",Toast.LENGTH_LONG).show();
             Intent i_Login = new Intent(obj_Registaration, Activity_login.class);
             i_Login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             i_Login.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
@@ -871,12 +961,54 @@ public class activity_user_register extends AppCompatActivity {
         });
         dialog_CountryList.show();
     }
+
+    private void openDialougSelectAgeList() {
+
+        dialog_age = new Dialog(obj_Registaration);
+        dialog_age.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog_age.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog_age.getWindow().setGravity(Gravity.CENTER);
+        dialog_age.setCanceledOnTouchOutside(false);
+
+        //setting custom layout to dialog_car_variant
+        dialog_age.setContentView(R.layout.dialoug_select_heard_about_us);
+
+
+        TextView txt_HeadeTitle = (TextView) dialog_age.findViewById(R.id.txt_title_dialog);
+
+        txt_HeadeTitle.setText("Select Age");
+
+        final ListView lst_view = (ListView) dialog_age.findViewById(R.id.lv_select_state);
+
+
+        getDataInAreaList();
+        AreaAdapter adapter = new AreaAdapter(obj_Registaration, myList);
+        lst_view.setAdapter(adapter);
+
+        lst_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                edt_age.setText(ld.getName());
+                dialog_age.dismiss();
+
+            }
+        });
+        dialog_age.show();
+    }
     private void getDataInList() {
         for (int i = 0; i < country_id.length; i++) {
             ld.setId(country_id[i]);
             ld.setName(country_name[i]);
             // Add this object into the ArrayList myList
             myList.add(ld);
+        }
+    }
+    private void getDataInAreaList() {
+        for (int i = 0; i < age_group.length; i++) {
+            ld.setName(age_group[i]);
+            // Add this object into the ArrayList myList
+            areaList.add(ld);
         }
     }
 
@@ -934,228 +1066,4 @@ public class activity_user_register extends AppCompatActivity {
 
         }
     }
-
-
- /*   @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registration);
-
-            this.context = this;
-            overridePendingTransition(R.anim.right_to_left, R.anim.left_to_inner);
-            mJsonParser = new MyJSONParser();
-
-        SharedPreferences appSharedPrefs = PreferenceManager
-                .getDefaultSharedPreferences(this.getApplicationContext());
-            Gson gson = new Gson();
-
-            String json = appSharedPrefs.getString("MyObject", "");
-            categoryDate = gson.fromJson(json, CategoryData.class);
-            this.email = (EditText) findViewById(R.id.etEmail);
-            this.pass = (EditText) findViewById(R.id.etPass);
-            this.firstname = (EditText) findViewById(R.id.etName);
-            this.username = (EditText) findViewById(R.id.etUserName);
-            this.phone = (EditText) findViewById(R.id.etPhone);
-            this.Dob = (EditText) findViewById(R.id.etDob);
-            this.city = (EditText) findViewById(R.id.etCity);
-            this.state = (EditText) findViewById(R.id.etState);
-            this.contry = (EditText) findViewById(R.id.etCountry);
-            this.pincode = (EditText) findViewById(R.id.etPincode);
-            this.address = (EditText) findViewById(R.id.etAddress);
-
-    }
-    static {
-        TAG = activity_user_register.class.getSimpleName();
-    }
-    class C08153 implements Response.Listener<JSONObject> {
-        C08153() {
-        }
-
-        public void onResponse(JSONObject jsonObject) {
-            activity_user_register.this.LoginCallAction(ParseDataProvider.getInstance(context).IsSuccessRegister(jsonObject));
-            Log.e("Response",jsonObject+"");
-        }
-    }
-
-    *//* renamed from: com.vegies.app.LoginActivity.4 *//*
-    class C08164 implements Response.ErrorListener {
-        C08164() {
-        }
-
-        public void onErrorResponse(VolleyError volleyError) {
-            if (!(volleyError.networkResponse == null || volleyError.networkResponse.data == null)) {
-                volleyError = new VolleyError(new String(volleyError.networkResponse.data));
-                Log.e("Volley Error-->",volleyError+"");
-            }
-            activity_user_register.this.progress.dismiss();
-        }
-    }
-
-
-    public boolean validate() {
-        boolean valid = true;
-
-        String emailAdd = email.getText().toString();
-        String password = pass.getText().toString();
-        String first= firstname.getText().toString();
-
-        if (first.isEmpty()) {
-            this.firstname.setError("enter a first name");
-            valid = false;
-        } else {
-            firstname.setError(null);
-        }
-
-
-        if (emailAdd.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(emailAdd).matches()) {
-            this.email.setError("enter a valid email address");
-            valid = false;
-        } else {
-            email.setError(null);
-        }
-
-        if (password.isEmpty() || password.length() < 3 || password.length() > 15) {
-            this.pass.setError("between 3 and 15 alphanumeric characters");
-            valid = false;
-        } else {
-            pass.setError(null);
-        }
-
-        return valid;
-    }
-
-    public void Signup(View view) {
-
-        if (!validate()) {
-
-            return;
-        }
-        username1=username.getText().toString();
-        name1=firstname.getText().toString();
-        email1= email.getText().toString();
-        pass1= pass.getText().toString();
-        phone1= phone.getText().toString();
-        address1= address.getText().toString();
-        city1= city.getText().toString();
-        state1= state.getText().toString();
-        country1= contry.getText().toString();
-        pincode1=pincode.getText().toString();
-        dob1= Dob.getText().toString();
-        new JSONParse().execute();
-
-        //LoginCall();
-    }
-    private class JSONParse extends AsyncTask<String,String,String> {
-        private ProgressDialog pDialog;
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-            pDialog = new ProgressDialog(activity_user_register.this);
-            pDialog.setMessage("Please Wait ...");
-            pDialog.setIndeterminate(false);
-            pDialog.setCancelable(true);
-            pDialog.show();
-
-        }
-        @Override
-        protected String  doInBackground(String... args) {
-
-            try {
-                JSONObject params = new JSONObject();
-
-                UUID uniqueKey = UUID.randomUUID();
-
-                params.put("username",username1);
-                params.put("name",name1);
-                params.put("email", email1);
-                params.put("password", pass1);
-                params.put("phone", phone1);
-                params.put("address", address1);
-                params.put("city", city1);
-                params.put("state", state1);
-                params.put("country", country1);
-                params.put("pincode", pincode1);
-                params.put("dob", dob1);
-                params.put("qr_number",uniqueKey.toString());
-
-                jsonObject_parent = mJsonParser.postData("http://www.mptechnolabs.com/1reward/userSignup.php", params);
-                //LoginCallAction(ParseDataProvider.getInstance(context).IsSuccessRegister(jsonObject_parent));
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            return null;
-        }
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-
-            if (pDialog.isShowing())
-                pDialog.dismiss();
-            LoginCallAction(ParseDataProvider.getInstance(context).IsSuccessRegister(jsonObject_parent));
-
-
-        }
-    }
-
-
-    private void LoginCall() {
-        Map<String, String> params = new HashMap();
-        UUID uniqueKey = UUID.randomUUID();
-
-        params.put("username",username.getText().toString());
-        params.put("name",firstname.getText().toString());
-        params.put("email", email.getText().toString());
-        params.put("password", pass.getText().toString());
-        params.put("phone", phone.getText().toString());
-        params.put("address", address.getText().toString());
-        params.put("city", city.getText().toString());
-        params.put("state", state.getText().toString());
-        params.put("country", contry.getText().toString());
-        params.put("pincode", pincode.getText().toString());
-        params.put("dob", Dob.getText().toString());
-        params.put("qr_number",uniqueKey.toString());
-
-        RequestQueue requestQueue = Volley.newRequestQueue(this.context);
-        VolleyHelper jsObjRequest = new VolleyHelper(1, "http://mptechnolabs.com/1reward/userSignup.php", new JSONObject (params), new C08153(), new C08164());
-        jsObjRequest.setRetryPolicy(new DefaultRetryPolicy(ApiHelper.MY_SOCKET_TIMEOUT_MS, 1, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        requestQueue.add(jsObjRequest);
-    }
-
-    protected void LoginCallAction(Integer isSuccess) {
-
-        if(isSuccess == 1) {
-            Intent i = new Intent(activity_user_register.this,StartActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("CategoryData", categoryDate);
-            i.putExtras(bundle);
-            startActivity(i);
-            finish();
-        }
-        else
-        {
-            Toast.makeText(activity_user_register.this, "Please check connection or try Again", Toast.LENGTH_LONG).show();
-            this.username.setText("");
-            this.pass.setText("");
-            this.firstname.setText("");
-            this.address.setText("");
-            this.Dob.setText("");
-            this.pincode.setText("");
-            this.city.setText("");
-            this.state.setText("");
-            this.email.setText("");
-            this.phone.setText("");
-        }
-    }
-
-    public void onBackPressed() {
-        super.onBackPressed();
-        overridePendingTransition(R.anim.inner_to_left, R.anim.left_to_out);
-        this.firstname.setText("");
-        this.email.setText("");
-        this.pass.setText("");
-
-    }*/
 }
