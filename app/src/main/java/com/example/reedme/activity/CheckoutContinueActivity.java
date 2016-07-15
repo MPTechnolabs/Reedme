@@ -33,6 +33,7 @@ public class CheckoutContinueActivity extends AppCompatActivity {
     static TextView txtPaybleValue;
     static TextView txtShipping;
     CategoryData categoryData;
+    String address;
 
 
     class C04693 implements DialogInterface.OnClickListener {
@@ -73,6 +74,7 @@ public class CheckoutContinueActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_checkout_continue);
         categoryData = (CategoryData) getIntent().getExtras().getSerializable("CategoryData");
+        address = AppPrefs.getAppPrefs(CheckoutContinueActivity.this).getString("address");
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -114,13 +116,23 @@ public class CheckoutContinueActivity extends AppCompatActivity {
     }
 
     public void ContinueCheckOut(View view) {
-        Intent intent = new Intent(CheckoutContinueActivity.this, CheckoutProceedActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("CategoryData", categoryData);
-        intent.putExtras(bundle);
-        overridePendingTransition(R.anim.right_to_left, R.anim.left_to_out);
-        startActivity(intent);
-        finish();
+
+        if(address == null || address.equals(""))
+        {
+            Intent i= new Intent(CheckoutContinueActivity.this,Activity_add_address.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(i);
+            finish();
+        }
+        else {
+            Intent intent = new Intent(CheckoutContinueActivity.this, CheckoutProceedActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("CategoryData", categoryData);
+            intent.putExtras(bundle);
+            overridePendingTransition(R.anim.right_to_left, R.anim.left_to_out);
+            startActivity(intent);
+            finish();
+        }
     }
 
     public void ClearCart(View view) {

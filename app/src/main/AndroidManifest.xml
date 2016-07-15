@@ -79,6 +79,7 @@
         <activity  android:name=".activity.OrderDetailActivity" android:screenOrientation="portrait"  android:theme="@style/AppTheme1"/>
         <activity android:name=".activity.StoreDiaplyActivity" android:screenOrientation="portrait"  android:theme="@style/AppTheme1"/>
         <activity android:name=".fragments.CategoryItemActivity" android:screenOrientation="portrait"  android:theme="@style/AppTheme1"/>
+        <activity android:name=".activity.Activity_add_address" android:screenOrientation="portrait"  android:theme="@style/AppTheme1"/>
 
         <activity android:name=".activity.activity_mystore"  android:screenOrientation="portrait" android:theme="@style/AppTheme1"/>
         <activity android:name=".activity.FragmentMyAccount"  android:screenOrientation="portrait" android:theme="@style/AppTheme1"/>

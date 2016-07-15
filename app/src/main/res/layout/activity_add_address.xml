@@ -1,0 +1,253 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_bg"
+    android:fitsSystemWindows="true"
+    >
+
+
+<include
+        layout="@layout/activity_progress"
+        />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:fillViewport="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/text_10">
+
+
+        <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+            android:layout_marginTop="@dimen/dp_10"
+        android:paddingLeft="@dimen/twentydp"
+        android:paddingRight="@dimen/twentydp">
+
+        <TextView
+            android:id="@+id/txt_title1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/tendp"
+            android:gravity="center"
+            android:padding="@dimen/fivedp"
+            android:text="Shipping Information"
+            android:textColor="@color/search_text_subheading"
+            android:textSize="@dimen/text_20" />
+
+         <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="@dimen/dp_20"
+              android:orientation="horizontal"
+              android:weightSum="2">
+
+              <TextView
+                  android:id="@+id/txt_country"
+                  android:layout_width="0dp"
+                  android:layout_height="wrap_content"
+                  android:layout_alignParentLeft="true"
+                  android:layout_centerVertical="true"
+                  android:layout_marginRight="@dimen/tendp"
+                  android:layout_weight="1"
+                  android:gravity="center_vertical"
+                  android:hint="Country *"
+                  android:textColorHint="@color/black"
+                  android:textSize="@dimen/text_14" />
+
+              <TextView
+                  android:id="@+id/txt_state"
+                  android:layout_width="0dp"
+                  android:layout_height="wrap_content"
+                  android:layout_alignParentLeft="true"
+                  android:layout_centerVertical="true"
+                  android:layout_weight="1"
+                  android:gravity="center_vertical"
+                  android:hint="State *"
+                  android:textColorHint="@color/black"
+                  android:textSize="@dimen/text_14" />
+
+          </LinearLayout>
+
+
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="@dimen/eight"
+              android:orientation="horizontal"
+              android:weightSum="2">
+
+              <EditText
+                  android:id="@+id/edt_country"
+                  android:layout_width="0dp"
+                  android:layout_height="wrap_content"
+                  android:layout_alignParentLeft="true"
+                  android:layout_centerVertical="true"
+                  android:layout_marginRight="@dimen/tendp"
+                  android:layout_weight="1"
+                  android:background="@drawable/signup_arrow_bg_city"
+                  android:gravity="center_vertical"
+                  android:hint="Select Country"
+                  android:padding="@dimen/tendp"
+                  android:focusableInTouchMode="false"
+                  android:focusable="false"
+
+                  android:textColorHint="@color/edt_search_text_bg"
+                  android:textSize="@dimen/text_14" />
+
+              <EditText
+                  android:id="@+id/edt_state"
+                  android:layout_width="0dp"
+                  android:layout_height="wrap_content"
+                  android:layout_alignParentLeft="true"
+                  android:layout_centerVertical="true"
+                  android:layout_weight="1"
+                  android:background="@drawable/signup_arrow_bg_city"
+                  android:gravity="center_vertical"
+                  android:hint="Select State"
+                  android:padding="@dimen/tendp"
+                  android:focusableInTouchMode="false"
+                  android:focusable="false"
+
+
+                  android:textColorHint="@color/edt_search_text_bg"
+                  android:textSize="@dimen/text_14" />
+
+          </LinearLayout>
+
+
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="@dimen/eight"
+              android:orientation="horizontal"
+              android:weightSum="2">
+
+              <EditText
+                  android:id="@+id/edt_city"
+                  android:layout_width="0dp"
+                  android:layout_height="wrap_content"
+                  android:layout_alignParentLeft="true"
+                  android:layout_centerVertical="true"
+                  android:layout_marginRight="@dimen/tendp"
+                  android:layout_weight="1"
+                  android:focusableInTouchMode="false"
+                  android:focusable="false"
+                  android:background="@drawable/signup_arrow_bg_city"
+                  android:gravity="center_vertical"
+                  android:hint="Select City"
+                  android:padding="@dimen/tendp"
+                  android:textColorHint="@color/edt_search_text_bg"
+                  android:textSize="@dimen/text_14" />
+
+              <EditText
+                  android:id="@+id/edt_pincode"
+                  android:layout_width="0dp"
+                  android:layout_height="wrap_content"
+                  android:layout_alignParentLeft="true"
+                  android:layout_centerVertical="true"
+                  android:layout_weight="1"
+                  android:background="@drawable/signup_select_city_without_arrow"
+                  android:gravity="center_vertical"
+                  android:hint="Pincode"
+                  android:inputType="number"
+                  android:padding="@dimen/tendp"
+                  android:textColorHint="@color/edt_search_text_bg"
+                  android:textSize="@dimen/text_14" />
+
+          </LinearLayout>
+
+
+        <EditText
+            android:id="@+id/edt_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="@dimen/tendp"
+            android:layout_weight="1"
+            android:background="@drawable/signup_address_fill"
+            android:gravity="top|left"
+            android:hint="Address *"
+            android:padding="@dimen/tendp"
+            android:textColorHint="@color/edt_search_text_bg"
+            android:textSize="@dimen/text_14" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="@dimen/tendp"
+                android:layout_weight="9"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="left|center_vertical"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ico_mo"
+                    android:scaleType="fitXY"
+                    />
+
+
+                <EditText
+                    android:id="@+id/edt_mobile_number"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_weight="4"
+                    android:layout_marginLeft="2dp"
+                    android:background="@drawable/signup_lname_bg"
+                    android:hint="Mobile Number *"
+                    android:inputType="number"
+                    android:gravity="center_vertical"
+                    android:layout_gravity="center_vertical"
+                    android:paddingBottom="@dimen/tendp"
+                    android:paddingLeft="@dimen/tendp"
+                    android:paddingTop="@dimen/tendp"
+                    android:maxLength="12"
+                    android:textColorHint="@color/edt_search_text_bg"
+                    android:textSize="@dimen/text_14" />
+
+            </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/fifteendp"
+            android:layout_marginTop="@dimen/fifteendp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/iv_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/text_10"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/tendp"
+                android:background="@drawable/button_login"
+                android:textColor="@color/white"
+                android:text="Add Address"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+</RelativeLayout>
+
+
+    </ScrollView>
+
+
+</RelativeLayout>
