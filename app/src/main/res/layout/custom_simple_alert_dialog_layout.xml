@@ -12,7 +12,7 @@
     >
 
         <TextView
-            android:id="@+id/txt_title_dialog"
+            android:id="@+id/txt_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -33,7 +33,7 @@
         android:paddingRight="10dp">
 
         <TextView
-            android:id="@+id/txt_message_dialog"
+            android:id="@+id/txt_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -41,7 +41,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="5dp"
             android:gravity="left|center"
-            android:minHeight="60dp"
+            android:minHeight="70dp"
             android:scrollHorizontally="true"
             android:text="Do You Want To Exit ??"
             android:textSize="18sp" />
@@ -67,7 +67,7 @@
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             android:layout_weight="50"
 
             android:text="Yes"
@@ -85,7 +85,7 @@
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             android:layout_weight="50"
             android:background="@color/remove_btn_bg"
 

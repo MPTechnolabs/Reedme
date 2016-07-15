@@ -329,7 +329,7 @@ public class StartActivity extends AppCompatActivity {
                     new HomeActivity();
                     return newInstance(categoryDate);
                 case 2:
-                    return new fragement_map_places();
+                    return new fragement_map();
 
                 default:
                     return null;

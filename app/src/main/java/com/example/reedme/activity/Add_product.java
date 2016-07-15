@@ -532,7 +532,6 @@ public class Add_product extends AppCompatActivity {
                 Log.e(e.getClass().getName(), e.getMessage(), e);
             }
 
-
         }
     }
 
