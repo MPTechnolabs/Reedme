@@ -334,11 +334,6 @@ public class activity_merchant_continue  extends AppCompatActivity {
 
 
 
-
-
-
-
-
             /*Utills.showCustomSimpleDialog(context, new CustomSimpleMessageDialog.SimpleDialogOnClickListener() {
                 @Override
                 public void onOkayButtonClick() {

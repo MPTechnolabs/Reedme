@@ -33,7 +33,6 @@ import com.example.reedme.fragments.CategoryItemActivity;
 import com.example.reedme.fragments.HomeActivity;
 import com.example.reedme.fragments.PrimaryFragment;
 import com.example.reedme.fragments.fragement_map;
-import com.example.reedme.fragments.fragement_map_places;
 import com.example.reedme.helper.AppPrefs;
 import com.example.reedme.helper.Util;
 import com.example.reedme.model.CategoryData;

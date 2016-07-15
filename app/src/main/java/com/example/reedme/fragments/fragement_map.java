@@ -92,7 +92,7 @@ public class fragement_map extends Fragment implements OnMapReadyCallback, Googl
                 false);
 
         mapFragment = (SupportMapFragment)getChildFragmentManager()
-                .findFragmentById(R.id.map);
+                .findFragmentById(R.id.map_fragmnet);
 
         mLocationMarkerText = (TextView) v.findViewById(R.id.locationMarkertext);
         mLocationAddress = (EditText) v.findViewById(R.id.Address);
@@ -176,6 +176,13 @@ public class fragement_map extends Fragment implements OnMapReadyCallback, Googl
             return;
         }
 
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (mapFragment != null)
+            getFragmentManager().beginTransaction().remove(mapFragment).commit();
     }
 
     @Override

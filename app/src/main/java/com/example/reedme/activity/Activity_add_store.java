@@ -1119,7 +1119,7 @@ public class Activity_add_store extends AppCompatActivity implements DatePickerD
                     if(store_id == 1)
                     {
 
-                        AppPrefs.getAppPrefs(Activity_add_store.this).setString("store_id", "2");
+                        AppPrefs.getAppPrefs(Activity_add_store.this).setString("store_id", store_id.toString());
 
                         Toast.makeText(Activity_add_store.this,"successfully added",Toast.LENGTH_LONG).show();
                         Intent i_Login = new Intent(obj_Registaration, activity_merchant_login.class);
