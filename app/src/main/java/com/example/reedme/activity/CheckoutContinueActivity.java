@@ -89,7 +89,12 @@ public class CheckoutContinueActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        address = AppPrefs.getAppPrefs(CheckoutContinueActivity.this).getString("address");
 
+    }
 
     public void LoadContext() {
         txtPaybleValue = (TextView) findViewById(R.id.txt_payable_value);
@@ -120,9 +125,8 @@ public class CheckoutContinueActivity extends AppCompatActivity {
         if(address == null || address.equals(""))
         {
             Intent i= new Intent(CheckoutContinueActivity.this,Activity_add_address.class);
-            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(i);
-            finish();
+            //finish();
         }
         else {
             Intent intent = new Intent(CheckoutContinueActivity.this, CheckoutProceedActivity.class);

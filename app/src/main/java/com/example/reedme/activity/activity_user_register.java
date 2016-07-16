@@ -219,19 +219,6 @@ public class activity_user_register extends AppCompatActivity {
                         }
 
                     }, Constants.DIALOG_INFO_TITLE, "Please Enter LastName", false);
-                }
-
-                    else if (str_user == null || str_user.equals("")) {
-
-                        Utills.showCustomSimpleDialog(obj_Registaration, new CustomSimpleMessageDialog.SimpleDialogOnClickListener() {
-                            @Override
-                            public void onOkayButtonClick() {
-                                if (Utills.customSimpleMessageDialog != null) {
-                                    Utills.customSimpleMessageDialog.dismiss();
-                                }
-                            }
-
-                        }, Constants.DIALOG_INFO_TITLE, "Please Enter UserName", false);
 
                 } else if (str_EmailId == null || str_EmailId.equals("")) {
 
@@ -981,8 +968,8 @@ public class activity_user_register extends AppCompatActivity {
         final ListView lst_view = (ListView) dialog_age.findViewById(R.id.lv_select_state);
 
 
-        getDataInAreaList();
-        AreaAdapter adapter = new AreaAdapter(obj_Registaration, myList);
+        getDataInAgeList();
+        AreaAdapter adapter = new AreaAdapter(obj_Registaration, areaList);
         lst_view.setAdapter(adapter);
 
         lst_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -1004,9 +991,9 @@ public class activity_user_register extends AppCompatActivity {
             myList.add(ld);
         }
     }
-    private void getDataInAreaList() {
-        for (int i = 0; i < age_group.length; i++) {
-            ld.setName(age_group[i]);
+    private void getDataInAgeList() {
+        for (String anAge_group : age_group) {
+            ld.setName(anAge_group);
             // Add this object into the ArrayList myList
             areaList.add(ld);
         }

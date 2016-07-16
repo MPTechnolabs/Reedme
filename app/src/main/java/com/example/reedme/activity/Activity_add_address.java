@@ -21,6 +21,7 @@ package com.example.reedme.activity;
         import android.text.InputType;
         import android.util.Log;
         import android.view.Gravity;
+        import android.view.MenuItem;
         import android.view.View;
         import android.view.Window;
         import android.widget.AdapterView;
@@ -76,17 +77,10 @@ public class Activity_add_address extends AppCompatActivity {
     String int_SelectCountryId,int_SelectStateId;
     private Button iv_add;
     GetCountryNameDetail ld = new GetCountryNameDetail();
-
-    private ImageView iv_shipping_back, iv_signup_back;
-
-
     EditText edt_City, edt_State, edt_Country, edt_Pincode, edt_Address, edt_mobile;
     Activity_add_address obj_Registaration;
-
     Dialog  dialog_CityList,dialog_CountryList, dialog_StateList;
-
     Boolean  bl_SelectCity = false, bl_SelectCode = false;
-
     String  str_MobileNumber="",  str_city="", str_state="", str_country="", str_pincode="", str_Address="", str_SpecialIntruction="",str_age="";
     private static final int PERMISSION_REQUEST_CODE = 1;
     String[] country_id = new String[]{
@@ -96,14 +90,12 @@ public class Activity_add_address extends AppCompatActivity {
     };
     static CategoryData categoryData;
 
-
-
     AVLoadingIndicatorView progress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registration);
+        setContentView(R.layout.activity_add_address);
         obj_Registaration = this;
         SharedPreferences appSharedPrefs = PreferenceManager
                 .getDefaultSharedPreferences(this.getApplicationContext());
@@ -118,11 +110,9 @@ public class Activity_add_address extends AppCompatActivity {
         idMapping();
         setListeners();
 
-
     }
-    private void idMapping() {
-
-
+    private void idMapping()
+    {
 
         edt_City = (EditText) findViewById(R.id.edt_city);
         edt_State = (EditText) findViewById(R.id.edt_state);
@@ -131,20 +121,14 @@ public class Activity_add_address extends AppCompatActivity {
         edt_Address = (EditText) findViewById(R.id.edt_address);
         iv_add = (Button) findViewById(R.id.iv_add);
         edt_mobile = (EditText) findViewById(R.id.edt_mobile_number);
-
         progress = (AVLoadingIndicatorView) findViewById(R.id.progress);
 
-
     }
-
     private void setListeners() {
-
-
 
         iv_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
 
                 str_city =  edt_City.getText().toString().trim();
                 str_state =  edt_State.getText().toString().trim();
@@ -165,7 +149,6 @@ public class Activity_add_address extends AppCompatActivity {
                         }
 
                     }, Constants.DIALOG_INFO_TITLE, "Please Select  City", false);
-
 
                 } else if (str_state == null || str_state.equals("")) {
 
@@ -192,7 +175,6 @@ public class Activity_add_address extends AppCompatActivity {
 
                     }, Constants.DIALOG_INFO_TITLE, "Please Enter  Country", false);
 
-
                 } else if (str_pincode == null || str_pincode.equals("")) {
 
                     Utills.showCustomSimpleDialog(obj_Registaration, new CustomSimpleMessageDialog.SimpleDialogOnClickListener() {
@@ -218,16 +200,11 @@ public class Activity_add_address extends AppCompatActivity {
 
                     }, Constants.DIALOG_INFO_TITLE, "Please Enter  Address", false);
 
-
-
                 } else {
 
                     callRegisterApi();
 
-
                 }
-
-
             }
         });
 
@@ -379,13 +356,13 @@ public class Activity_add_address extends AppCompatActivity {
             AppPrefs.getAppPrefs(Activity_add_address.this).setString("city",str_city);
             AppPrefs.getAppPrefs(Activity_add_address.this).setString("pincode",str_pincode);
             AppPrefs.getAppPrefs(Activity_add_address.this).setString("country",str_country);
-            Intent intent = new Intent(this, CheckoutContinueActivity.class);
+           /* Intent intent = new Intent(this, CheckoutContinueActivity.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable("CategoryData", categoryData);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             intent.putExtras(bundle);
-            startActivity(intent);
+            startActivity(intent);*/
             finish();
 
         }
@@ -405,6 +382,20 @@ public class Activity_add_address extends AppCompatActivity {
 
         }
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // app icon in action bar clicked; go home
+
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 
     private void getStateList() {
 

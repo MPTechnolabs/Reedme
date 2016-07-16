@@ -36,6 +36,7 @@ public class CheckoutProceedActivity extends AppCompatActivity {
     EditText edt_wallet;
     CheckBox chk_select;
     TextView txt_wallet;
+    TextView txt_edit;
 
 
     public CheckoutProceedActivity() {
@@ -75,8 +76,25 @@ public class CheckoutProceedActivity extends AppCompatActivity {
         this.txt_wallet = (TextView) findViewById(R.id.userWallet);
         this.chk_select = (CheckBox) findViewById(R.id.chkSelectWallet);
         this.edt_wallet = (EditText) findViewById(R.id.enterWallet);
+        txt_edit = (TextView) findViewById(R.id.txt_edit);
+
+        txt_edit.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i= new Intent(CheckoutProceedActivity.this,Activity_add_address.class);
+                startActivity(i);
+                //finish();
+            }
+        });
 
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LoadContext();
+        LoatData();
     }
 
     public void LoatData() {

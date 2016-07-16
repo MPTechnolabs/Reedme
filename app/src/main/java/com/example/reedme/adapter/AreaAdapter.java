@@ -17,25 +17,25 @@ import java.util.ArrayList;
  */
 public class AreaAdapter extends BaseAdapter {
 
-    ArrayList myList = new ArrayList();
+    ArrayList areaList = new ArrayList();
     LayoutInflater inflater;
     Context context;
 
 
-    public AreaAdapter(Context context, ArrayList myList) {
-        this.myList = myList;
+    public AreaAdapter(Context context, ArrayList areaList) {
+        this.areaList = areaList;
         this.context = context;
         inflater = LayoutInflater.from(this.context);
     }
 
     @Override
     public int getCount() {
-        return myList.size();
+        return areaList.size();
     }
 
     @Override
     public GetCountryNameDetail getItem(int position) {
-        return (GetCountryNameDetail) myList.get(position);
+        return (GetCountryNameDetail) areaList.get(position);
     }
 
     @Override

@@ -590,8 +590,8 @@ public class activity_merchant_register extends AppCompatActivity {
                 params.put("state", str_state);
                 params.put("country", str_country);
                 params.put("pincode", str_pincode);
-                params.put("lati", 72.4554);
-                params.put("longi", 84.3433);
+                params.put("lati", "");
+                params.put("longi", "");
                 params.put("m_logo", "http:");
                 params.put("m_catagory",str_category);
 
