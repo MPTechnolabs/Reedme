@@ -308,6 +308,7 @@ public class Activity_login extends AppCompatActivity {
                 String state = user.getString("state");
                 String city = user.getString("city");
                 String pincode = user.getString("pincode");
+                String country = user.getString("country");
 
                 AppPrefs.getAppPrefs(Activity_login.this).setString(Activity_login.this.getResources().getString(R.string.user_id), userid);
                 AppPrefs.getAppPrefs(Activity_login.this).setString("qr_number",qr_number);
@@ -319,6 +320,8 @@ public class Activity_login extends AppCompatActivity {
                 AppPrefs.getAppPrefs(Activity_login.this).setString("state",state);
                 AppPrefs.getAppPrefs(Activity_login.this).setString("city",city);
                 AppPrefs.getAppPrefs(Activity_login.this).setString("pincode",pincode);
+                AppPrefs.getAppPrefs(Activity_login.this).setString("country",country);
+
 
 
             } catch (JSONException e) {

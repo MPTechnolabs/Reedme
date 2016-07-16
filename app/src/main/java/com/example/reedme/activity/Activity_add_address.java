@@ -3,64 +3,64 @@ package com.example.reedme.activity;
 /**
  * Created by jolly on 15/7/16.
  */
-import android.Manifest;
-import android.app.Dialog;
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.graphics.drawable.ColorDrawable;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.telephony.TelephonyManager;
-import android.text.InputType;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.View;
-import android.view.Window;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
+        import android.Manifest;
+        import android.app.Dialog;
+        import android.app.ProgressDialog;
+        import android.content.Context;
+        import android.content.Intent;
+        import android.content.SharedPreferences;
+        import android.content.pm.PackageManager;
+        import android.graphics.drawable.ColorDrawable;
+        import android.os.AsyncTask;
+        import android.os.Bundle;
+        import android.preference.PreferenceManager;
+        import android.support.v4.app.ActivityCompat;
+        import android.support.v4.content.ContextCompat;
+        import android.support.v7.app.AppCompatActivity;
+        import android.telephony.TelephonyManager;
+        import android.text.InputType;
+        import android.util.Log;
+        import android.view.Gravity;
+        import android.view.View;
+        import android.view.Window;
+        import android.widget.AdapterView;
+        import android.widget.Button;
+        import android.widget.CheckBox;
+        import android.widget.EditText;
+        import android.widget.ImageView;
+        import android.widget.ListView;
+        import android.widget.RelativeLayout;
+        import android.widget.TextView;
+        import android.widget.Toast;
 
-import com.example.reedme.R;
-import com.example.reedme.adapter.AreaAdapter;
-import com.example.reedme.adapter.CityAdapter;
-import com.example.reedme.adapter.CountryAdapter;
-import com.example.reedme.adapter.StoreAdapter;
-import com.example.reedme.dataprovider.ParseDataProvider;
+        import com.example.reedme.R;
+        import com.example.reedme.adapter.AreaAdapter;
+        import com.example.reedme.adapter.CityAdapter;
+        import com.example.reedme.adapter.CountryAdapter;
+        import com.example.reedme.adapter.StoreAdapter;
+        import com.example.reedme.dataprovider.ParseDataProvider;
 
-import com.example.reedme.helper.AppPrefs;
-import com.example.reedme.helper.Constants;
-import com.example.reedme.helper.CustomSimpleMessageDialog;
-import com.example.reedme.helper.MyJSONParser;
-import com.example.reedme.helper.Utills;
-import com.example.reedme.helper.VolleyHelper;
-import com.example.reedme.model.CategoryData;
-import com.example.reedme.model.GetCityNameDetail;
-import com.example.reedme.model.GetCityNameList;
-import com.example.reedme.model.GetCountryNameDetail;
-import com.example.reedme.model.GetStateNameDetail;
-import com.example.reedme.model.GetStateNameList;
-import com.example.reedme.views.AVLoadingIndicatorView;
-import com.google.gson.Gson;
+        import com.example.reedme.helper.AppPrefs;
+        import com.example.reedme.helper.Constants;
+        import com.example.reedme.helper.CustomSimpleMessageDialog;
+        import com.example.reedme.helper.MyJSONParser;
+        import com.example.reedme.helper.Utills;
+        import com.example.reedme.helper.VolleyHelper;
+        import com.example.reedme.model.CategoryData;
+        import com.example.reedme.model.GetCityNameDetail;
+        import com.example.reedme.model.GetCityNameList;
+        import com.example.reedme.model.GetCountryNameDetail;
+        import com.example.reedme.model.GetStateNameDetail;
+        import com.example.reedme.model.GetStateNameList;
+        import com.example.reedme.views.AVLoadingIndicatorView;
+        import com.google.gson.Gson;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+        import org.json.JSONException;
+        import org.json.JSONObject;
 
-import java.util.ArrayList;
+        import java.util.ArrayList;
 
-import java.util.UUID;
+        import java.util.UUID;
 
 
 /**
@@ -373,6 +373,12 @@ public class Activity_add_address extends AppCompatActivity {
         if(isSuccess == 1) {
 
             Toast.makeText(Activity_add_address.this,"Successfully Added",Toast.LENGTH_LONG).show();
+            AppPrefs.getAppPrefs(Activity_add_address.this).setString("address",str_Address);
+            AppPrefs.getAppPrefs(Activity_add_address.this).setString("phone",str_MobileNumber);
+            AppPrefs.getAppPrefs(Activity_add_address.this).setString("state",str_state);
+            AppPrefs.getAppPrefs(Activity_add_address.this).setString("city",str_city);
+            AppPrefs.getAppPrefs(Activity_add_address.this).setString("pincode",str_pincode);
+            AppPrefs.getAppPrefs(Activity_add_address.this).setString("country",str_country);
             Intent intent = new Intent(this, CheckoutContinueActivity.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable("CategoryData", categoryData);
