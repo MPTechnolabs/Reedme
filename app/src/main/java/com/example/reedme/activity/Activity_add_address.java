@@ -3,7 +3,6 @@ package com.example.reedme.activity;
 /**
  * Created by jolly on 15/7/16.
  */
-        import android.Manifest;
         import android.app.Dialog;
         import android.app.ProgressDialog;
         import android.content.Context;
@@ -35,7 +34,6 @@ package com.example.reedme.activity;
         import android.widget.Toast;
 
         import com.example.reedme.R;
-        import com.example.reedme.adapter.AreaAdapter;
         import com.example.reedme.adapter.CityAdapter;
         import com.example.reedme.adapter.CountryAdapter;
         import com.example.reedme.adapter.StoreAdapter;

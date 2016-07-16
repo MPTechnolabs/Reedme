@@ -59,6 +59,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.lang.reflect.Field;
+
 /**
  * Created by Jolly Raiyani on 4/6/2016.
  */
@@ -67,7 +69,7 @@ public class fragement_map extends Fragment implements OnMapReadyCallback, Googl
     private GoogleMap mMap;
     private GoogleApiClient mGoogleApiClient;
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
-    private static String TAG = "MAP LOCATION";
+    public static String TAG="fragement_map";
     TextView mLocationMarkerText;
     private LatLng mCenterLatLong;
     private AddressResultReceiver mResultReceiver;
@@ -82,6 +84,11 @@ public class fragement_map extends Fragment implements OnMapReadyCallback, Googl
    // TextView mLocationText;
     private static final int REQUEST_CODE_AUTOCOMPLETE = 1;
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("WORKAROUND_FOR_BUG_19917_KEY", "WORKAROUND_FOR_BUG_19917_VALUE");
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -178,12 +185,33 @@ public class fragement_map extends Fragment implements OnMapReadyCallback, Googl
 
     }
 
+
     @Override
     public void onDestroyView() {
+
+            if (mapFragment != null) {
+                getFragmentManager().beginTransaction().remove(mapFragment).commit();
+            }
         super.onDestroyView();
-        if (mapFragment != null)
-            getFragmentManager().beginTransaction().remove(mapFragment).commit();
+
     }
+    @Override
+    public void onDetach() {
+        super.onDetach();
+
+        try {
+            Field childFragmentManager = Fragment.class.getDeclaredField("mChildFragmentManager");
+            childFragmentManager.setAccessible(true);
+            childFragmentManager.set(this, null);
+
+        } catch (NoSuchFieldException e) {
+            throw new RuntimeException(e);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    
 
     @Override
     public void onConnected(Bundle bundle) {

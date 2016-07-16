@@ -86,6 +86,10 @@ public class StartActivity extends AppCompatActivity {
         mFragmentManager = getSupportFragmentManager();
 
     }
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+    }
+
     private void setUpCustomTabs() {
         LayoutInflater mLayoutInflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -317,6 +321,7 @@ public class StartActivity extends AppCompatActivity {
 
         public MainScreenPagerAdapter(FragmentManager fm) {
             super(fm);
+
         }
 
         @Override
@@ -396,18 +401,20 @@ public class StartActivity extends AppCompatActivity {
                 return true;
             }
             this.isBack = true;
+
             Toast.makeText(context, "Press again to exit", Toast.LENGTH_LONG).show();
 
             return true;
         }
     }
     public void BackFromCategoryItemActivity() {
-        Fragment fragment = fragmentManager.findFragmentByTag(CategoryItemActivity.TAG);
+        Fragment fragment = fragmentManager.findFragmentByTag(fragement_map.TAG);
         if (fragment != null) {
             fragmentManager.beginTransaction().setCustomAnimations(R.anim.inner_to_left, R.anim.left_to_out).remove(fragment).commitAllowingStateLoss();
         }
 
     }
+
 
 }
    /* public static CategoryData categoryDate;

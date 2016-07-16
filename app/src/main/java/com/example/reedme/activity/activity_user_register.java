@@ -49,6 +49,7 @@ import com.example.reedme.helper.MyJSONParser;
 import com.example.reedme.helper.Utills;
 import com.example.reedme.helper.VolleyHelper;
 import com.example.reedme.model.CategoryData;
+import com.example.reedme.model.GetAgeDetail;
 import com.example.reedme.model.GetCityNameDetail;
 import com.example.reedme.model.GetCityNameList;
 import com.example.reedme.model.GetCountryNameDetail;
@@ -78,11 +79,13 @@ public class activity_user_register extends AppCompatActivity {
     JSONObject jsonObject_parent = null;
     Context context;
     ArrayList myList = new ArrayList();
-    ArrayList areaList = new ArrayList();
+    ArrayList ageList = new ArrayList();
     String int_SelectCountryId,int_SelectStateId;
     private RelativeLayout rel_two, rel_one;
     private Button iv_next, iv_signup;
     GetCountryNameDetail ld = new GetCountryNameDetail();
+    GetAgeDetail ld1 = new GetAgeDetail();
+
 
     private ImageView iv_shipping_back, iv_signup_back;
 
@@ -104,11 +107,12 @@ public class activity_user_register extends AppCompatActivity {
     Boolean bl_InputConfirmPasswordType = true;
     private static final int PERMISSION_REQUEST_CODE = 1;
     String[] country_id = new String[]{
-           "101"    };
+           "101"   };
     String[] country_name = new String[]{
            "India"
     };
 
+    String[] age_id = new String[]{"1","2","3","4","5","6","7","8"};
     String[] age_group = new String[]{
             "18-21","21-25","25-29","30-34","35-39","35-40","40-50","Over-50"
     };
@@ -969,14 +973,14 @@ public class activity_user_register extends AppCompatActivity {
 
 
         getDataInAgeList();
-        AreaAdapter adapter = new AreaAdapter(obj_Registaration, areaList);
+        AreaAdapter adapter = new AreaAdapter(obj_Registaration, ageList);
         lst_view.setAdapter(adapter);
 
         lst_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                edt_age.setText(ld.getName());
+                edt_age.setText(ld1.getName());
                 dialog_age.dismiss();
 
             }
@@ -992,11 +996,15 @@ public class activity_user_register extends AppCompatActivity {
         }
     }
     private void getDataInAgeList() {
-        for (String anAge_group : age_group) {
-            ld.setName(anAge_group);
+        for (int i = 0; i < age_id.length; i++) {
+            ld1.setId(age_id[i]);
+            ld1.setName(age_group[i]);
+            Log.e("ld--->",ld1.getName().toString());
             // Add this object into the ArrayList myList
-            areaList.add(ld);
+            ageList.add(ld1);
+
         }
+
     }
 
     @Override

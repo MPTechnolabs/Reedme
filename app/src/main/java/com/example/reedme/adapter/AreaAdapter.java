@@ -1,6 +1,7 @@
 package com.example.reedme.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.reedme.R;
+import com.example.reedme.model.GetAgeDetail;
 import com.example.reedme.model.GetCountryNameDetail;
 
 import java.util.ArrayList;
@@ -17,25 +19,25 @@ import java.util.ArrayList;
  */
 public class AreaAdapter extends BaseAdapter {
 
-    ArrayList areaList = new ArrayList();
+    ArrayList ageList = new ArrayList();
     LayoutInflater inflater;
     Context context;
 
 
-    public AreaAdapter(Context context, ArrayList areaList) {
-        this.areaList = areaList;
+    public AreaAdapter(Context context, ArrayList myList) {
+        this.ageList = myList;
         this.context = context;
         inflater = LayoutInflater.from(this.context);
     }
 
     @Override
     public int getCount() {
-        return areaList.size();
+        return ageList.size();
     }
 
     @Override
-    public GetCountryNameDetail getItem(int position) {
-        return (GetCountryNameDetail) areaList.get(position);
+    public GetAgeDetail getItem(int position) {
+        return (GetAgeDetail) ageList.get(position);
     }
 
     @Override
@@ -55,17 +57,19 @@ public class AreaAdapter extends BaseAdapter {
             mViewHolder = (MyViewHolder) convertView.getTag();
         }
 
-        GetCountryNameDetail currentListData = getItem(position);
+        GetAgeDetail currentListData = getItem(position);
 
+        mViewHolder.tvId.setText(currentListData.getId());
         mViewHolder.tvName.setText(currentListData.getName());
 
         return convertView;
     }
 
     private class MyViewHolder {
-        TextView  tvName;
+        TextView tvId, tvName;
 
         public MyViewHolder(View item) {
+            tvId = (TextView) item.findViewById(R.id.txt_id);
             tvName = (TextView) item.findViewById(R.id.txt_app_info_name);
         }
     }
