@@ -85,15 +85,6 @@ public class Activity_login extends AppCompatActivity {
         findById();
         setAction();
 
-      /*  if (android.os.Build.VERSION.SDK_INT < 23) {
-
-            TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-            str_DeviceId = telephonyManager.getDeviceId();
-
-        } else {
-            requestPermission();
-        }
-*/
     }
 
     private void findById() {

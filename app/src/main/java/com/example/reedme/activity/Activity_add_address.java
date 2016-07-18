@@ -135,7 +135,6 @@ public class Activity_add_address extends AppCompatActivity {
                 str_Address = edt_Address.getText().toString().trim();
                 str_MobileNumber = edt_mobile.getText().toString().trim();
 
-
                 if (str_city == null || str_city.equals("")) {
 
                     Utills.showCustomSimpleDialog(obj_Registaration, new CustomSimpleMessageDialog.SimpleDialogOnClickListener() {
