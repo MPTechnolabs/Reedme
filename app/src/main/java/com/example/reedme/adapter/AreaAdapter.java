@@ -1,5 +1,6 @@
 package com.example.reedme.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,67 +11,66 @@ import android.widget.TextView;
 
 import com.example.reedme.R;
 import com.example.reedme.model.GetAgeDetail;
-import com.example.reedme.model.GetCountryNameDetail;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by jolly on 15/7/16.
  */
 public class AreaAdapter extends BaseAdapter {
 
-    ArrayList ageList = new ArrayList();
-    LayoutInflater inflater;
+    List<GetAgeDetail> rowItems;
     Context context;
 
 
-    public AreaAdapter(Context context, ArrayList myList) {
-        this.ageList = myList;
+    public AreaAdapter(Context context, List<GetAgeDetail> items) {
+        this.rowItems = items;
         this.context = context;
-        inflater = LayoutInflater.from(this.context);
     }
 
     @Override
     public int getCount() {
-        return ageList.size();
+        return rowItems.size();
     }
 
     @Override
-    public GetAgeDetail getItem(int position) {
-        return (GetAgeDetail) ageList.get(position);
+    public Object getItem(int position) {
+        return rowItems.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return  rowItems.indexOf(getItem(position));
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        MyViewHolder mViewHolder;
+        ViewHolder holder = null;
 
+        LayoutInflater mInflater = (LayoutInflater)
+                context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.list_select_heard_list_dialoug, parent, false);
-            mViewHolder = new MyViewHolder(convertView);
-            convertView.setTag(mViewHolder);
-        } else {
-            mViewHolder = (MyViewHolder) convertView.getTag();
+            convertView = mInflater.inflate(R.layout.list_select_heard_list_dialoug, null);
+            holder = new ViewHolder();
+            holder.tvId = (TextView) convertView.findViewById(R.id.txt_id);
+            holder.tvName = (TextView) convertView.findViewById(R.id.txt_app_info_name);
+            convertView.setTag(holder);
+        }
+        else {
+            holder = (ViewHolder) convertView.getTag();
         }
 
-        GetAgeDetail currentListData = getItem(position);
+        GetAgeDetail rowItem = (GetAgeDetail) getItem(position);
 
-        mViewHolder.tvId.setText(currentListData.getId());
-        mViewHolder.tvName.setText(currentListData.getName());
+        holder.tvId.setText(rowItem.getId());
+        holder.tvName.setText(rowItem.getName());
 
         return convertView;
     }
-
-    private class MyViewHolder {
+    private class ViewHolder {
         TextView tvId, tvName;
 
-        public MyViewHolder(View item) {
-            tvId = (TextView) item.findViewById(R.id.txt_id);
-            tvName = (TextView) item.findViewById(R.id.txt_app_info_name);
-        }
+
     }
 }

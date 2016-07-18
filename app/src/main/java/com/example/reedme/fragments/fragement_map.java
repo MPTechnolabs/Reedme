@@ -3,11 +3,9 @@ package com.example.reedme.fragments;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Point;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,20 +17,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
-import android.widget.GridView;
-import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.reedme.R;
-import com.example.reedme.activity.StartActivity;
-import com.example.reedme.adapter.CategoryListAdapter;
-import com.example.reedme.adapter.PlacesAutoCompleteAdapter;
 import com.example.reedme.helper.AppUtils;
-import com.example.reedme.helper.Util;
 import com.example.reedme.service.FetchAddressIntentService;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -44,20 +35,13 @@ import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.Places;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
-import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.lang.reflect.Field;
 
@@ -188,11 +172,14 @@ public class fragement_map extends Fragment implements OnMapReadyCallback, Googl
 
     @Override
     public void onDestroyView() {
+        super.onDestroyView();
 
+
+        if (!getActivity().isFinishing()) {
             if (mapFragment != null) {
                 getFragmentManager().beginTransaction().remove(mapFragment).commit();
             }
-        super.onDestroyView();
+        }
 
     }
     @Override

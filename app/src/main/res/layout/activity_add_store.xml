@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@mipmap/blue_ocen"
     android:fitsSystemWindows="true">
     <include
@@ -442,7 +443,25 @@
                         android:padding="@dimen/tendp"
                         android:textColorHint="@color/edt_search_text_bg"
                         android:textSize="@dimen/text_14" />
-
+                    <com.example.reedme.custom.PlacesAutoCompleteEditText
+                        android:id="@+id/edt_locality"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="@dimen/tendp"
+                        app:south_bound="8"
+                        app:west_bound="65"
+                        app:north_bound="37"
+                        app:east_bound="100"
+                        app:item_layout="@layout/autocomplete_item"
+                        app:item_text_id="@+id/text1"
+                        android:layout_weight="1"
+                        android:background="@drawable/signup_lname_bg"
+                        android:layout_gravity="center_vertical"                        android:hint="Enter Locality *"
+                        android:padding="@dimen/tendp"
+                        android:textColorHint="@color/edt_search_text_bg"
+                        android:textSize="@dimen/text_14" />
 
                     <LinearLayout
                         android:layout_width="match_parent"

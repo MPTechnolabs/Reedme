@@ -146,7 +146,7 @@ public class Activity_add_address extends AppCompatActivity {
                             }
                         }
 
-                    }, Constants.DIALOG_INFO_TITLE, "Please Select  City", false);
+                    }, Constants.DIALOG_INFO_TITLE, "Please Select City", false);
 
                 } else if (str_state == null || str_state.equals("")) {
 
@@ -158,7 +158,7 @@ public class Activity_add_address extends AppCompatActivity {
                             }
                         }
 
-                    }, Constants.DIALOG_INFO_TITLE, "Please Select  State", false);
+                    }, Constants.DIALOG_INFO_TITLE, "Please Select State", false);
 
 
                 } else if (str_country == null || str_country.equals("")) {

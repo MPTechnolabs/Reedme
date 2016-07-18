@@ -15,6 +15,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -43,6 +44,8 @@ import com.example.reedme.adapter.CategoryDialogAdapter;
 import com.example.reedme.adapter.CityAdapter;
 import com.example.reedme.adapter.CountryAdapter;
 import com.example.reedme.adapter.StoreAdapter;
+import com.example.reedme.custom.PlaceSelectedListener;
+import com.example.reedme.custom.PlacesAutoCompleteEditText;
 import com.example.reedme.dataprovider.ParseDataProvider;
 import com.example.reedme.date.DatePickerDialog;
 import com.example.reedme.helper.AppPrefs;
@@ -55,6 +58,10 @@ import com.example.reedme.model.GetCityNameList;
 import com.example.reedme.model.GetCountryNameDetail;
 import com.example.reedme.model.GetStateNameList;
 import com.example.reedme.views.AVLoadingIndicatorView;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.Places;
 
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -79,7 +86,7 @@ import static com.example.reedme.dataprovider.ParseDataProvider.getInstance;
 /**
  * Created by jolly on 5/7/16.
  */
-public class Activity_add_store extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+public class Activity_add_store extends AppCompatActivity implements DatePickerDialog.OnDateSetListener ,GoogleApiClient.OnConnectionFailedListener {
     public static MyJSONParser mJsonParser = null;
     JSONObject jsonObject_parent = null;
     Context context;
@@ -95,8 +102,12 @@ public class Activity_add_store extends AppCompatActivity implements DatePickerD
 
     EditText edt_City, edt_State, edt_Country, edt_Pincode, edt_Address, edt_toDate,edt_fromDate;
     ImageView img_store,img_camera,img_to,img_from;
+    double latitude_place;
+    double longitude_place;
 
     Activity_add_store obj_Registaration;
+    PlacesAutoCompleteEditText placesView;
+    GoogleApiClient googleApiClient;
 
     Dialog dialog_CityList,dialog_CountryList, dialog_StateList,dialog_category;
 
@@ -122,6 +133,14 @@ public class Activity_add_store extends AppCompatActivity implements DatePickerD
         idMapping();
         setListeners();
 
+        googleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this, 1, this)
+                .addApi(Places.GEO_DATA_API)
+                .addApi(Places.PLACE_DETECTION_API)
+                .build();
+
+        placesView.setGoogleApiClient(googleApiClient);
+
     }
     private void idMapping() {
 
@@ -140,13 +159,23 @@ public class Activity_add_store extends AppCompatActivity implements DatePickerD
         img_camera = (ImageView) findViewById(R.id.img_camera);
         img_to = (ImageView) findViewById(R.id.img_to);
         img_from = (ImageView) findViewById(R.id.img_from);
+        placesView = (PlacesAutoCompleteEditText) findViewById(R.id.edt_locality);
+
+
         edt_category_select = (EditText) findViewById(R.id.edt_category_select);
         edt_discount = (EditText) findViewById(R.id.edt_discount);
         iv_add = (Button) findViewById(R.id.iv_add);
     }
 
     private void setListeners() {
+        placesView.setPlaceSelectedListener(new PlaceSelectedListener() {
+            @Override
+            public void onPlaceSelected(Place place) {
 
+                latitude_place = place.getLatLng().latitude;
+                longitude_place = place.getLatLng().longitude;
+            }
+        });
         img_camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -583,6 +612,11 @@ public class Activity_add_store extends AppCompatActivity implements DatePickerD
         return b;
     }
 
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
 
 
     private class GetState extends AsyncTask<String,String,String> {
@@ -1070,8 +1104,8 @@ public class Activity_add_store extends AppCompatActivity implements DatePickerD
                         new StringPart("discount",str_discount),
                         new StringPart("status","0"),
                         new StringPart("user_status","0"),
-                        new StringPart("lat","35.4545"),
-                        new StringPart("long","34.4545"),
+                        new StringPart("lat",latitude_place+""),
+                        new StringPart("longitude",longitude_place+""),
 
                         new FilePart("store_img", fileBanner)
                 };

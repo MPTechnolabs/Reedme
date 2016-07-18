@@ -11,7 +11,10 @@ public class GetAgeDetail implements Serializable {
     String name;
 
 
-    public GetAgeDetail() {
+    public GetAgeDetail(String age_id,String name) {
+
+        this.age_id =age_id;
+        this.name = name;
     }
 
 

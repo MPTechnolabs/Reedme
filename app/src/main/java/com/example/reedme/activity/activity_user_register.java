@@ -65,6 +65,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -84,8 +85,7 @@ public class activity_user_register extends AppCompatActivity {
     private RelativeLayout rel_two, rel_one;
     private Button iv_next, iv_signup;
     GetCountryNameDetail ld = new GetCountryNameDetail();
-    GetAgeDetail ld1 = new GetAgeDetail();
-
+    List<GetAgeDetail> rowItems;
 
     private ImageView iv_shipping_back, iv_signup_back;
 
@@ -112,8 +112,8 @@ public class activity_user_register extends AppCompatActivity {
            "India"
     };
 
-    String[] age_id = new String[]{"1","2","3","4","5","6","7","8"};
-    String[] age_group = new String[]{
+    public static final String[] age_id = new String[]{"1","2","3","4","5","6","7","8"};
+    public static final String[] age_group = new String[]{
             "18-21","21-25","25-29","30-34","35-39","35-40","40-50","Over-50"
     };
 
@@ -930,7 +930,7 @@ public class activity_user_register extends AppCompatActivity {
 
         txt_HeadeTitle.setText("Select Country");
 
-        final ListView lst_view = (ListView) dialog_CountryList.findViewById(R.id.lv_select_state);
+        ListView lst_view = (ListView) dialog_CountryList.findViewById(R.id.lv_select_state);
 
 
         getDataInList();
@@ -969,18 +969,18 @@ public class activity_user_register extends AppCompatActivity {
 
         txt_HeadeTitle.setText("Select Age");
 
-        final ListView lst_view = (ListView) dialog_age.findViewById(R.id.lv_select_state);
+        ListView lst_view = (ListView) dialog_age.findViewById(R.id.lv_select_state);
 
 
         getDataInAgeList();
-        AreaAdapter adapter = new AreaAdapter(obj_Registaration, ageList);
+        AreaAdapter adapter = new AreaAdapter(obj_Registaration, rowItems);
         lst_view.setAdapter(adapter);
 
         lst_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                edt_age.setText(ld1.getName());
+                edt_age.setText(rowItems.get(position).getName());
                 dialog_age.dismiss();
 
             }
@@ -996,13 +996,10 @@ public class activity_user_register extends AppCompatActivity {
         }
     }
     private void getDataInAgeList() {
+        rowItems = new ArrayList<GetAgeDetail>();
         for (int i = 0; i < age_id.length; i++) {
-            ld1.setId(age_id[i]);
-            ld1.setName(age_group[i]);
-            Log.e("ld--->",ld1.getName().toString());
-            // Add this object into the ArrayList myList
-            ageList.add(ld1);
-
+            GetAgeDetail item = new GetAgeDetail(age_id[i], age_group[i]);
+            rowItems.add(item);
         }
 
     }
