@@ -474,7 +474,7 @@ public class Add_product extends AppCompatActivity {
                         new StringPart("weight",str_weight),
                         new StringPart("description",str_description),
                         new StringPart("quntity",str_quantity),
-                        new StringPart("s_id","33"),
+                        new StringPart("s_id",AppPrefs.getAppPrefs(Add_product.this).getString("store_id")),
                         new FilePart("product_img", fileBanner)
                 };
 

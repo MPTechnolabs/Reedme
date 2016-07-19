@@ -4,18 +4,29 @@ import android.Manifest;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.graphics.drawable.ColorDrawable;
+import android.media.ExifInterface;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.PreferenceManager;
+import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
 import android.text.InputType;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -30,6 +41,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.internal.http.multipart.FilePart;
+import com.android.internal.http.multipart.MultipartEntity;
+import com.android.internal.http.multipart.Part;
+import com.android.internal.http.multipart.StringPart;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -59,10 +74,20 @@ import com.example.reedme.views.AVLoadingIndicatorView;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -86,9 +111,11 @@ public class activity_user_register extends AppCompatActivity {
     private Button iv_next, iv_signup;
     GetCountryNameDetail ld = new GetCountryNameDetail();
     List<GetAgeDetail> rowItems;
-
+    File fileBanner;
+    String base64Image;
+    ImageView img_store,img_camera;
     private ImageView iv_shipping_back, iv_signup_back;
-
+    JSONObject object;
     EditText edt_FirstName, edt_LastName, edt_EmailId, edt_Password, edt_ConfirmPassword, edt_MobileNumber,edt_age;
 
     EditText edt_City, edt_State, edt_Country, edt_Pincode, edt_Address, edt_SpecialInstruction;
@@ -149,7 +176,8 @@ public class activity_user_register extends AppCompatActivity {
         edt_ConfirmPassword = (EditText) findViewById(R.id.edt_conpassword);
         edt_MobileNumber = (EditText) findViewById(R.id.edt_mobile_number);
         edt_age = (EditText) findViewById(R.id.edt_age);
-
+        img_store = (ImageView) findViewById(R.id.img_store);
+        img_camera = (ImageView) findViewById(R.id.img_camera);
         // Second  Page
         edt_City = (EditText) findViewById(R.id.edt_city);
         edt_State = (EditText) findViewById(R.id.edt_state);
@@ -167,6 +195,12 @@ public class activity_user_register extends AppCompatActivity {
 
     private void setListeners() {
 
+        img_camera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectImage();
+            }
+        });
 
         iv_shipping_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -619,7 +653,176 @@ public class activity_user_register extends AppCompatActivity {
 
 
     }
+    private void selectImage() {
+        final CharSequence[] options = {"Take Photo", "Choose from Gallery", "Cancel"};
 
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity_user_register.this);
+        builder.setTitle("Add Photo!");
+        builder.setItems(options, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int item) {
+                if (options[item].equals("Take Photo")) {
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    File f = new File(Environment.getExternalStorageDirectory(), "temp.jpg");
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
+                    startActivityForResult(intent, 1);
+                } else if (options[item].equals("Choose from Gallery")) {
+                    Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    startActivityForResult(intent, 2);
+                } else if (options[item].equals("Cancel")) {
+                    dialog.dismiss();
+                }
+            }
+        });
+        builder.show();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == 1) {
+                File f = new File(Environment.getExternalStorageDirectory().toString());
+                for (File temp : f.listFiles()) {
+                    if (temp.getName().equals("temp.jpg")) {
+                        f = temp;
+                        break;
+                    }
+                }
+                try {
+                    Bitmap bitmap;
+                    BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
+                    bitmapOptions.inSampleSize = 8;
+
+                    bitmap = getResizedBitmap(BitmapFactory.decodeFile(f.getAbsolutePath(),
+                            bitmapOptions), 200);
+
+                    Matrix matrix = new Matrix();
+                    matrix.postRotate(getImageOrientation(f.getAbsolutePath()));
+                    Bitmap rotatedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
+                            bitmap.getHeight(), matrix, true);
+
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    rotatedBitmap.compress(Bitmap.CompressFormat.JPEG, 85, baos);
+                    byte b[] = baos.toByteArray();
+                    base64Image = Base64.encodeToString(b, Base64.DEFAULT);
+                    Log.e("byte array", base64Image);
+
+
+                    img_store.setImageBitmap(rotatedBitmap);
+                    f.delete();
+                    String path = Environment
+                            .getExternalStorageDirectory()
+                            + File.separator;
+
+                    f.delete();
+                    OutputStream outFile = null;
+                    File file = new File(path, String.valueOf(System.currentTimeMillis()) + ".png");
+                    //  new UploadProfileImageAsync(file).execute();
+                    FileBanner(file);
+
+                    try {
+                        outFile = new FileOutputStream(file);
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 85, outFile);
+                        outFile.flush();
+                        outFile.close();
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else if (requestCode == 2) {
+
+                Uri selectedImage = data.getData();
+                String[] filePath = {MediaStore.Images.Media.DATA};
+
+                Cursor c = getContentResolver().query(selectedImage, filePath, null, null, null);
+                c.moveToFirst();
+                int columnIndex = c.getColumnIndex(filePath[0]);
+                String picturePath = c.getString(columnIndex);
+
+                c.close();
+                Bitmap thumbnail = getResizedBitmap((BitmapFactory.decodeFile(picturePath)), 100);
+
+
+                Log.w("path from gallery", picturePath + "");
+
+                Matrix matrix = new Matrix();
+                matrix.postRotate(getImageOrientation(picturePath));
+                Bitmap rotatedBitmap = Bitmap.createBitmap(thumbnail, 0, 0, thumbnail.getWidth(),
+                        thumbnail.getHeight(), matrix, true);
+
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                rotatedBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                byte b[] = baos.toByteArray();
+                base64Image = Base64.encodeToString(b, Base64.DEFAULT);
+
+                img_store.setImageBitmap(rotatedBitmap);
+                byte[] bytarray = Base64.decode(base64Image, Base64.DEFAULT);
+                Bitmap bmimage = BitmapFactory.decodeByteArray(bytarray, 0,
+                        bytarray.length);
+                File file = new File(picturePath);
+                //new UploadProfileImageAsync(file).execute();
+                FileBanner(file);
+
+            }
+        }
+    }
+
+    private void FileBanner(File file) {
+
+        fileBanner = file;
+
+    }
+
+
+    public static int getImageOrientation(String imagePath) {
+        int rotate = 0;
+        try {
+
+            File imageFile = new File(imagePath);
+            ExifInterface exif = new ExifInterface(
+                    imageFile.getAbsolutePath());
+            int orientation = exif.getAttributeInt(
+                    ExifInterface.TAG_ORIENTATION,
+                    ExifInterface.ORIENTATION_NORMAL);
+
+            switch (orientation) {
+                case ExifInterface.ORIENTATION_ROTATE_270:
+                    rotate = 270;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_180:
+                    rotate = 180;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_90:
+                    rotate = 90;
+                    break;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return rotate;
+    }
+
+    public Bitmap getResizedBitmap(Bitmap image, int maxSize) {
+        int width = image.getWidth();
+        int height = image.getHeight();
+
+        float bitmapRatio = (float) width / (float) height;
+        if (bitmapRatio > 0) {
+            width = maxSize;
+            height = (int) (width / bitmapRatio);
+        } else {
+            height = maxSize;
+            width = (int) (height * bitmapRatio);
+        }
+        return Bitmap.createScaledBitmap(image, width, height, true);
+    }
     private void callRegisterApi() {
 
         if (Utills.isConnectingToInternet(obj_Registaration)) {
@@ -648,6 +851,7 @@ public class activity_user_register extends AppCompatActivity {
 
     private class JSONParse extends AsyncTask<String,String,String> {
         private ProgressDialog pDialog;
+        String sResponse = null;
 
         @Override
         protected void onPreExecute() {
@@ -660,41 +864,70 @@ public class activity_user_register extends AppCompatActivity {
         }
         @Override
         protected String  doInBackground(String... args) {
-
             try {
-                JSONObject params = new JSONObject();
-
+                String url = "http://www.mptechnolabs.com/1reward/userSignup.php";
+                HttpClient client = new DefaultHttpClient();
+                HttpPost post = new HttpPost(url);
+                post.addHeader("Accept", "application/json");
                 UUID uniqueKey = UUID.randomUUID();
 
-                params.put("username",str_user);
-                params.put("firstname",str_FirstName);
-                params.put("lastname",str_LastName);
-                params.put("email", str_EmailId);
-                params.put("password", str_Password);
-                params.put("phone", str_MobileNumber);
-                params.put("address", str_Address);
-                params.put("city", str_city);
-                params.put("state", str_state);
-                params.put("country", str_country);
-                params.put("pincode", str_pincode);
-                params.put("age_group",str_age);
-                params.put("qr_number",uniqueKey.toString());
+                Part[] parts = {
 
-                jsonObject_parent = mJsonParser.postData("http://www.mptechnolabs.com/1reward/14-04-2016userSignup.php", params);
+                        new StringPart("username", str_user),
+                        new StringPart("firstname", str_FirstName),
+                        new StringPart("lastname", str_LastName),
+                        new StringPart("email", str_EmailId),
+                        new StringPart("password", str_Password),
+                        new StringPart("phone", str_MobileNumber),
+                        new StringPart("address", str_Address),
+                        new StringPart("city", str_city),
+                        new StringPart("state", str_state),
+                        new StringPart("country", str_country),
+                        new StringPart("pincode", str_pincode),
+                        new StringPart("age_group", str_age),
+                        new StringPart("qr_number", uniqueKey.toString()),
 
-            } catch (JSONException e) {
-                e.printStackTrace();
+                        new FilePart("user_img", fileBanner)
+                };
+
+                Log.e("file baaner : ", fileBanner.toString());
+                MultipartEntity reqEntity = new MultipartEntity(parts, post.getParams());
+
+                post.setEntity(reqEntity);
+                Log.e("multipart", reqEntity + "");
+
+
+                try {
+                    sResponse = EntityUtils.toString(client.execute(post).getEntity(), "UTF-8");
+                    Log.d("post", post.toString());
+                    Log.e("Response", sResponse);
+
+
+                     object= new JSONObject(sResponse);
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    client.getConnectionManager().shutdown();
+                }
+
+            } catch (Exception e) {
+                Log.e(e.getClass().getName(), e.getMessage(), e);
+
             }
-
-            return null;
+            return sResponse;
         }
+            
+
+
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
            //Utills.dismissDialog();
             progress.setVisibility(View.GONE);
 
-            LoginCallAction(ParseDataProvider.getInstance(context).IsSuccessRegister(jsonObject_parent));
+            LoginCallAction(ParseDataProvider.getInstance(context).IsSuccessRegister(object));
 
         }
     }
@@ -777,19 +1010,18 @@ public class activity_user_register extends AppCompatActivity {
         @Override
         protected String doInBackground(String... args) {
 
+            JSONObject params = new JSONObject();
+
+
             try {
-                JSONObject params = new JSONObject();
-
-
                 params.put("country_id", int_SelectCountryId);
-
-
-                jsonObject_parent = mJsonParser.postData("http://www.mptechnolabs.com/1reward/getlocation.php", params);
-                Log.e("JsonObject", jsonObject_parent + "");
-
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+
+
+            jsonObject_parent = mJsonParser.postData("http://www.mptechnolabs.com/1reward/getlocation.php", params);
+            Log.e("JsonObject", jsonObject_parent + "");
 
             return null;
         }
@@ -812,19 +1044,18 @@ public class activity_user_register extends AppCompatActivity {
         @Override
         protected String doInBackground(String... args) {
 
+            JSONObject params = new JSONObject();
+
+
             try {
-                JSONObject params = new JSONObject();
-
-
                 params.put("state_id", int_SelectStateId);
-
-
-                jsonObject_parent = mJsonParser.postData("http://www.mptechnolabs.com/1reward/getCity.php", params);
-                Log.e("JsonObject", jsonObject_parent + "");
-
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+
+
+            jsonObject_parent = mJsonParser.postData("http://www.mptechnolabs.com/1reward/getCity.php", params);
+            Log.e("JsonObject", jsonObject_parent + "");
 
             return null;
         }
@@ -1019,43 +1250,6 @@ public class activity_user_register extends AppCompatActivity {
                 }
                 break;
         }
-    }
 
-    private void requestPermission() {
-
-        if (ActivityCompat.shouldShowRequestPermissionRationale(obj_Registaration, Manifest.permission.READ_PHONE_STATE)) {
-
-            //   Toast.makeText(context, "GPS permission allows us to access location data. Please allow in App Settings for additional functionality.", Toast.LENGTH_LONG).show();
-
-
-            Utills.showCustomSimpleDialog(obj_Registaration, new CustomSimpleMessageDialog.SimpleDialogOnClickListener() {
-                @Override
-                public void onOkayButtonClick() {
-
-
-                    if (Utills.customSimpleMessageDialog != null) {
-                        Utills.customSimpleMessageDialog.dismiss();
-                    }
-                }
-
-            }, Constants.DIALOG_INFO_TITLE, "Please Turn On Phone Permission in Setting", false);
-
-        } else {
-
-            ActivityCompat.requestPermissions(obj_Registaration, new String[]{Manifest.permission.READ_PHONE_STATE}, PERMISSION_REQUEST_CODE);
-        }
-    }
-
-    private boolean checkPermission() {
-        int result = ContextCompat.checkSelfPermission(obj_Registaration, Manifest.permission.READ_PHONE_STATE);
-        if (result == PackageManager.PERMISSION_GRANTED) {
-
-            return true;
-
-        } else {
-
-            return false;
-
-        }
     }
 }

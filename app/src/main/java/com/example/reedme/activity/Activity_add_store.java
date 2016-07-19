@@ -1153,9 +1153,12 @@ public class Activity_add_store extends AppCompatActivity implements DatePickerD
                     if(store_id == 1)
                     {
 
+                        new GetStoreCode().execute();
+
+
                         AppPrefs.getAppPrefs(Activity_add_store.this).setString("store_id", store_id.toString());
 
-                        Toast.makeText(Activity_add_store.this,"successfully added",Toast.LENGTH_LONG).show();
+                        Toast.makeText(Activity_add_store.this,"Successfully added Store.Please Check your mail for store code",Toast.LENGTH_LONG).show();
                         Intent i_Login = new Intent(obj_Registaration, activity_merchant_login.class);
                         overridePendingTransition(R.anim.right_to_left, R.anim.left_to_out);
 
@@ -1176,6 +1179,41 @@ public class Activity_add_store extends AppCompatActivity implements DatePickerD
             } catch (Exception e) {
                 Log.e(e.getClass().getName(), e.getMessage(), e);
             }
+
+
+        }
+    }
+    private class GetStoreCode extends AsyncTask<String,String,String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+        @Override
+        protected String doInBackground(String... args) {
+
+            try {
+                JSONObject params = new JSONObject();
+
+
+                params.put("store_name", str_FirstName);
+
+                params.put("email",AppPrefs.getAppPrefs(Activity_add_store.this).getString("m_email"));
+
+
+                jsonObject_parent = mJsonParser.postData("http://www.mptechnolabs.com/1reward/send_mail.php", params);
+                Log.e("JsonObject", jsonObject_parent + "");
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
 
 
         }

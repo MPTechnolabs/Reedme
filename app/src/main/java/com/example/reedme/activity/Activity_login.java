@@ -95,12 +95,12 @@ public class Activity_login extends AppCompatActivity {
         txt_ShowPassword = (TextView) findViewById(R.id.txt_show);
         txt_merchant = (TextView) findViewById(R.id.txt_merchant);
         progress = (AVLoadingIndicatorView) findViewById(R.id.progress);
-
         btn_Login = (Button) findViewById(R.id.btn_login);
 
     }
 
-    private void setAction() {
+    private void setAction()
+    {
 
         txt_register_now.setOnClickListener(new View.OnClickListener() {
             @Override

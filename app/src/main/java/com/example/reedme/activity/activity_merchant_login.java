@@ -1,14 +1,10 @@
 package com.example.reedme.activity;
 
-import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.util.Log;
@@ -18,6 +14,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.reedme.R;
 import com.example.reedme.dataprovider.ParseDataProvider;
@@ -28,12 +25,13 @@ import com.example.reedme.helper.MyJSONParser;
 import com.example.reedme.helper.Utills;
 import com.example.reedme.model.CategoryData;
 import com.example.reedme.model.login_code;
-import com.example.reedme.views.AVLoadingIndicatorView;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * Created by Android on 6/24/2016.
@@ -44,6 +42,7 @@ public class activity_merchant_login extends AppCompatActivity {
     CategoryData categoryDate;
     public static MyJSONParser mJsonParser = null;
     String pass1, user1;
+    int flag =0;
 
     JSONObject jsonObject_parent = null;
     TextView txt_register_now, txt_ShowPassword;
@@ -54,8 +53,10 @@ public class activity_merchant_login extends AppCompatActivity {
     Button btn_Login;
     EditText inputCode;
     Button btn_verify_code;
+    ArrayList<login_code> storedetail = new ArrayList<login_code>();
     TextView txt_user;
     LinearLayout layout_login,layout_code;
+
     static {
         TAG = activity_merchant_login.class.getSimpleName();
     }
@@ -95,6 +96,8 @@ public class activity_merchant_login extends AppCompatActivity {
         btn_verify_code = (Button) findViewById(R.id.btn_verify_code);
 
         btn_Login = (Button) findViewById(R.id.btn_login);
+
+
 
     }
 
@@ -145,11 +148,31 @@ public class activity_merchant_login extends AppCompatActivity {
                 else
                 {
                     inputCode.setError(null);
-                    Intent intent = new Intent(activity_merchant_login.this, DrawerActivity.class);
-                    overridePendingTransition(R.anim.right_to_left, R.anim.left_to_out);
 
-                    startActivity(intent);
-                    finish();
+                    for(int i=0; i< storedetail.size(); i++)
+                    {
+
+                        Log.e("storde code",storedetail.get(i).getStore_code());
+
+                        if((storedetail.get(i).getStore_code()).equals(inputCode.getText().toString()))
+                        {
+                            AppPrefs.getAppPrefs(obj_Login).setIsMerchantLogin(true);
+                            AppPrefs.getAppPrefs(activity_merchant_login.this).setString("store_id",storedetail.get(i).getStore_id());
+
+
+                            flag =1;
+                            Intent intent = new Intent(activity_merchant_login.this, DrawerActivity.class);
+                            overridePendingTransition(R.anim.right_to_left, R.anim.left_to_out);
+
+                            startActivity(intent);
+                            finish();
+                        }
+                    }
+                    if(flag == 0)
+                    {
+                        Toast.makeText(getApplicationContext(),"Please enter Valid store code",Toast.LENGTH_LONG).show();
+                    }
+
                 }
             }
         });
@@ -275,6 +298,8 @@ public class activity_merchant_login extends AppCompatActivity {
             AppPrefs.getAppPrefs(obj_Login).setIsMerchantLogin(true);
 */
 
+            Toast.makeText(activity_merchant_login.this,"Successfully Login",Toast.LENGTH_LONG).show();
+
             try {
 
                 JSONObject user =jsonObject_parent.getJSONObject("user_data");
@@ -324,15 +349,19 @@ public class activity_merchant_login extends AppCompatActivity {
                 JSONArray jsonStore = user.optJSONArray("store_data");
 
                 if(jsonStore != null) {
-                    AppPrefs.getAppPrefs(obj_Login).setIsMerchantLogin(true);
+                    Log.e("json_store",jsonStore+"");
 
                     for (int i = 0; i < jsonStore.length(); i++) {
+                        login_code code = new login_code();
 
                         JSONObject jsonChildNode = jsonStore.getJSONObject(i);
 
-                        login_code code = new login_code();
                         code.setStore_id(jsonChildNode.getString("store_id"));
                         code.setStore_code(jsonChildNode.getString("store_code"));
+
+                        Log.d("store ",jsonChildNode.get("store_id")+"");
+
+                        storedetail.add(code);
 
                     }
                     layout_login.setVisibility(View.GONE);

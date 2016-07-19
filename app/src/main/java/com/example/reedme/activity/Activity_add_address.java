@@ -47,6 +47,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+
+
 /**
  * Created by Jolly Raiyani on 4/7/2016.
  */
@@ -56,6 +58,7 @@ public class Activity_add_address extends AppCompatActivity {
     JSONObject jsonObject_parent = null;
     Context context;
     ArrayList myList = new ArrayList();
+    ArrayList areaList = new ArrayList();
     String int_SelectCountryId,int_SelectStateId;
     private Button iv_add;
     GetCountryNameDetail ld = new GetCountryNameDetail();
@@ -64,6 +67,7 @@ public class Activity_add_address extends AppCompatActivity {
     Dialog  dialog_CityList,dialog_CountryList, dialog_StateList;
     Boolean  bl_SelectCity = false, bl_SelectCode = false;
     String  str_MobileNumber="",  str_city="", str_state="", str_country="", str_pincode="", str_Address="", str_SpecialIntruction="",str_age="";
+    private static final int PERMISSION_REQUEST_CODE = 1;
     String[] country_id = new String[]{
             "101"    };
     String[] country_name = new String[]{
