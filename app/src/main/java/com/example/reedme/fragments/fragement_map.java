@@ -337,11 +337,10 @@ public class fragement_map extends Fragment implements OnMapReadyCallback, Googl
 
             CameraPosition cameraPosition = new CameraPosition.Builder()
                     .target(latLong).zoom(19f).tilt(70).build();
-
+            mapFragment.getMap().setPadding(0, 80, 0, 0);
             mMap.setMyLocationEnabled(true);
-            //mMap.getUiSettings().setMyLocationButtonEnabled(true);
-            mMap.animateCamera(CameraUpdateFactory
-                    .newCameraPosition(cameraPosition));
+            mMap.getUiSettings().setMyLocationButtonEnabled(true);
+            mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
             mLocationMarkerText.setText("Lat : " + location.getLatitude() + "," + "Long : " + location.getLongitude());
             startIntentService(location);
 
