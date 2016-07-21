@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.ResultReceiver;
@@ -23,7 +24,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.reedme.R;
+import com.example.reedme.activity.StartActivity;
+import com.example.reedme.dataprovider.ParseDataProvider;
+import com.example.reedme.helper.AppPrefs;
 import com.example.reedme.helper.AppUtils;
+import com.example.reedme.helper.MyJSONParser;
+import com.example.reedme.model.LatLongData;
 import com.example.reedme.service.FetchAddressIntentService;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -40,10 +46,17 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.lang.reflect.Field;
+import java.util.List;
 
 /**
  * Created by Jolly Raiyani on 4/6/2016.
@@ -58,6 +71,8 @@ public class fragement_map extends Fragment implements OnMapReadyCallback, Googl
     private LatLng mCenterLatLong;
     private AddressResultReceiver mResultReceiver;
     RelativeLayout rel_address;
+    JSONObject jsonObject_parent = null;
+    public static MyJSONParser mJsonParser = null;
 
     protected String mAddressOutput;
     protected String mAreaOutput;
@@ -81,6 +96,7 @@ public class fragement_map extends Fragment implements OnMapReadyCallback, Googl
 
         View v = inflater.inflate(R.layout.activity_maps, container,
                 false);
+        mJsonParser = new MyJSONParser();
 
         mapFragment = (SupportMapFragment)getChildFragmentManager()
                 .findFragmentById(R.id.map_fragmnet);
@@ -155,12 +171,14 @@ public class fragement_map extends Fragment implements OnMapReadyCallback, Googl
 
                     startIntentService(mLocation);
                     mLocationMarkerText.setText("Lat : " + mCenterLatLong.latitude + "," + "Long : " + mCenterLatLong.longitude);
+                    new getLatLongData().execute();
 
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
+
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
 
@@ -169,7 +187,62 @@ public class fragement_map extends Fragment implements OnMapReadyCallback, Googl
 
     }
 
+    private class getLatLongData extends AsyncTask<String,String,String> {
 
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+
+        }
+
+        @Override
+        protected String doInBackground(String... args) {
+
+            try {
+                JSONObject params = new JSONObject();
+
+
+                params.put("lat",mCenterLatLong.latitude);
+                params.put("longitude",mCenterLatLong.longitude);
+
+                jsonObject_parent = mJsonParser.postData("http://www.mptechnolabs.com/1reward/long_lat.php", params);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            LatLongDisplay(ParseDataProvider.getInstance(getActivity()).LatLongData(jsonObject_parent));
+
+        }
+    }
+
+    protected void LatLongDisplay(List<LatLongData> LatlongList) {
+        if (LatlongList != null) {
+
+            for(int i=0; i<LatlongList.size(); i++)
+            {
+                createMarker(Double.parseDouble(LatlongList.get(i).getLatitude()), Double.parseDouble(LatlongList.get(i).getLongitude()), LatlongList.get(i).getTitle());
+            }
+        }
+
+    }
+    protected void createMarker(double latitude, double longitude, String title) {
+
+        mapFragment.getMap().addMarker(new MarkerOptions()
+                .position(new LatLng(latitude, longitude))
+                .anchor(0.5f, 0.5f)
+                .title(title).icon(BitmapDescriptorFactory.fromResource(R.mipmap.marker_icon)));
+
+
+
+    }
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -207,7 +280,7 @@ public class fragement_map extends Fragment implements OnMapReadyCallback, Googl
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
             //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
+            //     int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
             return;
@@ -384,8 +457,6 @@ public class fragement_map extends Fragment implements OnMapReadyCallback, Googl
 
 
             }
-
-
         }
 
     }

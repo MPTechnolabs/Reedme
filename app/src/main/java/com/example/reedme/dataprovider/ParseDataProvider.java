@@ -18,6 +18,7 @@ import com.example.reedme.model.GetCityNameDetail;
 import com.example.reedme.model.GetCityNameList;
 import com.example.reedme.model.GetStateNameDetail;
 import com.example.reedme.model.GetStateNameList;
+import com.example.reedme.model.LatLongData;
 import com.example.reedme.model.OrderDetail;
 import com.example.reedme.model.OrderVariant;
 import com.example.reedme.model.Product;
@@ -459,6 +460,47 @@ public class ParseDataProvider {
                 return null;
             }
         } catch (Exception e2) {
+            ex = e2;
+            Log.e("Login", ex.getMessage());
+            return orderDetailList;
+        }
+    }
+
+    public List<LatLongData> LatLongData(JSONObject jsonObject) {
+        Exception ex;
+        List<LatLongData> orderDetailList = null;
+        try {
+            // this.statusCode = jsonObject.getInt("success");
+            // if (this.statusCode == 1) {
+
+            List<LatLongData> orderDetailList2 = new ArrayList();
+            try {
+                JSONArray ajsonArray = jsonObject.getJSONArray("data");
+                for (int s = 0; s < ajsonArray.length(); s++) {
+                    JSONObject ajsonObject = ajsonArray.getJSONObject(s);
+                    LatLongData orderDetail = new LatLongData();
+                    orderDetail.setLatitude(ajsonObject.getString("lat"));
+                    orderDetail.setLongitude(ajsonObject.getString("longitude"));
+                    orderDetail.setTitle(ajsonObject.getString("name"));
+                    orderDetailList2.add(orderDetail);
+                }
+                return orderDetailList2;
+            } catch (Exception e) {
+                ex = e;
+                orderDetailList = orderDetailList2;
+                Log.e("Login", ex.getMessage()+"hellooo");
+                return orderDetailList;
+            }
+            // } else if (jsonObject.isNull("error_msg")) {
+            //return null;
+
+            // }
+           /* else {
+                this.message = jsonObject.getString("error_msg");
+                return null;
+            }
+        } */
+        }catch (Exception e2) {
             ex = e2;
             Log.e("Login", ex.getMessage());
             return orderDetailList;
